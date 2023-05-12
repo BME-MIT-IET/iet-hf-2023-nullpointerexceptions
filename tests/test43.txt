@@ -1,0 +1,9 @@
+createfield evillab
+createfield storage
+createfield 
+setneighbour f1 f2
+placevirologus f1
+placevirologus f3
+startgame
+touch
+finishturn

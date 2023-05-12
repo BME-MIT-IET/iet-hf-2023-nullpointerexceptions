@@ -1,0 +1,13 @@
+createfield
+placevirologus f1
+add packet v1
+add packet v1
+add vitusdancecode v1
+add stuncode v1
+add protectioncode v1
+add forgetcode v1
+startgame
+create vitusdance
+create stun
+create protection
+create forget

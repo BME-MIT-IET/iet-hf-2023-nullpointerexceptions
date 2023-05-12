@@ -1,0 +1,6 @@
+createfield storage
+placevirologus f1
+add aminosav f1
+startgame
+touch
+collect amino

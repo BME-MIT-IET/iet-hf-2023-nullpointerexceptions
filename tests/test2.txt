@@ -1,0 +1,6 @@
+createfield lab
+placevirologus f1
+add stuncode f1
+startgame
+touch
+learn

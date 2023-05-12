@@ -1,0 +1,6 @@
+createfield shelter
+placevirologus f1
+add sack v1
+startgame
+touch
+leave sack

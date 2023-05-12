@@ -1,0 +1,10 @@
+createfield
+placevirologus f1
+add stuncode v1
+add packet v1
+startgame
+create stun
+touch
+useagens v1 stun
+finishturn
+create stun

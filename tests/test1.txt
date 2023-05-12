@@ -1,0 +1,6 @@
+createfield
+createfield
+setneighbour f1 f2
+placevirologus f1
+startgame
+move f2

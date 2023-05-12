@@ -1,0 +1,9 @@
+createfield shelter
+placevirologus f1
+add sack f1
+add axe v1
+add glove v1
+add cloak v1
+startgame
+touch
+pickup sack

@@ -1,0 +1,10 @@
+createfield
+createfield
+setneighbour f1 f2
+placevirologus f1
+placevirologus f1
+add vitusdance v1
+startgame
+touch
+useagens v2 vitusdance
+finishturn

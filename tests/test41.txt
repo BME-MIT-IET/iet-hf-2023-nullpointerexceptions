@@ -1,0 +1,4 @@
+createfield evillab
+placevirologus f1
+startgame
+touch

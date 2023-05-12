@@ -1,0 +1,72 @@
+/bin/
+/.classpath
+/.project
+
+
+# Compiled class files
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven specific files and folders
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/maven.config
+
+# Gradle specific files and folders
+.gradle/
+build/
+
+# IDE-specific files and folders
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse specific files and folders
+.classpath
+.project
+.settings/
+.factorypath
+
+# NetBeans specific files and folders
+nbproject/
+nbactions.xml
+nb-configuration.xml
+
+# Compiled Debugging/Profile Logs
+*.log
+*.log.*
+*.stackdump
+
+# Log files
+log/
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment-specific files
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Miscellaneous
+*.bak
+*.tmp
+
+# Ignore Maven Wrapper (if not using it)
+!/.mvn/wrapper/maven-wrapper.jar

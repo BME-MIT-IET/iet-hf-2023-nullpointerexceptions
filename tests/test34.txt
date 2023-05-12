@@ -1,0 +1,10 @@
+createfield lab
+placevirologus f1
+placevirologus f1
+add vitusdancecode f1
+add nukleotid v1
+add aminosav v1
+add nukleotid v2
+add glove v2
+startgame
+touch

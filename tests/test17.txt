@@ -1,0 +1,7 @@
+createfield
+placevirologus f1
+add protectioncode v1
+add forgetcode v1
+startgame
+create protection
+create forget

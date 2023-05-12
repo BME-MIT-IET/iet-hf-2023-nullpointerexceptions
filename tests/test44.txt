@@ -1,0 +1,33 @@
+createfield
+createfield lab
+createfield shelter
+createfield storage
+createfield evillab
+placevirologus f1
+placevirologus f4
+setneighbour f1 f2
+setneighbour f2 f3
+setneighbour f3 f4
+setneighbour f4 f5
+setneighbour f5 f1
+add packet f4
+add forgetcode f2
+add cloak f3
+startgame
+move f5
+finishturn
+touch
+collect amino
+touch
+collect nukleotid
+finishturn
+finishturn
+move f3
+touch
+pickup cloak
+finishturn
+finishturn
+move f2
+touch
+learn
+finishturn

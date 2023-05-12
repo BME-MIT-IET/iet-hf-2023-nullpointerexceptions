@@ -1,0 +1,5 @@
+createfield shelter
+placevirologus f1
+startgame
+touch
+pickup axe

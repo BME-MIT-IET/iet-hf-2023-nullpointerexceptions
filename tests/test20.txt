@@ -1,0 +1,8 @@
+createfield
+placevirologus f1
+placevirologus f1
+add forget v1
+add glove v2
+startgame
+touch
+useagens v2 forget

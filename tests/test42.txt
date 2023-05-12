@@ -1,0 +1,11 @@
+createfield evillab
+createfield
+setneighbour f1 f2
+placevirologus f2
+add protection v1
+startgame
+touch
+useagens v1 protection
+move f1
+finshturn
+touch

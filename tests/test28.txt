@@ -1,0 +1,5 @@
+createfield
+placevirologus f1
+startgame
+touch
+pickup sack

@@ -21,7 +21,7 @@ public class StunCode extends GeneticCode
 		
 	}
 	
-	public boolean Check(String s) {
+	public boolean check(String s) {
 		if(s.equals("stun"))
 			return true;
 		return false;

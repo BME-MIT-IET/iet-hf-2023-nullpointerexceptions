@@ -20,7 +20,7 @@ public class VitusdanceCode extends GeneticCode
 			MyRunnable.log("Not enough aminosav,nukleotid to create vitusdance");
 	}
 	
-	public boolean Check(String s) {
+	public boolean check(String s) {
 		if(s.equals("vitusdance"))
 			return true;
 		return false;

@@ -325,11 +325,11 @@ public class MyRunnable {
 		
 		kimenet = "Genetik kodok: ";
 		for(GeneticCode gc : currentVirologus.getGeneticCodeHave()) {
-			if(gc.Check("protection"))
+			if(gc.check("protection"))
 				kimenet = kimenet.concat("protectionCode, ");
-			else if(gc.Check("forget"))
+			else if(gc.check("forget"))
 				kimenet = kimenet.concat("forgetCode, ");
-			else if(gc.Check("stun"))
+			else if(gc.check("stun"))
 				kimenet = kimenet.concat("stunCode, ");
 			else 
 				kimenet = kimenet.concat("vitusdanceCode, ");

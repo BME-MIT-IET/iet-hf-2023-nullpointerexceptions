@@ -63,7 +63,7 @@ public class AgensUsable extends Entity{
 	//megtanul egy genetikk�dot
 	public void learnGeneticCode(GeneticCode gc) {
 		for (GeneticCode gc2 : geneticCode){
-			if (gc2.Check(gc.toString().substring(0, gc.toString().length()-4)))
+			if (gc2.check(gc.toString().substring(0, gc.toString().length()-4)))
 				return;
 		}
 		geneticCode.add(gc);
@@ -74,7 +74,7 @@ public class AgensUsable extends Entity{
 		boolean created = false;
 		int i = 0;
 		while(!created && i < geneticCode.size()) {
-			if(geneticCode.get(i).Check(mit)) {
+			if(geneticCode.get(i).check(mit)) {
 				geneticCode.get(i).createAgens(this);
 				created = true;
 				geneticCode.remove(i);

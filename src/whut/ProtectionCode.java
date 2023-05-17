@@ -26,7 +26,7 @@ public class ProtectionCode extends GeneticCode
 	}
 	
 	@Override
-	public boolean Check(String s) {
+	public boolean check(String s) {
 		if(s.equals("protection"))
 			return true;
 		return false;

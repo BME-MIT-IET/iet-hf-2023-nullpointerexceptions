@@ -21,7 +21,7 @@ public class ForgetCode extends GeneticCode
 	}
 	
 	@Override
-	public boolean Check(String s) {
+	public boolean check(String s) {
 		if(s.equals("forget"))
 			return true;
 		return false;

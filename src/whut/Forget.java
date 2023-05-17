@@ -16,9 +16,7 @@ public class Forget extends Agens{
 	
 	@Override
 	public boolean check(String s) {
-		if(s.equals("forget"))
-			return true;
-		return false;
+		return s.equals("forget");
 	}
 	
 	public String toString() {

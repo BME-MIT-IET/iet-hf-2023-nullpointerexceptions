@@ -1,11 +1,12 @@
 package whut;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AgensUsable extends Entity{
 	
-	protected ArrayList<Agens> agens = new ArrayList<Agens>();
-	protected ArrayList<Agens> agensOnMe = new ArrayList<Agens>();
-	protected ArrayList<GeneticCode> geneticCode = new ArrayList<GeneticCode>();
+	protected ArrayList<Agens> agens = new ArrayList<>();
+	protected ArrayList<Agens> agensOnMe = new ArrayList<>();
+	protected ArrayList<GeneticCode> geneticCode = new ArrayList<>();
 	protected Packet materialPacket = new Packet();
 	
 	
@@ -90,6 +91,8 @@ public class AgensUsable extends Entity{
 				case "forget":
 					geneticCode.add(new ForgetCode());
 					break;
+				default:
+					break;
 				}
 			}
 			i++;
@@ -100,7 +103,7 @@ public class AgensUsable extends Entity{
 	}
 	//elfelejt minden genetikk�dot
 	public void forgetAll() {
-		geneticCode.removeAll(geneticCode);
+		geneticCode.clear();
 	}
 	
 	//elvileg ez �sszevonja a kapott packet-et a saj�tj�val?
@@ -124,7 +127,7 @@ public class AgensUsable extends Entity{
 	}
 
 	
-	public ArrayList<GeneticCode> getGeneticCodeHave(){
+	public List<GeneticCode> getGeneticCodeHave(){
 		return geneticCode;
 	}
 
@@ -136,11 +139,11 @@ public class AgensUsable extends Entity{
 		return null;
 	}
 
-	public ArrayList<Agens> getAgensHave(){
+	public List<Agens> getAgensHave(){
 		return agens;
 	}
 	
-	public ArrayList<Agens> getAgensOnMe(){
+	public List<Agens> getAgensOnMe(){
 		return agensOnMe;
 	}
 }

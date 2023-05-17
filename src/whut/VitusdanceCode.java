@@ -21,9 +21,7 @@ public class VitusdanceCode extends GeneticCode
 	}
 	
 	public boolean check(String s) {
-		if(s.equals("vitusdance"))
-			return true;
-		return false;
+		return s.equals("vitusdance");
 	}
 	
 	public String toString() {

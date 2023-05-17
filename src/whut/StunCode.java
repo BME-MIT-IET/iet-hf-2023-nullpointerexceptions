@@ -22,9 +22,7 @@ public class StunCode extends GeneticCode
 	}
 	
 	public boolean check(String s) {
-		if(s.equals("stun"))
-			return true;
-		return false;
+		return s.equals("stun");
 	}
 	
 	public String toString() {

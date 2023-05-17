@@ -29,9 +29,7 @@ public class Protection extends Agens{
 	
 	@Override
 	public boolean check(String s) {
-		if(s.equals("protection"))
-			return true;
-		return false;
+		return s.equals("protection");
 	}
 	
 	public String toString() {

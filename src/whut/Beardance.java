@@ -1,7 +1,5 @@
 package whut;
-
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
 public class Beardance extends Agens{
 	
@@ -12,21 +10,12 @@ public class Beardance extends Agens{
 	public boolean startTurnEffect(AgensUsable v) {
 		infectAll(v.getField().getVirologusok(),v);
 		
-		/*Field all;
-		ArrayList<Field> osszesSzomszed = new ArrayList<Field>();
-		int randomSzomsz;
-		Random rand = new Random();
-		all = v.getField();
-		osszesSzomszed = all.getNeighbourhood();
-		randomSzomsz = rand.nextInt(osszesSzomszed.size());
-		v.move(osszesSzomszed.get(randomSzomsz));*/
-		
 		if (v.getField().getNeighbourhood().size() > 3) {
 			v.move(v.getField().getNeighbourhood().get(2));
 		} 
-		else v.move(v.getField().getNeighbourhood().get(0));
-		//if(v.getField().getNeighbourhood().size() > 0)
-		//	v.move(v.getField().getNeighbourhood().get(0));
+		else{
+			v.move(v.getField().getNeighbourhood().get(0));
+		}
 		infectAll(v.getField().getVirologusok(),v);		
 		return false;
 	}
@@ -40,13 +29,12 @@ public class Beardance extends Agens{
 	//A paraméterül kapott virológuslistából mindenkit megfertõz Beardance ágenssel az alábbi módon: 
 	//Csinál egy Beardance ágenst, amit odaad a paraméterül kapott virológusnak. 
 	//Ezután a lista elem virológust a viselõ virológus nevében a csinált ágenssel megtámadja.
-	public void infectAll(ArrayList<AgensUsable> vs, AgensUsable a) {
+	public void infectAll(List<AgensUsable> vs, AgensUsable a) {
 		for(int i = vs.size()-1; i >= 0; i--) {
 			if(!vs.get(i).equals(a)) {
 				Beardance b = new Beardance();
 				a.addAgens(b);
 				Virologus v = (Virologus)vs.get(i);
-				//vc.uRAttacked(b,v);
 				a.useAgens(v, b);
 			}
 		}
@@ -54,9 +42,7 @@ public class Beardance extends Agens{
 	
 	@Override
 	public boolean check(String s) {
-		if(s.equals("Beardance"))
-			return true;
-		return false;
+		return s.equals("Beardance");
 	}
 	
 	public String toString() {

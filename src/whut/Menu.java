@@ -4,15 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -23,9 +19,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Menu extends JPanel implements Serializable{
 	private static int players = 1;
 	private static JFrame f;
-	private static JTextField t;
 	private static Game gg;
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		drawMenu();
 	}
 	
@@ -42,7 +37,7 @@ public class Menu extends JPanel implements Serializable{
 	}
 	
 	public static void drawMenu() {
-		
+		JTextField t;
 		f = new JFrame("");
 		f.setPreferredSize( new Dimension(300, 300));
 		
@@ -60,8 +55,9 @@ public class Menu extends JPanel implements Serializable{
 		
 		JButton minus = new JButton("-");
 		minus.addActionListener(ae -> { 
-				  if(players > 1)
+				  if(players > 1) {
 						players--;
+				  }
 				  t.setText(Integer.toString(players));
 					f.pack();
 				  });

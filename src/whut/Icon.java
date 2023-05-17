@@ -3,8 +3,6 @@ package whut;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Icon extends JButton{
 
@@ -17,10 +15,10 @@ public class Icon extends JButton{
     public Icon(String[] c,String p){
     command = c;
     this.setIcon(new ImageIcon(p+".png"));
-    this.addActionListener(new afterTouchActionListener());
+    this.addActionListener(new AfterTouchActionListener());
     }
 
-    public class afterTouchActionListener implements ActionListener {
+    public class AfterTouchActionListener implements ActionListener {
       @Override
      public void actionPerformed(ActionEvent e) {
             MyRunnable.getInputAfterTouch(command);

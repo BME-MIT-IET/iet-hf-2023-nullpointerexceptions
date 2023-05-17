@@ -14,7 +14,8 @@ public class Forget extends Agens{
 		return true;
 	}
 	
-	public boolean Check(String s) {
+	@Override
+	public boolean check(String s) {
 		if(s.equals("forget"))
 			return true;
 		return false;
@@ -22,5 +23,10 @@ public class Forget extends Agens{
 	
 	public String toString() {
 		return "forget";
+	}
+
+	@Override
+	public void destroyEffect(Packet p) {
+		//abstract oszatlyt valósít meg ezért kell
 	}
 }

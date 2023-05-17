@@ -2,7 +2,7 @@ package whut;
 
 import java.io.Serializable;
 
-public class Agens implements Serializable{
+public abstract class Agens implements Serializable{
 	
 	//ezeket a fï¿½ggvï¿½nyeket overridoljï¿½k(opcionï¿½lisan) az ï¿½gensek. Alapï¿½rtelmezetten olyan a visszatï¿½rï¿½si ï¿½rtï¿½k, hogy ne legyen hatï¿½sa(pl.: nem lehet csak ï¿½gy lopni, ezï¿½rt a canStealEffect false)
 	
@@ -19,9 +19,7 @@ public class Agens implements Serializable{
 	//A paraméter a birtokos virológus. 
 	//Igazzal tér vissza, ha az adott ágens miatt még tud mozogni az adott körben. 
 	//Jelen helyen tehát mindig igazzal, de ezt felül lehet definiálni.
-	public boolean startTurnEffect(AgensUsable v) {
-		return true;
-	}
+	public abstract boolean startTurnEffect(AgensUsable v);
 	
 	//Akkor hívódik meg, ha a birtokos virológust ágenssel megtámadják. 
 	//Igazzal tér vissza, ha védve van, tehát az ágens hatása nem érvényesülhet, hamissal ha nincs védve.
@@ -32,11 +30,7 @@ public class Agens implements Serializable{
 	//Akkor hívódik meg, amikor a birtokos virológus egy raktárra lép. 
 	//Paraméterül megkapja a bent lévõ packetet. 
 	//Alapértelmezetten ezzel semmit nem csinál, de egyes ágensek(BearDance) kezdhet valamit a megkapott packettel.
-	public void destroyEffect(Packet p) {
-		return;
-	}
+	public abstract void destroyEffect(Packet p);
 
-	public boolean Check(String s) {
-		return false;
-	}
+	public abstract boolean check(String s);
 }

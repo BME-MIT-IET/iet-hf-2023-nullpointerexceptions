@@ -26,7 +26,8 @@ public class Vitusdance extends Agens{
 		return true;
 	}
 	
-	public boolean Check(String s) {
+	@Override
+	public boolean check(String s) {
 		if(s.equals("vitusdance"))
 			return true;
 		return false;
@@ -34,6 +35,11 @@ public class Vitusdance extends Agens{
 	
 	public String toString() {
 		return "vitusdance";
+	}
+
+	@Override
+	public void destroyEffect(Packet p) {
+		//abstracct osztályt valósít meg ezért kell
 	}
 	
 }

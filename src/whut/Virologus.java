@@ -163,12 +163,12 @@ public class Virologus extends AgensUsable {
 			if(!fireBacked) {
 				boolean medve = false;
 				for (Agens ag2 : agensOnMe) {
-					if(ag2.Check("Beardance"))
+					if(ag2.check("Beardance"))
 						medve = true;
 				}
 				if (!medve)
 					addAgensOnMe(ag);
-				if (ag.Check("Beardance")) {
+				if (ag.check("Beardance")) {
 					MyRunnable.setSelected(null);
 					MyRunnable.setTouched(false);
 					String[] command = new String[1];
@@ -200,7 +200,7 @@ public class Virologus extends AgensUsable {
 	public boolean isBear() {
 		boolean medve = false;
 		for (Agens ag2 : agensOnMe) {
-			if(ag2.Check("Beardance"))
+			if(ag2.check("Beardance"))
 				medve = true;
 		}
 		return medve;

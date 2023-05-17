@@ -28,7 +28,8 @@ public class Stun extends Agens{
 		return true;
 	}
 	
-	public boolean Check(String s) {
+	@Override
+	public boolean check(String s) {
 		if(s.equals("stun"))
 			return true;
 		return false;
@@ -36,5 +37,10 @@ public class Stun extends Agens{
 	
 	public String toString() {
 		return "stun";
+	}
+
+	@Override
+	public void destroyEffect(Packet p) {
+		//abstracct osztályt valósít meg ezért kell
 	}
 }

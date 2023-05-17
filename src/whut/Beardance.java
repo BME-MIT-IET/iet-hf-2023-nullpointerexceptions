@@ -52,7 +52,8 @@ public class Beardance extends Agens{
 		}
 	}
 	
-	public boolean Check(String s) {
+	@Override
+	public boolean check(String s) {
 		if(s.equals("Beardance"))
 			return true;
 		return false;

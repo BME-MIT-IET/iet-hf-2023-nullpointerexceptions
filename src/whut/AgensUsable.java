@@ -130,7 +130,8 @@ public class AgensUsable extends Entity{
 
 	public Agens getAgens(String s) {
 		for(Agens ag : agens) {
-			if(ag.Check(s))return ag;
+			if(ag.check(s))
+				return ag;
 		}
 		return null;
 	}

@@ -27,7 +27,8 @@ public class Protection extends Agens{
 		return true;
 	}
 	
-	public boolean Check(String s) {
+	@Override
+	public boolean check(String s) {
 		if(s.equals("protection"))
 			return true;
 		return false;
@@ -35,6 +36,11 @@ public class Protection extends Agens{
 	
 	public String toString() {
 		return "protection";
+	}
+
+	@Override
+	public void destroyEffect(Packet p) {
+		//abstracct osztályt valósít meg ezért kell
 	}
 	
 }

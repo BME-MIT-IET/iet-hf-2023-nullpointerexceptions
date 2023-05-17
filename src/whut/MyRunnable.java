@@ -337,13 +337,13 @@ public class MyRunnable {
 		
 		kimenet ="Agensek: ";
 		for(Agens a : currentVirologus.getAgensHave()) {
-			if(a.Check("protection"))
+			if(a.check("protection"))
 				kimenet = kimenet.concat("protection, ");
-			else if(a.Check("forget"))
+			else if(a.check("forget"))
 				kimenet = kimenet.concat("forget, ");
-			else if(a.Check("stun"))
+			else if(a.check("stun"))
 				kimenet = kimenet.concat("stun, ");
-			else if(a.Check("vitusdance"))
+			else if(a.check("vitusdance"))
 				kimenet = kimenet.concat("vitusdance, ");
 			else
 				kimenet = kimenet.concat("beardance, ");
@@ -352,13 +352,13 @@ public class MyRunnable {
 		
 		kimenet = "Hato agensek: ";
 		for(Agens a : currentVirologus.getAgensOnMe()) {
-			if(a.Check("protection"))
+			if(a.check("protection"))
 				kimenet = kimenet.concat("protection, ");
-			else if(a.Check("forget"))
+			else if(a.check("forget"))
 				kimenet = kimenet.concat("forget, ");
-			else if(a.Check("stun"))
+			else if(a.check("stun"))
 				kimenet = kimenet.concat("stun, ");
-			else if(a.Check("vitusdance"))
+			else if(a.check("vitusdance"))
 				kimenet = kimenet.concat("vitusdance, ");
 			else 
 				kimenet = kimenet.concat("beardance, ");

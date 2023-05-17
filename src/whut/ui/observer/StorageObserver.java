@@ -47,8 +47,8 @@ public class StorageObserver implements Observer, Serializable {
         tmp1[0]= tmp2[0]="collect";
         tmp1[1] = "nukleotid";
         tmp2[1]= "amino";
-        container.addIcon(new Icon(tmp1,"nukleotid"));
-        container.addIcon(new Icon(tmp2,"amino"));
+        container.addIcon(new Icon(tmp1,"resources/nukleotid"));
+        container.addIcon(new Icon(tmp2,"resources/amino"));
         container.add(new JLabel(Integer.toString(nukNum)));
         container.add(new JLabel(Integer.toString(aminoNum)));
         container.addLabel(new JLabel(Integer.toString(nukNum)));

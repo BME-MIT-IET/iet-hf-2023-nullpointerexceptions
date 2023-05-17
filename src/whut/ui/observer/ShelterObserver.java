@@ -39,7 +39,7 @@ public class ShelterObserver implements Observer, Serializable{
             String[] command = new String[2];
             command[0] = "pickup";
             command[1] = s;
-            container.addIcon(new Icon(command,s));
+            container.addIcon(new Icon(command,"resources/"+s));
         }
         cs.addContainer(container);
         cs.draw();

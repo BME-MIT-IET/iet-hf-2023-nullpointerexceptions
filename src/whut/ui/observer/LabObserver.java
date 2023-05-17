@@ -35,7 +35,7 @@ public class LabObserver implements Observer, Serializable{
         Container container = new Container("Genetic Code:");
         String[] tmp = new String[1];
         tmp[0]= "learn";
-        container.addIcon(new Icon(tmp,name));
+        container.addIcon(new Icon(tmp,"resources/"+name));
         cs.addContainer(container);
         cs.draw();
         JFrame frame = MyRunnable.getFrame();

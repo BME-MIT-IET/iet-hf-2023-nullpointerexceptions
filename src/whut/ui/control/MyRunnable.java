@@ -458,11 +458,15 @@ public class MyRunnable {
 	private static void logItemsOnField(Field f) {
 		String item;
 		ArrayList<Item> il = f.getItems();
+		if(il == null){
+			log(itemek);
+			return;
+		}
 		item = itemek;
 		for (Item i : il) {
 			item = item.concat(i.toString()+" ");
 		}
-		log(itemek);
+		log(item);
 	}
 	
 	private static void logMaterialsOnField(Field f) {

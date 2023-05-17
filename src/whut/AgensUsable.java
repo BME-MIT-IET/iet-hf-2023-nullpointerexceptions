@@ -114,10 +114,10 @@ public class AgensUsable extends Entity{
 	//ennek kene egy parameter, hogy melyik agenst hasznalja
 	public void useAgens(Virologus v, Agens ag) {
 		if (!MyRunnable.getGame().getMegy()) return;
-		MyRunnable.getGame().BearAll();
+		MyRunnable.getGame().bearAll();
 		agens.remove(ag);
 		v.uRAttacked(ag, (Virologus)this);
-		MyRunnable.getGame().BearAll();
+		MyRunnable.getGame().bearAll();
 	}
 	
 	public void destroyMaterial(Packet p) {

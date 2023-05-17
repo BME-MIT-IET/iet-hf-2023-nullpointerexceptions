@@ -167,7 +167,7 @@ public class Virologus extends AgensUsable {
 			MyRunnable.setTouched(false);
 			String[] command = new String[1];
 			command[0] = "finishturn";
-			MyRunnable.getGame().BearAll();
+			MyRunnable.getGame().bearAll();
 			MyRunnable.getInputFirstAct(command);
 		}
 	}

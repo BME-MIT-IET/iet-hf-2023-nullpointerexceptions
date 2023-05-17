@@ -1,6 +1,7 @@
 package whut;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Game extends View implements Serializable {
@@ -10,6 +11,8 @@ public class Game extends View implements Serializable {
 	ArrayList<? extends AgensUsable> au;
 	private int players;
 	private boolean megy = true;
+	private Random rand = new Random();
+
 	
 	public Entity getEntityAt(int index) {
 		if(index<entity.size()&&index>=0) {
@@ -18,17 +21,17 @@ public class Game extends View implements Serializable {
 		return null;
 	}
 	
-	public Game(int _players)
+	public Game(int playerNum)
 	{
-		players = _players;
+		players = playerNum;
 		initGame();
 	}
 	
 	public void initGame() //játék inicializálás
 	{
 		map = new Map();
-		entity = new ArrayList<Entity>();
-		allGeneticCode = new ArrayList<GeneticCode>();
+		entity = new ArrayList<>();
+		allGeneticCode = new ArrayList<>();
 		allGeneticCode.add(new ForgetCode());
 		allGeneticCode.add(new StunCode());
 		allGeneticCode.add(new ProtectionCode());
@@ -37,14 +40,9 @@ public class Game extends View implements Serializable {
 		createGame();
 		MyRunnable.setGame(this);
 		attach(new GameObserver(this));
-		
-		
-		//MyRunnable.startInfo();
-		//MyRunnable.getInputFirstAct();
 	}
 	
-	public void BearAll() {
-		//System.out.print("vklnnroebrne........");
+	public void bearAll() {
 		boolean vanJozan = false;
 		for (Entity e : entity) {
 			Virologus v = (Virologus)e;
@@ -165,86 +163,7 @@ public class Game extends View implements Serializable {
 
 	public void createGame() {
 		MyRunnable.setLeft(2);
-		/*Random r = new Random();
-		for(int i = 0; i < players; i++)
-			entity.add(new Virologus());
-		int items = 0;
-		int anyagok = 0;
-		int genetic = 2;
-		int fields = 5;
-		for(int i = 0; i < fields; i++) {
-			
-			if(i % 5 == 0)
-				map.addField(new Field());
-			else if(i % 5 == 1) {
-				map.addField(new Lab());
-				if(genetic%4 == 0)
-					map.getField(i).setGeneticCode(new ForgetCode());
-				else if(genetic%4 == 1)
-					map.getField(i).setGeneticCode(new StunCode());
-				else if(genetic%4 == 2)
-					map.getField(i).setGeneticCode(new ProtectionCode());
-				else 
-					map.getField(i).setGeneticCode(new VitusdanceCode());
-				items++;
-				genetic++;
-			}
-			else if(i%5 == 2) {
-				map.addField(new Shelter());
-				
-				/*if(items%4 == 0)
-					map.getField(i).addItem(new Cloak());
-				else if(items%4 == 1)
-					map.getField(i).addItem(new Glove());
-				else if(items%4 == 2)
-					map.getField(i).addItem(new Sack());
-				else 
-					map.getField(i).addItem(new Axe());
-				items++;
-				
-				map.getField(i).addItem(new Cloak());
-				map.getField(i).addItem(new Glove());
-				map.getField(i).addItem(new Sack());
-				map.getField(i).addItem(new Axe());
-				items+=4;
-			}
-			else if(i%5 == 3) {
-				map.addField(new Storage());
-				for(int k = 0; k<2; k++) {
-					map.getField(i).getPacket().addMaterial(new Aminosav());
-					map.getField(i).getPacket().addMaterial(new Nukleotid());
-				}
-			}
-			else {
-				map.addField(new EvilLab());
-				
-			}
-			
-			map.getField(0).setNeighbour(map.getField(i));
-		}*/
-	
-		//map.getField(0).setNeighbour(map.getField(0));
-		/*
-		map.addField(new Lab());
-		map.getField(0).setGeneticCode(new ForgetCode());
-		map.addField(new Lab());
-		map.getField(1).setGeneticCode(new ProtectionCode());
-		map.addField(new Lab());
-		map.getField(2).setGeneticCode(new VitusdanceCode());
-		map.addField(new Lab());
-		map.getField(3).setGeneticCode(new StunCode());
-		for(int i =1; i < 4; i++) {
-			map.getField(0).setNeighbour(map.getField(i));
-		}*/
-		
-		/*for(int i = 0; i < entity.size(); i++)
-			//map.getField(i % map.getSize()).accept(entity.get(i));
-			map.getField(0).accept(entity.get(i));*/
-		//random kivalaszt a harom palyageneralas kozul es azt lefuttatja
-		Random select= new Random();
-        int kor=select.nextInt(3);
-        //System.out.println(kor);
-        //kor = 1;
+        int kor=rand.nextInt(3);
         if(kor==0) mapFirst();
         if (kor==1) mapSecond();
         if (kor==2) mapThird();
@@ -256,11 +175,10 @@ public class Game extends View implements Serializable {
 		for(int i = 0;i<entity.size();++i)
 		{
 			  entity.get(i).step();
-			  //myNotify();
 		}
 	}
 	
-	public void endGame(ArrayList<GeneticCode> all) //játék végét ellenőrzi, genetikai kódókat hasonlít össze
+	public void endGame(List<GeneticCode> all) //játék végét ellenőrzi, genetikai kódókat hasonlít össze
 	{
 		boolean[] megvannak = {false,false,false,false};
 		for(int i = 0;i<all.size();++i)
@@ -289,13 +207,6 @@ public class Game extends View implements Serializable {
 		return megy;
 	}
 	
-	
-	public void run() {
-		boolean megy = true;
-		while(megy) {
-			oneRound();
-		}
-	}
 	//eltavolit egy jatekost
 	public void removePlayer(Virologus v) {
 		entity.remove(v);
@@ -309,7 +220,7 @@ public class Game extends View implements Serializable {
 		return map;
 	}
 	//visszaadja az osszes entity-t
-	public ArrayList<Entity> getEntity(){
+	public List<Entity> getEntity(){
 		return entity;
 	}
 	//general egy palyat
@@ -486,7 +397,6 @@ public class Game extends View implements Serializable {
 		map.getField(5).getPacket().addMaterial(new Aminosav());
 		map.getField(5).getPacket().addMaterial(new Nukleotid());
 		
-		Random rand = new Random();
 		int field;
 		for(int i = 0; i < entity.size(); i++) {
 			field = rand.nextInt(20);

@@ -181,7 +181,7 @@ public class MyRunnable {
 			int melyik = Integer.parseInt(ch);
 			Field f = game.getMap().getFields().get(melyik-1);
 			if(hova.charAt(0) == 'f') {
-				ArrayList<Field> list = currentVirologus.getField().getNeighbourhood();
+				List<Field> list = currentVirologus.getField().getNeighbourhood();
 				for(Field ff : list)
 					if(ff == f) {
 						currentVirologus.move(f);
@@ -310,11 +310,11 @@ public class MyRunnable {
 	private static void logItemsOnVirologist() {
 		String kimenet = itemek;
 		for(Item it : currentVirologus.getItemHave()) {
-			if(it.Check("axe"))
+			if(it.check("axe"))
 				kimenet = kimenet.concat("axe, ");
-			else if(it.Check("cloak"))
+			else if(it.check("cloak"))
 				kimenet = kimenet.concat("cloak, ");
-			else if(it.Check("glove"))
+			else if(it.check("glove"))
 				kimenet = kimenet.concat("glove, ");
 			else
 				kimenet = kimenet.concat("sack, ");
@@ -441,7 +441,7 @@ public class MyRunnable {
 			Virologus v = (Virologus) a;
 			log("v"+ getVirologusSzam(v));
 			String vAnyagok = "Anyagok: ";
-			ArrayList<Material> vml = v.getPacket().getMaterials();
+			List<Material> vml = v.getPacket().getMaterials();
 			if (vml != null){
 				for (Material m : vml)
 					vAnyagok = vAnyagok.concat(m.toString()+" ");
@@ -457,8 +457,8 @@ public class MyRunnable {
 	
 	private static void logItemsOnField(Field f) {
 		String item;
-		ArrayList<Item> il = f.getItems();
-		if(il == null){
+		List<Item> il = f.getItems();
+		if(il.isEmpty()){
 			log(itemek);
 			return;
 		}
@@ -475,7 +475,7 @@ public class MyRunnable {
 		if (p == null)
 			anyagok = anyagok.concat("-");
 		else {
-			ArrayList<Material> ml = p.getMaterials();
+			List<Material> ml = p.getMaterials();
 			if (ml == null)
 				anyagok = anyagok.concat("-");
 			else {
@@ -561,7 +561,7 @@ public class MyRunnable {
 	}
 	
 	private static void playerCanMoveTo() {
-		ArrayList<Field> n = currentVirologus.getField().getNeighbourhood();
+		List<Field> n = currentVirologus.getField().getNeighbourhood();
 		String kimenet = "Player can move to: ";
 		for(Field f : n)
 			for(int i = 0; i < game.getMap().getSize(); i++)
@@ -692,7 +692,7 @@ public class MyRunnable {
 	public static void startInfo() {
 		log("player in row: v" + getVirologusSzam(currentVirologus));
 		getInfo();
-		ArrayList<Field> n = currentVirologus.getField().getNeighbourhood();
+		List<Field> n = currentVirologus.getField().getNeighbourhood();
 		String kimenet = "Player can move to: ";
 		for(Field f : n)
 			for(int i = 0; i < game.getMap().getSize(); i++)

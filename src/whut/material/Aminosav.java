@@ -13,11 +13,8 @@ public class Aminosav extends Material {
 		return "Aminosav";
 	}
 	
-	public boolean Check(String s) {
-		if(s.equals("amino")) {
-			return true;
-		}
-		return false;
+	public boolean check(String s) {
+		return s.equals("amino");
 	}
 	
 	public String toString() {

@@ -7,6 +7,7 @@ public class Axe extends Item{
 	private boolean used = false;
 	
 	//A paraméterként kapott virológust megöli (meghívja rajta a die() függvényt). Igazzal tér vissza.
+	@Override
 	public boolean killEffect(Virologus v) {
 		if (used) return false;
 		v.die();
@@ -15,14 +16,12 @@ public class Axe extends Item{
 	}
 
 	@Override
-	public boolean Check(String s) {
-		if(s.equals("axe")) {
-			return true;
-		}
-		return false;
+	public boolean check(String s) {
+		return s.equals("axe");
 	}
 	
 	public String toString() {
 		return "axe";
 	}
+	
 }

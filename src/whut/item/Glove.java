@@ -15,7 +15,6 @@ public class Glove extends Item {
 			MyRunnable.log("v"+MyRunnable.getVirologusSzam(hasznalo) + " attacked back with " + a.toString());
 			tamado.uRAttacked(a, null);
 		}
-		//System.out.println(usedTime+"uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 		usedTime++;
 		if (usedTime >= 3) {
 			hasznalo.removeItem(this);
@@ -23,10 +22,9 @@ public class Glove extends Item {
 		return true;
 	}
 	
-	public boolean Check(String it) {
-		if(it.equals("glove"))
-			return true;
-		return false;
+	@Override
+	public boolean check(String it) {
+		return it.equals("glove");
 	}
 	
 	public String toString() {

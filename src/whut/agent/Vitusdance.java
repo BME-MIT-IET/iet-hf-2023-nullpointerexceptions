@@ -4,7 +4,7 @@ import whut.field.Field;
 import whut.material.Packet;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -17,7 +17,7 @@ public class Vitusdance extends Agens{
 	public boolean startTurnEffect(AgensUsable au) {
 		//kor elejen haromszor random lepteti
 		Field all;
-		ArrayList<Field> osszesSzomszed;
+		List<Field> osszesSzomszed;
 		int randomSzomsz;
 		for(int i=0;i<3;i++) {
 			all = au.getField();

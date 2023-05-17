@@ -11,6 +11,7 @@ import whut.ui.container.ContainerSuper;
 import java.awt.BorderLayout;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,13 +21,11 @@ public class StorageObserver implements Observer, Serializable {
     public StorageObserver(Storage s){
     	storage=s;
     }
-    
-    private ContainerSuper cs;
 
     @Override
 	public void update(){
-       ArrayList<Material> ms =  storage.getPacket().getMaterials();
-       ArrayList<String> ss = new ArrayList<String>();
+       List<Material> ms =  storage.getPacket().getMaterials();
+       ArrayList<String> ss = new ArrayList<>();
         int nukNum = 0;
         int aminoNum = 0;
        for(Material m : ms){
@@ -40,7 +39,7 @@ public class StorageObserver implements Observer, Serializable {
        draw(nukNum,aminoNum);
     }
     public void draw(int nukNum,int aminoNum){
-        cs  = new ContainerSuper("Field stat:");
+    	ContainerSuper cs = new ContainerSuper("Field stat:");
         Container container = new Container("Material:");
         String[] tmp1 = new String[2];
         String[] tmp2 = new String[2];

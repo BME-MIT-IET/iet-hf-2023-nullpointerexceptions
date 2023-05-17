@@ -10,6 +10,7 @@ import whut.ui.control.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Field extends View implements Serializable
@@ -20,14 +21,14 @@ public class Field extends View implements Serializable
 	
 	public Field()
 	{
-		au = new ArrayList<AgensUsable>(); //létrehozza a virológust
-		neighbor = new ArrayList<Field>();
+		au = new ArrayList<>(); //létrehozza a virológust
+		neighbor = new ArrayList<>();
 	}
 	
 
 	
 	//visszaadja a virológusok listáját
-	public ArrayList<AgensUsable> getVirologusok()
+	public List<AgensUsable> getVirologusok()
 	{
 		return au;
 	}
@@ -47,9 +48,8 @@ public class Field extends View implements Serializable
 	}
 	
 	//mező érintés esetén hívódik meg
-	public void touching(Virologus v)
-	{
-
+	public void touching(Virologus v){
+		//leszarmazott felulirja
 	}
 	
 	//szomszédos mezők beállítása
@@ -65,8 +65,7 @@ public class Field extends View implements Serializable
 	}
 	
 	//visszaadja a szomszéd mezők listáját
-	public ArrayList<Field> getNeighbourhood()
-	{
+	public List<Field> getNeighbourhood(){
 		return neighbor;
 	}
 
@@ -81,8 +80,8 @@ public class Field extends View implements Serializable
 		return null;
 	}
 	
-	public ArrayList<Item> getItems() {
-		return null;
+	public List<Item> getItems() {
+		return new ArrayList<>();
 	}
 	
 	public Packet getPacket() {

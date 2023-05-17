@@ -9,27 +9,20 @@ import whut.genetic_code.StunCode;
 //Kezeli a mezõn történõ interakciók megvalósulását. Kezeli a virológusok megfertõzését.
 public class EvilLab extends Lab
 {
-	//private boolean elhasznalt = false;
-	
 	public EvilLab()
 	{
-		
 		super(new StunCode());
 	}
  
 	//Létrehoz egy medvetánc ágenst, és megtámadja vele a virológust, ezzel „megfertõzve” õt.
+	@Override
 	public void touching(Virologus v) //mezÅ‘ Ã©rintÃ©sekor
 	{
-		//if(!elhasznalt) {
-			//elhasznalt = true;
-			//felajÃ¡nlja a jÃ¡tÃ©kosnak a lehetsÃ©ges cselekvÃ©seket
-			Beardance br = new Beardance();
-			v.uRAttacked(br,null); //megtÃ¡madjad egy medvetÃ¡ncal
-
-		//}
-		
+		Beardance br = new Beardance();
+		v.uRAttacked(br,null); //megtÃ¡madjad egy medvetÃ¡ncal		
 	}
 	
+	@Override
 	public String toString() {
 		return "evillab";
 	}

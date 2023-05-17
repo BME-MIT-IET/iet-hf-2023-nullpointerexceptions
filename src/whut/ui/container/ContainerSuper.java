@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ContainerSuper extends JPanel{
-    private ArrayList<Container> containers = new ArrayList<Container>();
-    private String containerSuperText = new String();
+    private ArrayList<Container> containers = new ArrayList<>();
+    private String containerSuperText = "";
 
     public ContainerSuper(String cST){containerSuperText = cST;}
 

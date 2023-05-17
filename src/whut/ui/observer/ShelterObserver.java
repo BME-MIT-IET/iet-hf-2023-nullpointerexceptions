@@ -10,12 +10,11 @@ import whut.ui.container.ContainerSuper;
 import java.awt.BorderLayout;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 public class ShelterObserver implements Observer, Serializable{
-
-    private ContainerSuper cs;
 
     private Shelter shelter;
     public ShelterObserver(Shelter s){
@@ -26,14 +25,14 @@ public class ShelterObserver implements Observer, Serializable{
     @Override
 	public void update(){
         ArrayList<Item> items = shelter.getItems();
-        ArrayList<String> strings = new ArrayList<String>();
+        ArrayList<String> strings = new ArrayList<>();
         for(Item i : items){
             strings.add(i.toString());
         }
         draw(strings);
     }
-    public void draw(ArrayList<String> ss){
-        cs  = new ContainerSuper("Field stat:");
+    public void draw(List<String> ss){
+    	ContainerSuper cs  = new ContainerSuper("Field stat:");
         Container container = new Container("Items:");
         for(String s: ss){
             String[] command = new String[2];

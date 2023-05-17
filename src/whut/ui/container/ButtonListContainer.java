@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ButtonListContainer extends JPanel {
-	ArrayList<JButton> buttons = new ArrayList<JButton>();
+	ArrayList<JButton> buttons = new ArrayList<>();
 	
 	public ButtonListContainer() {
 		this.setLayout(new FlowLayout());

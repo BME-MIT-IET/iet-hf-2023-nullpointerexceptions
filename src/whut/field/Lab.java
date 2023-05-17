@@ -1,7 +1,6 @@
 package whut.field;
 
 import whut.ui.observer.LabObserver;
-import whut.player.Virologus;
 import whut.genetic_code.GeneticCode;
 
 public class Lab extends Field
@@ -17,13 +16,6 @@ public class Lab extends Field
 	{
 		geneticCode = g;
 		this.attach(new LabObserver(this));
-	}
-	
-	
-	@Override
-	public void touching(Virologus v) //mező érintésekor
-	{
-
 	}
 	
 	@Override

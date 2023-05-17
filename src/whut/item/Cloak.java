@@ -3,18 +3,17 @@ package whut.item;
 import java.util.Random;
 
 public class Cloak extends Item{
+	private Random random = new Random();
 	//visszaadja, hogy siker�lt-e kiv�deni az �gensken�st
+	@Override
 	public boolean canCastEffect() {
-		Random random = new Random();
 		int n = random.nextInt(1000);
-		if (n <= 823) return false;
-		return true;
+		return n <= 823;
 	}
 	
-	public boolean Check(String it) {
-		if(it.equals("cloak"))
-			return true;
-		return false;
+	@Override
+	public boolean check(String it) {
+		return it.equals("cloak");
 	}
 	
 	public String toString() {

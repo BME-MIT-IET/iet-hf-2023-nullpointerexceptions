@@ -5,7 +5,7 @@ import whut.ui.control.MyRunnable;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,15 +14,15 @@ import javax.swing.JPanel;
 
 public class MoveContainer extends JPanel{
 	private JLabel label = new JLabel("Move to: ");
-	private JComboBox<String> cb = new JComboBox<String>();
+	private JComboBox<String> cb = new JComboBox<>();
 	private JButton button = new JButton();
 	
-	public MoveContainer(ArrayList<String> where) {
+	public MoveContainer(List<String> where) {
 		for (String field : where)
 			cb.addItem(field);
 		button.setText("Move");
 		button.setActionCommand("move");
-		button.addActionListener(new moveActionListener());
+		button.addActionListener(new MoveActionListener());
 		this.setLayout(new FlowLayout());
 		this.add(label);
 		this.add(cb);
@@ -44,7 +44,7 @@ public class MoveContainer extends JPanel{
 		this.add(button);
 	}
 	
-	class moveActionListener implements ActionListener{
+	class MoveActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getActionCommand().equals("move")) {

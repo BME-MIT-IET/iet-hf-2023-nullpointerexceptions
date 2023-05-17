@@ -1,32 +1,32 @@
 package whut.field;
-import whut.field.Field;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Map implements Serializable
 {
-	private ArrayList<Field> Fields;
+	private ArrayList<Field> fields;
 	
 	public Map()
 	{
-		Fields = new ArrayList<Field>();
+		fields = new ArrayList<>();
 	}
 	
-	public ArrayList<Field> getFields(){
-		return Fields;
+	public List<Field> getFields(){
+		return fields;
 	}
 	
 	public void addField(Field f) {
-		Fields.add(f);
+		fields.add(f);
 	}
 	
 	public Field getField(int index) {
-		return Fields.get(index);
+		return fields.get(index);
 	}
 	
 	public int getSize() {
-		return Fields.size();
+		return fields.size();
 	}
 	
 }

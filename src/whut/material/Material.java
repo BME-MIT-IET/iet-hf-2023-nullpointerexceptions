@@ -8,7 +8,7 @@ public abstract class Material implements Serializable{
 	private int value;
 
 	// Konstruktor, beallitja random az anyag erteket
-	public Material()
+	protected Material()
 	{
 		Random rand = new Random();
 		value = rand.nextInt(50) + 1;
@@ -36,7 +36,5 @@ public abstract class Material implements Serializable{
 	
 	
 	//a getType a bels�h�z kell ez a kuls� elereshez
-	public boolean Check(String s) {
-		return false;
-	}
+	public abstract boolean check(String s);
 }

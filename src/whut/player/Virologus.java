@@ -41,7 +41,7 @@ public class Virologus extends AgensUsable {
 	//megk�rdezi a felhaszn�l�t�l, hogy melyik t�rgyat akarja cse�lni, �s azt adja vissza
 	public Item getItem(String getThis) {
 		for(Item i : itemHave) {
-			if(i.Check(getThis)) {
+			if(i.check(getThis)) {
 				return i;
 			}
 		}

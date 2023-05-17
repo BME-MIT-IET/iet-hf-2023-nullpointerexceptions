@@ -21,8 +21,6 @@ public class LabObserver implements Observer, Serializable{
     	lab=l;
     }
 
-    private ContainerSuper cs;
-
     @Override
 	public void update(){
         GeneticCode g = lab.codeHere();
@@ -31,7 +29,7 @@ public class LabObserver implements Observer, Serializable{
     }
 
     public void draw(String name){
-        cs  = new ContainerSuper("Field stat:");
+    	ContainerSuper cs  = new ContainerSuper("Field stat:");
         Container container = new Container("Genetic Code:");
         String[] tmp = new String[1];
         tmp[0]= "learn";

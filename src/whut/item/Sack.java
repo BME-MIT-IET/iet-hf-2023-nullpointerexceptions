@@ -8,6 +8,7 @@ public class Sack extends Item{
 	
 	//megn�veli a virol�gus anyag t�rol�kapacit�s�t
 	//Virologus v - a virol�gus, akin kifejti hat�s�t
+	@Override
 	public void pickUpEffect(Virologus v) {
 		Packet p = v.getPacket();
 		p.changeMaxMaterial(increase);
@@ -15,15 +16,15 @@ public class Sack extends Item{
 	
 	//cs�kkenti a virol�gus anyag t�rol�kapacit�s�t
 	//Virologus v - a virol�gus, akin kifejti hat�s�t
+	@Override
 	public void lostEffect(Virologus v) {
 		Packet p = v.getPacket();
 		p.handlePossibleLostMaterial(increase);
 	}
 	
-	public boolean Check(String it) {
-		if(it.equals("sack"))
-			return true;
-		return false;
+	@Override
+	public boolean check(String it) {
+		return it.equals("sack");
 	}
 	
 	public String toString() {

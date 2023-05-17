@@ -11,13 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Container extends JPanel{
-    private ArrayList<Icon> icons = new ArrayList<Icon>();
-    private ArrayList<JLabel> labels = new ArrayList<JLabel>();
+    private ArrayList<Icon> icons = new ArrayList<>();
+    private ArrayList<JLabel> labels = new ArrayList<>();
 
 
 
 
-    private String containerText = new String();
+    private String containerText = "";
 
     public Container(String cT){containerText = cT;}
 
@@ -36,7 +36,6 @@ public class Container extends JPanel{
     {
 
     	this.removeAll();
-        //MyRunnable.addLogo(this);
     	JPanel c1=new JPanel(new FlowLayout());
     	JPanel c2=new JPanel(new FlowLayout());
     	JPanel c3=new JPanel(new FlowLayout());

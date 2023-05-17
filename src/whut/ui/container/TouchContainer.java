@@ -13,18 +13,20 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.*;
 
 public class TouchContainer extends JPanel {
 	private JLabel label = new JLabel("Players you touched: ");
-	private JComboBox<String> cb = new JComboBox<String>();
+	private JComboBox<String> cb = new JComboBox<>();
 	private JButton button = new JButton();
+	private String touch = "touch";
 	
 	public TouchContainer() {
 	
 		button.setText("Touch");
-		button.setActionCommand("touch");
-		button.addActionListener(new touchActionListener()); 
-		cb.addActionListener(new itemActionListener());
+		button.setActionCommand(touch);
+		button.addActionListener(new TouchActionListener()); 
+		cb.addActionListener(new ItemActionListener());
 		this.setLayout(new FlowLayout());
 		this.add(label);
 		this.add(cb);
@@ -38,7 +40,7 @@ public class TouchContainer extends JPanel {
 		this.add(cb);
 	}
 	
-	class itemActionListener implements ActionListener{
+	class ItemActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(MyRunnable.getTouched()) {
@@ -50,28 +52,26 @@ public class TouchContainer extends JPanel {
 		}
 	}
 	
-	class touchActionListener implements ActionListener{
+	class TouchActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 
-			if (ae.getActionCommand().equals("touch") && !MyRunnable.getTouched()) {
+			if (ae.getActionCommand().equals(touch) && !MyRunnable.getTouched()) {
 				cb.removeAllItems();
-				ArrayList<String> players = new ArrayList<String>();
-				ArrayList<AgensUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologusok();
+				ArrayList<String> players = new ArrayList<>();
+				List<AgensUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologusok();
 				for (AgensUsable a : vs) {
 					Virologus v = (Virologus)a;
 					players.add("v"+MyRunnable.getVirologusSzam(v));
-					//System.out.println("v"+MyRunnable.getVirologusSzam(v));
 				}
 				for (String player : players)
 					cb.addItem(player);
 				MyRunnable.setSelected((Virologus)vs.get(0));
 				String[] command = new String[1];
-				command[0] = "touch";
+				command[0] = touch;
 				MyRunnable.setTouched(true);
 				MyRunnable.getInputFirstAct(command);
 				MyRunnable.getGame().myNotify();
-				
 			}
 			
 		}

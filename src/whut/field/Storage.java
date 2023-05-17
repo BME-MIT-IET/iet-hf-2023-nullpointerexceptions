@@ -20,12 +20,6 @@ public class Storage extends Field
 	
 	
 	@Override
-	public void touching(Virologus v) //mező érintésekor
-	{
-
-	}
-	
-	@Override
 	public void accept(Entity e) {
 		Virologus ag = (Virologus)e;
 		au.add(ag);

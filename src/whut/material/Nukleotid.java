@@ -12,16 +12,12 @@ public class Nukleotid extends Material
 	@Override
     public String getType()
 	{
-		//System.out.println(">[:Nukleotid].getType()");
 		return "Nukleotid";
 	}
 	
 	
-	public boolean Check(String s) {
-		if(s.equals("nukleotid")) {
-			return true;
-		}
-		return false;
+	public boolean check(String s) {
+		return s.equals("nukleotid");
 	}
 	
 	public String toString() {

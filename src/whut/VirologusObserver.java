@@ -3,6 +3,7 @@ package whut;
 import java.awt.BorderLayout;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,17 +31,17 @@ public class VirologusObserver implements Observer, Serializable{
     }
 
     public void updateLeft(){
-        ArrayList<Item> items = v.getItemHave();
+        List<Item> items = v.getItemHave();
         ArrayList<String> is = new ArrayList<String>();
         for(Item i : items){
             is.add(i.toString());
         }
-        ArrayList<Agens> agenses = v.getAgensHave();
+        List<Agens> agenses = v.getAgensHave();
         ArrayList<String> as = new ArrayList<String>();
         for(Agens a : agenses){
             as.add(a.toString());
         }
-        ArrayList<GeneticCode> genetics = v.getGeneticCodeHave();
+        List<GeneticCode> genetics = v.getGeneticCodeHave();
         ArrayList<String> gs = new ArrayList<String>();
         for(GeneticCode g : genetics){
             gs.add(g.toString());
@@ -61,7 +62,7 @@ public class VirologusObserver implements Observer, Serializable{
             ss.add(m.toString());
        	}
         
-        ArrayList<Agens> agensesOn = v.getAgensOnMe();
+        List<Agens> agensesOn = v.getAgensOnMe();
         ArrayList<String> aos = new ArrayList<String>();
         for(Agens a : agensesOn){
             aos.add(a.toString());
@@ -149,13 +150,13 @@ public class VirologusObserver implements Observer, Serializable{
             }
             ss.add(m.toString());
         }
-        ArrayList<Item> items = v.getItemHave();
+        List<Item> items = v.getItemHave();
         ArrayList<String> is = new ArrayList<String>();
         for(Item i : items){
             is.add(i.toString());
         }
         
-        ArrayList<Agens> agensesOn = v.getAgensOnMe();
+        List<Agens> agensesOn = v.getAgensOnMe();
         ArrayList<String> aos = new ArrayList<String>();
         for(Agens a : agensesOn){
             aos.add(a.toString());

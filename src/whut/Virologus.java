@@ -1,16 +1,14 @@
 package whut;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Virologus extends AgensUsable {
-	private ArrayList<Item> itemHave = new ArrayList<Item>();
+	private ArrayList<Item> itemHave = new ArrayList<>();
+	private String bearDance = "Beardance";
 
 	public Virologus() {
 		VirologusObserver virologusObs=new VirologusObserver(this);
 		this.attach(virologusObs);
-		//Aminosav a = new Aminosav();
-		//a.setValue(25);
-		//materialPacket.addMaterial(a);
-		
 	}
 	
 	public int getItemNumber() {
@@ -74,7 +72,7 @@ public class Virologus extends AgensUsable {
 		if (canSteal) {
 			Packet p = v.getPacket();		
 			materialPacket.handleMaterialSeparate(mit, p);
-			ArrayList<Material> temp = new ArrayList<Material>();
+			ArrayList<Material> temp = new ArrayList<>();
 			temp.add(mit);
 			getPacket().decreaseMaterial(temp);
 			MyRunnable.log(mit.toString()+"was stolen");
@@ -128,57 +126,49 @@ public class Virologus extends AgensUsable {
 	//megt�madj�k az adott virol�gust
 	@Override
 	public void uRAttacked(Agens ag, Virologus v) {
-		MyRunnable.log(ag.toString() + " was used against v" + MyRunnable.getVirologusSzam(this));
-		//agens.remove(ag);
-		
 		if (v == this) {
 			addAgensOnMe(ag);
-			MyRunnable.log("v" + MyRunnable.getVirologusSzam(this)+" is now under " + ag.toString() + " effect");
 		} else {
+			canAddAgensToMe(ag, v);
+		}
+	}
+	
+	private void canAddAgensToMe(Agens ag, Virologus v) {
+		//ellenorzi, hogy van-e vedve valami altal
+		for(Agens a : agensOnMe)
+			if(a.defendEffect())
+				return;
 		
-			//ellen�rzi, hogy van-e v�dve valami �ltal
-			boolean isProtected = false;
-			for(Agens a : agensOnMe)
-				if(a.defendEffect())
-					isProtected=true;
-				
-			//mivel virol�gus, ez�rt v�gigmegy az �gensein k�v�l az itemein is, hogy azok valamelyike megv�di-e
-			for(Item it : itemHave)
-				if(!it.canCastEffect())
-					isProtected=true;
+		//mivel virologus, ezert vegigmegy az itemein is, hogy azok valamelyike megvedi-e
+		for(Item it : itemHave) 
+			if(!it.canCastEffect())
+				return;
 		
-			if(isProtected)
-				MyRunnable.log("Unsuccessfull attack!");
+		//mivel virologus, ezert vegigmegy az itemein, hogy valamelyik visszakeni-e
+		for(int i=itemHave.size()-1; i>=0; i--)
+			if(itemHave.get(i).fireBackEffect(v, this, ag))
+				 return;
+			
+		//ha vissza sem keni, akkor hozzaadja a rajt levo agensekhez
+		addAgensToMe(ag);
+	}
 		
-			//mivel virol�gus, ez�rt v�gigmegy az itemein, hogy valamelyik visszakeni-e
-			if(!isProtected) {
-				boolean fireBacked = false;
-				//for(Item it: itemHave){
-				for(int i=itemHave.size()-1; i>=0; i--) {
-					if(itemHave.get(i).fireBackEffect(v, this, ag)) {
-						fireBacked=true;
-					}
-				}
-				//ha vissza sem keni, akkor hozz�adja a rajt l�v� �gensekhez
-			if(!fireBacked) {
-				boolean medve = false;
-				for (Agens ag2 : agensOnMe) {
-					if(ag2.check("Beardance"))
-						medve = true;
-				}
-				if (!medve)
-					addAgensOnMe(ag);
-				if (ag.check("Beardance")) {
-					MyRunnable.setSelected(null);
-					MyRunnable.setTouched(false);
-					String[] command = new String[1];
-					command[0] = "finishturn";
-					MyRunnable.getGame().BearAll();
-					MyRunnable.getInputFirstAct(command);
-				}
-				MyRunnable.log("v" + MyRunnable.getVirologusSzam(this)+" is now under " + ag.toString() + " effect");
-			}
-			}
+	private void addAgensToMe(Agens ag) {
+		boolean medve = false;
+		for (Agens ag2 : agensOnMe) {
+			if(ag2.check(bearDance))
+				medve = true;
+		}
+		if (!medve) {
+				addAgensOnMe(ag);
+		}
+		if (ag.check(bearDance)) {
+			MyRunnable.setSelected(null);
+			MyRunnable.setTouched(false);
+			String[] command = new String[1];
+			command[0] = "finishturn";
+			MyRunnable.getGame().BearAll();
+			MyRunnable.getInputFirstAct(command);
 		}
 	}
 	
@@ -227,12 +217,10 @@ public class Virologus extends AgensUsable {
 	
 	@Override
 	public void step() {
-		//MyRunnable.setCurrentVirologus(this);
-		
 		MyRunnable.getGame().endGame(geneticCode);
 	}
 	
-	public ArrayList<Item> getItemHave(){
+	public List<Item> getItemHave(){
 		return itemHave;
 	}
 }

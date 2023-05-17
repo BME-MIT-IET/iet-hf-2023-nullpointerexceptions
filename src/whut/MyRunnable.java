@@ -1,9 +1,10 @@
 package whut;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -620,7 +621,7 @@ public class MyRunnable {
 			}
 			log(vAnyagok);
 			String vItemek = "Itemek: ";
-			ArrayList<Item> vil = v.getItemHave();
+			List<Item> vil = v.getItemHave();
 			for(Item i : vil)
 				vItemek = vItemek.concat(i.toString()+" ");
 			log(vItemek);

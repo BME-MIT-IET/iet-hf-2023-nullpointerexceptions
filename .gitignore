@@ -70,3 +70,8 @@ Thumbs.db
 
 # Ignore Maven Wrapper (if not using it)
 !/.mvn/wrapper/maven-wrapper.jar
+
+# Ignore Gradle Wrapper (if not using it)
+!/gradle/wrapper/gradle-wrapper.properties
+!/gradle/wrapper/gradle-wrapper.jar
+

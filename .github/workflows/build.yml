@@ -17,8 +17,9 @@ jobs:
           distribution: 'adopt'
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
   analize:
     name: Analyze
     runs-on: ubuntu-latest
@@ -31,6 +32,7 @@ jobs:
         with:
           java-version: 11
           distribution: 'zulu' # Alternative distribution options are available
+          cache: gradle
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Cache SonarCloud packages

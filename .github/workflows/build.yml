@@ -15,11 +15,9 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
-          cache: gradle
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
   analize:
     name: Analyze
     runs-on: ubuntu-latest

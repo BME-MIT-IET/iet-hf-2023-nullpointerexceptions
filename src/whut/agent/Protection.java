@@ -1,7 +1,7 @@
 package agent;
 
-import whut.player.AgensUsable;
-import whut.material.Packet;
+import player.AgensUsable;
+import material.Packet;
 
 public class Protection extends Agens{
 	

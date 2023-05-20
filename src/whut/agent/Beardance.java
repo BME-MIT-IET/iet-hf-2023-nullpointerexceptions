@@ -1,7 +1,7 @@
 package agent;
-import whut.player.AgensUsable;
-import whut.material.Packet;
-import whut.player.Virologus;
+import player.AgensUsable;
+import material.Packet;
+import player.Virologus;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package whut.item;
+package item;
 
-import whut.ui.control.MyRunnable;
-import whut.agent.Agens;
-import whut.player.Virologus;
+import ui.control.MyRunnable;
+import agent.Agens;
+import player.Virologus;
 
 public class Glove extends Item {
 	private int usedTime = 0;

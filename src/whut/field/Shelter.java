@@ -1,7 +1,7 @@
-package whut.field;
-import whut.item.Item;
-import whut.ui.control.MyRunnable;
-import whut.ui.observer.ShelterObserver;
+package field;
+import item.Item;
+import ui.control.MyRunnable;
+import ui.observer.ShelterObserver;
 
 import java.util.ArrayList;
 

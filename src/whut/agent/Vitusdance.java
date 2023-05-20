@@ -1,7 +1,7 @@
-package whut.agent;
-import whut.player.AgensUsable;
-import whut.field.Field;
-import whut.material.Packet;
+package agent;
+import player.AgensUsable;
+import field.Field;
+import material.Packet;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.Random;
 public class Vitusdance extends Agens{
 	
 	private Random rand = new SecureRandom();  
-	//A kör elején hívódik meg, a paraméterül kapott virológust 3-szor egy random szomszédos mezõre mozgatja, majd kitörli magát. 
-	//Mindig igazzal tér vissza, mert a hatás után még mozoghat.
+	//A kï¿½r elejï¿½n hï¿½vï¿½dik meg, a paramï¿½terï¿½l kapott virolï¿½gust 3-szor egy random szomszï¿½dos mezï¿½re mozgatja, majd kitï¿½rli magï¿½t. 
+	//Mindig igazzal tï¿½r vissza, mert a hatï¿½s utï¿½n mï¿½g mozoghat.
 	@Override
 	public boolean startTurnEffect(AgensUsable au) {
 		//kor elejen haromszor random lepteti
@@ -42,7 +42,7 @@ public class Vitusdance extends Agens{
 
 	@Override
 	public void destroyEffect(Packet p) {
-		//abstracct osztályt valósít meg ezért kell
+		//abstracct osztï¿½lyt valï¿½sï¿½t meg ezï¿½rt kell
 	}
 	
 }

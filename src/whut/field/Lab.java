@@ -1,7 +1,7 @@
-package whut.field;
+package field;
 
-import whut.ui.observer.LabObserver;
-import whut.genetic_code.GeneticCode;
+import ui.observer.LabObserver;
+import genetic_code.GeneticCode;
 
 public class Lab extends Field
 {

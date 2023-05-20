@@ -1,15 +1,11 @@
-package whut.player;
-import whut.field.*;
-import whut.genetic_code.*;
-import whut.item.Axe;
-import whut.item.Cloak;
-import whut.item.Glove;
-import whut.item.Sack;
-import whut.material.Aminosav;
-import whut.material.Nukleotid;
-import whut.ui.control.MyRunnable;
-import whut.ui.control.View;
-import whut.ui.observer.GameObserver;
+package player;
+import field.*;
+import genetic_code.*;
+import item.*;
+import material.*;
+import ui.control.MyRunnable;
+import ui.control.View;
+import ui.observer.GameObserver;
 
 import java.io.Serializable;
 import java.util.ArrayList;

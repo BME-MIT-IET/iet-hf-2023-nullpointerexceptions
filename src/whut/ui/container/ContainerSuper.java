@@ -1,6 +1,6 @@
-package whut.ui.container;
+package ui.container;
 
-import whut.ui.control.MyRunnable;
+import ui.control.MyRunnable;
 
 import java.util.ArrayList;
 

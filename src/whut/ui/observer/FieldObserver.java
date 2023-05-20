@@ -1,4 +1,4 @@
-package whut.ui.observer;
+package ui.observer;
 
 import java.io.Serializable;
 

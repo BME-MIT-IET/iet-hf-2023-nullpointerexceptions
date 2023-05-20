@@ -1,8 +1,8 @@
-package whut.genetic_code;
+package genetic_code;
 
-import whut.player.AgensUsable;
-import whut.ui.control.MyRunnable;
-import whut.agent.Forget;
+import player.AgensUsable;
+import ui.control.MyRunnable;
+import agent.Forget;
 
 //egy konkret genetikuskodert felel
 public class ForgetCode extends GeneticCode

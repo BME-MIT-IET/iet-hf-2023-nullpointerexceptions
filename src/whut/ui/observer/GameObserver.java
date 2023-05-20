@@ -1,12 +1,12 @@
-package whut.ui.observer;
+package ui.observer;
 
-import whut.ui.control.Menu;
-import whut.ui.control.MyRunnable;
-import whut.field.Field;
-import whut.player.Game;
-import whut.ui.container.ButtonListContainer;
-import whut.ui.container.MoveContainer;
-import whut.ui.container.TouchContainer;
+import ui.control.Menu;
+import ui.control.MyRunnable;
+import field.Field;
+import player.Game;
+import ui.container.ButtonListContainer;
+import ui.container.MoveContainer;
+import ui.container.TouchContainer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

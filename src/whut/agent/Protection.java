@@ -1,4 +1,4 @@
-package whut.agent;
+package agent;
 
 import whut.player.AgensUsable;
 import whut.material.Packet;

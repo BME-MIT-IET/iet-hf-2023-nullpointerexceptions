@@ -1,8 +1,8 @@
-package whut.genetic_code;
+package genetic_code;
 
-import whut.player.AgensUsable;
-import whut.ui.control.MyRunnable;
-import whut.agent.Protection;
+import player.AgensUsable;
+import ui.control.MyRunnable;
+import agent.Protection;
 
 //egy konkr�t genetikusk�d�rt felel
 public class ProtectionCode extends GeneticCode

@@ -1,9 +1,8 @@
-package whut.player;
-import whut.ui.control.MyRunnable;
-import whut.agent.Agens;
-import whut.genetic_code.*;
-import whut.material.Material;
-import whut.material.Packet;
+package player;
+import ui.control.MyRunnable;
+import agent.Agens;
+import genetic_code.*;
+import material.*;
 
 import java.util.ArrayList;
 import java.util.List;

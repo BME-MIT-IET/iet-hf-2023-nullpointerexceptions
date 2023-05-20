@@ -1,4 +1,4 @@
-package whut.material;
+package material;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,8 @@ public class Packet implements Serializable
 		if (nukSum < nuklevon || aminoSum < aminolevon){
 			return false;
 		} else {
-			int nukMarad = nukSum-nuklevon; //ennyi nukleotidunk marad a levonás után
-			int aminoMarad = aminoSum-aminolevon; //ennyi aminosavunk marad a levonás után
+			int nukMarad = nukSum-nuklevon; //ennyi nukleotidunk marad a levonï¿½s utï¿½n
+			int aminoMarad = aminoSum-aminolevon; //ennyi aminosavunk marad a levonï¿½s utï¿½n
 			materials.clear();
 			Aminosav a = new Aminosav();
 			a.setValue(aminoMarad);

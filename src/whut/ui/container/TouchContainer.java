@@ -1,8 +1,8 @@
-package whut.ui.container;
+package ui.container;
 
-import whut.ui.control.MyRunnable;
-import whut.player.AgensUsable;
-import whut.player.Virologus;
+import ui.control.MyRunnable;
+import player.AgensUsable;
+import player.Virologus;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

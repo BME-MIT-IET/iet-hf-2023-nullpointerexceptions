@@ -1,7 +1,7 @@
-package whut.item;
+package item;
 
-import whut.agent.Agens;
-import whut.player.Virologus;
+import agent.Agens;
+import player.Virologus;
 
 import java.io.Serializable;
 

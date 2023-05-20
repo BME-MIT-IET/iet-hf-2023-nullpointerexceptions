@@ -1,12 +1,10 @@
-package whut.field;
-import whut.genetic_code.GeneticCode;
-import whut.item.Item;
-import whut.material.Packet;
-import whut.player.AgensUsable;
-import whut.player.Entity;
-import whut.player.Virologus;
-import whut.ui.control.MyRunnable;
-import whut.ui.control.View;
+package field;
+import genetic_code.GeneticCode;
+import item.Item;
+import material.Packet;
+import player.*;
+import ui.control.MyRunnable;
+import ui.control.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;

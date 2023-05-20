@@ -1,4 +1,4 @@
-package whut.material;
+package material;
 //egy konkret anyagtipusert felel
 public class Nukleotid extends Material
 {

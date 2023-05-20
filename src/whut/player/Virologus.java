@@ -1,11 +1,10 @@
-package whut.player;
-import whut.item.Item;
-import whut.ui.control.MyRunnable;
-import whut.ui.observer.VirologusObserver;
-import whut.agent.Agens;
-import whut.field.Field;
-import whut.material.Material;
-import whut.material.Packet;
+package player;
+import item.Item;
+import ui.control.MyRunnable;
+import ui.observer.VirologusObserver;
+import agent.Agens;
+import field.Field;
+import material.*;
 
 import java.util.ArrayList;
 import java.util.List;

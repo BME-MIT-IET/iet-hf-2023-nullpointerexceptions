@@ -1,12 +1,12 @@
-package whut.item;
+package item;
 
-import whut.player.Virologus;
+import player.Virologus;
 
-//Egy balta tárgyért felel, a baltával virológusokat lehet ölni, de egy használat után kicsorbul, többet nem lehet használni.
+//Egy balta tï¿½rgyï¿½rt felel, a baltï¿½val virolï¿½gusokat lehet ï¿½lni, de egy hasznï¿½lat utï¿½n kicsorbul, tï¿½bbet nem lehet hasznï¿½lni.
 public class Axe extends Item{
 	private boolean used = false;
 	
-	//A paraméterként kapott virológust megöli (meghívja rajta a die() függvényt). Igazzal tér vissza.
+	//A paramï¿½terkï¿½nt kapott virolï¿½gust megï¿½li (meghï¿½vja rajta a die() fï¿½ggvï¿½nyt). Igazzal tï¿½r vissza.
 	@Override
 	public boolean killEffect(Virologus v) {
 		if (used) return false;

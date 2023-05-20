@@ -1,12 +1,12 @@
-package whut.field;
+package field;
 
 
-import whut.player.Virologus;
-import whut.agent.Beardance;
-import whut.genetic_code.StunCode;
+import player.Virologus;
+import agent.Beardance;
+import genetic_code.StunCode;
 
-//A fertõzõ laboratórium mezõ nyilvántartásáért felel.
-//Kezeli a mezõn történõ interakciók megvalósulását. Kezeli a virológusok megfertõzését.
+//A fertï¿½zï¿½ laboratï¿½rium mezï¿½ nyilvï¿½ntartï¿½sï¿½ï¿½rt felel.
+//Kezeli a mezï¿½n tï¿½rtï¿½nï¿½ interakciï¿½k megvalï¿½sulï¿½sï¿½t. Kezeli a virolï¿½gusok megfertï¿½zï¿½sï¿½t.
 public class EvilLab extends Lab
 {
 	public EvilLab()
@@ -14,7 +14,7 @@ public class EvilLab extends Lab
 		super(new StunCode());
 	}
  
-	//Létrehoz egy medvetánc ágenst, és megtámadja vele a virológust, ezzel „megfertõzve” õt.
+	//Lï¿½trehoz egy medvetï¿½nc ï¿½genst, ï¿½s megtï¿½madja vele a virolï¿½gust, ezzel ï¿½megfertï¿½zveï¿½ ï¿½t.
 	@Override
 	public void touching(Virologus v) //mezÅ‘ Ã©rintÃ©sekor
 	{

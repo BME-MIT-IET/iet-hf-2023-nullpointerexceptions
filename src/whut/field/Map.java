@@ -1,4 +1,4 @@
-package whut.field;
+package field;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,21 +1,20 @@
-package whut.ui.control;
+package ui.control;
 
-import whut.agent.Agens;
-import whut.field.*;
-import whut.genetic_code.GeneticCode;
-import whut.item.Item;
-import whut.material.Aminosav;
-import whut.material.Material;
-import whut.material.Nukleotid;
-import whut.material.Packet;
-import whut.player.AgensUsable;
-import whut.player.Game;
-import whut.player.Virologus;
+import agent.Agens;
+import field.*;
+import genetic_code.GeneticCode;
+import item.Item;
+import material.Aminosav;
+import material.Material;
+import material.Nukleotid;
+import material.Packet;
+import player.AgensUsable;
+import player.Game;
+import player.Virologus;
 
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.*;

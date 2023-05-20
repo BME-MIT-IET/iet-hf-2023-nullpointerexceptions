@@ -1,4 +1,4 @@
-package whut.ui.control;
+package ui.control;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

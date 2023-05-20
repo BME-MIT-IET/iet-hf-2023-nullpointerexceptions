@@ -1,4 +1,4 @@
-package whut.material;
+package material;
 import java.io.Serializable;
 import java.util.Random;
 

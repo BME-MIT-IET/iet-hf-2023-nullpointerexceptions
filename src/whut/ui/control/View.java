@@ -1,6 +1,6 @@
-package whut.ui.control;
+package ui.control;
 
-import whut.ui.observer.Observer;
+import ui.observer.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;

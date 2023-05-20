@@ -1,11 +1,11 @@
-package whut.field;
+package field;
 
 
-import whut.material.Packet;
-import whut.player.Entity;
-import whut.player.Virologus;
-import whut.ui.control.MyRunnable;
-import whut.ui.observer.StorageObserver;
+import material.Packet;
+import player.Entity;
+import player.Virologus;
+import ui.control.MyRunnable;
+import ui.observer.StorageObserver;
 
 public class Storage extends Field
 {

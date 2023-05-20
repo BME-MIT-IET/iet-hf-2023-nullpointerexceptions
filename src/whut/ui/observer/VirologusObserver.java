@@ -1,15 +1,15 @@
-package whut.ui.observer;
+package ui.observer;
 
-import whut.ui.control.Icon;
-import whut.ui.control.MyRunnable;
-import whut.agent.Agens;
-import whut.genetic_code.GeneticCode;
-import whut.item.Item;
-import whut.material.Material;
-import whut.material.Nukleotid;
-import whut.player.Virologus;
-import whut.ui.container.Container;
-import whut.ui.container.ContainerSuper;
+import ui.control.Icon;
+import ui.control.MyRunnable;
+import agent.Agens;
+import genetic_code.GeneticCode;
+import item.Item;
+import material.Material;
+import material.Nukleotid;
+import player.Virologus;
+import ui.container.Container;
+import ui.container.ContainerSuper;
 
 import java.awt.BorderLayout;
 import java.io.Serializable;

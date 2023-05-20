@@ -1,7 +1,7 @@
-package whut.player;
+package player;
 
-import whut.ui.control.View;
-import whut.field.Field;
+import ui.control.View;
+import field.Field;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ public class Entity extends View implements Serializable{
 	protected Field field;
 	
 	public void step() {
-		//leszármazott definiálja
+		//leszï¿½rmazott definiï¿½lja
 	}
 	
 	public void move(Field cel) {

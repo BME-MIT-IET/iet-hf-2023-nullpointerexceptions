@@ -1,6 +1,6 @@
-package whut.ui.control;
+package ui.control;
 
-import whut.player.Game;
+import player.Game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

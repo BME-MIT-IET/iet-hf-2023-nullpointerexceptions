@@ -1,7 +1,7 @@
-package whut.item;
+package item;
 
-import whut.material.Packet;
-import whut.player.Virologus;
+import material.Packet;
+import player.Virologus;
 
 public class Sack extends Item{
 	private int increase = 200;

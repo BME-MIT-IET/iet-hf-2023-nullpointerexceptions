@@ -1,8 +1,6 @@
-package whut.genetic_code;
-import whut.player.AgensUsable;
-import whut.material.Aminosav;
-import whut.material.Material;
-import whut.material.Nukleotid;
+package genetic_code;
+import player.AgensUsable;
+import material.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-package whut.ui.container;
+package ui.container;
 
-import whut.ui.control.Menu;
-import whut.ui.control.MyRunnable;
+import ui.control.Menu;
+import ui.control.MyRunnable;
 
 import java.awt.Color;
 import java.awt.FlowLayout;

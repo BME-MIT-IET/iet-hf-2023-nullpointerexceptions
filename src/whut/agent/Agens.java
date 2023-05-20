@@ -1,7 +1,7 @@
-package whut.agent;
+package agent;
 
-import whut.player.AgensUsable;
-import whut.material.Packet;
+import player.AgensUsable;
+import material.Packet;
 
 import java.io.Serializable;
 

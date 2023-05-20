@@ -1,6 +1,6 @@
-package whut.ui.container;
+package ui.container;
 
-import whut.ui.control.Icon;
+import ui.control.Icon;
 
 import java.awt.Color;
 import java.awt.FlowLayout;

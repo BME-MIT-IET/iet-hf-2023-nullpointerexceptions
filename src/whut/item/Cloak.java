@@ -1,4 +1,4 @@
-package whut.item;
+package item;
 
 import java.util.Random;
 

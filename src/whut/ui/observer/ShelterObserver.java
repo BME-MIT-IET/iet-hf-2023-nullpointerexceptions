@@ -1,11 +1,11 @@
-package whut.ui.observer;
+package ui.observer;
 
-import whut.ui.control.Icon;
-import whut.ui.control.MyRunnable;
-import whut.field.Shelter;
-import whut.item.Item;
-import whut.ui.container.Container;
-import whut.ui.container.ContainerSuper;
+import ui.control.Icon;
+import ui.control.MyRunnable;
+import field.Shelter;
+import item.Item;
+import ui.container.Container;
+import ui.container.ContainerSuper;
 
 import java.awt.BorderLayout;
 import java.io.Serializable;

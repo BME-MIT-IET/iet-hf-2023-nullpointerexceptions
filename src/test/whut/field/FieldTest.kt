@@ -66,10 +66,7 @@ class FieldTest {
     @Test
     fun acceptEntityToField(){
         val entity = Entity()
-        val exception = assertThrows<ClassCastException> {
-            field.accept(entity)
-        }
-        assertEquals("whut.player.Entity cannot be cast to whut.player.Virologus", exception.message)
+        assertEquals(Unit, field.accept(entity))
     }
 
     @Test

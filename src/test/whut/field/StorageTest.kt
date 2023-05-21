@@ -42,10 +42,7 @@ class StorageTest{
     @Test
     fun acceptEntityToStorage(){
         val entity = Entity()
-        val exception = assertThrows<ClassCastException> {
-            storage.accept(entity)
-        }
-        assertEquals("whut.player.Entity cannot be cast to whut.player.Virologus", exception.message)
+        assertEquals(Unit, storage.accept(entity))
     }
 
     @Test

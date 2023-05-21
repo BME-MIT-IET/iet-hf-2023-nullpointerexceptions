@@ -14,16 +14,16 @@ class AminoAcidTest {
 
     @Test
     fun testCheck(){
-        Assertions.assertEquals(true, aminoAcid.check("aminosav"))
+        Assertions.assertEquals(true, aminoAcid.check("AminoAcid"))
     }
 
     @Test
     fun testToString(){
-        Assertions.assertEquals("aminosav", aminoAcid.toString())
+        Assertions.assertEquals("AminoAcid", aminoAcid.toString())
     }
 
     @Test
     fun testGetType(){
-        Assertions.assertEquals("Aminosav", aminoAcid.type)
+        Assertions.assertEquals("AminoAcid", aminoAcid.type)
     }
 }

@@ -59,7 +59,7 @@ public class TouchContainer extends JPanel {
 			if (ae.getActionCommand().equals(touch) && !MyRunnable.getTouched()) {
 				cb.removeAllItems();
 				ArrayList<String> players = new ArrayList<>();
-				List<AgentUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologusok();
+				List<AgentUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologists();
 				for (AgentUsable a : vs) {
 					Virologist v = (Virologist)a;
 					players.add("v"+MyRunnable.getVirologusSzam(v));

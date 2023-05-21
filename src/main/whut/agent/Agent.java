@@ -22,7 +22,7 @@ public abstract class Agent implements Serializable{
 	//A param�ter a birtokos virol�gus. 
 	//Igazzal t�r vissza, ha az adott �gens miatt m�g tud mozogni az adott k�rben. 
 	//Jelen helyen teh�t mindig igazzal, de ezt fel�l lehet defini�lni.
-	public abstract boolean startTurnEffect(AgentUsable v);
+	public abstract boolean startTurnEffect(AgentUsable agentUsable);
 	
 	//Akkor h�v�dik meg, ha a birtokos virol�gust �genssel megt�madj�k. 
 	//Igazzal t�r vissza, ha v�dve van, teh�t az �gens hat�sa nem �rv�nyes�lhet, hamissal ha nincs v�dve.
@@ -33,7 +33,7 @@ public abstract class Agent implements Serializable{
 	//Akkor h�v�dik meg, amikor a birtokos virol�gus egy rakt�rra l�p. 
 	//Param�ter�l megkapja a bent l�v� packetet. 
 	//Alap�rtelmezetten ezzel semmit nem csin�l, de egyes �gensek(BearDance) kezdhet valamit a megkapott packettel.
-	public abstract void destroyEffect(Packet p);
+	public abstract void destroyEffect(Packet packet);
 
-	public abstract boolean check(String s);
+	public abstract boolean check(String agentType);
 }

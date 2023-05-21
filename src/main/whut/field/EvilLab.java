@@ -16,15 +16,15 @@ public class EvilLab extends Lab
  
 	//L�trehoz egy medvet�nc �genst, �s megt�madja vele a virol�gust, ezzel �megfert�zve� �t.
 	@Override
-	public void touching(Virologist v) //mező érintésekor
+	public void touching(Virologist virologist) //mező érintésekor
 	{
 		BearDance br = new BearDance();
-		v.uRAttacked(br,null); //megtámadjad egy medvetáncal		
+		virologist.gotAttacked(br,null); //megtámadjad egy medvetáncal
 	}
 	
 	@Override
 	public String toString() {
-		return "evillab";
+		return "EvilLab";
 	}
 	
 }

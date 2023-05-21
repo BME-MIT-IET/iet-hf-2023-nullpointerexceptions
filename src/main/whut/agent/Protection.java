@@ -14,10 +14,10 @@ public class Protection extends Agent {
 	
 	//Elõször is az élettartalmát csökkenti, ha pedig ez az érték eléri a 0-t akkor a paraméterül kapott virológustól kitörli. 
 	//Mindenképp igazzal tér vissza, jelezve hogy még az adott körben mozoghat.
-	public boolean startTurnEffect(AgentUsable au) {
+	public boolean startTurnEffect(AgentUsable agentUsable) {
 		//csï¿½kkenti a hatï¿½sidï¿½t, ï¿½s ha lejï¿½rt, akkor kitï¿½rli a virolï¿½gustï¿½l
 		if(effectTime < 0) {
-			au.removeAgensOnMe(this);
+			agentUsable.removeAppliedAgent(this);
 		}
 		
 		//mï¿½g tud mozogni ezert igazzal ter vissza
@@ -31,16 +31,16 @@ public class Protection extends Agent {
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("protection");
+	public boolean check(String agentType) {
+		return agentType.equals(toString());
 	}
 	
 	public String toString() {
-		return "protection";
+		return "Protection";
 	}
 
 	@Override
-	public void destroyEffect(Packet p) {
+	public void destroyEffect(Packet packet) {
 		//abstracct osztályt valósít meg ezért kell
 	}
 	

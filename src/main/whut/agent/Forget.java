@@ -8,26 +8,26 @@ public class Forget extends Agent {
 	//Meghívja a paraméterül kapott virológus forgetAll() függvényét, amivel a virológus elfelejti az általa ismert összes genetikai kódot. 
 	//Ezután kitörli a paraméterül kapott virológuson ható ágensek közül.
 	@Override
-	public boolean startTurnEffect(AgentUsable au) {
+	public boolean startTurnEffect(AgentUsable agentUsable) {
 		//kï¿½r elejï¿½n elfelejtteti minden megtanult kï¿½djï¿½t
-		au.forgetAll();
+		agentUsable.forgetAllGeneticCodes();
 		//kiotï¿½rli a gazdï¿½ja listï¿½jï¿½bï¿½l magï¿½t
-		au.removeAgensOnMe(this);
+		agentUsable.removeAppliedAgent(this);
 		//visszatï¿½r igazzal, mert tud mï¿½g mozogni
 		return true;
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("forget");
+	public boolean check(String agentType) {
+		return agentType.equals(toString());
 	}
 	
 	public String toString() {
-		return "forget";
+		return "Forget";
 	}
 
 	@Override
-	public void destroyEffect(Packet p) {
+	public void destroyEffect(Packet packet) {
 		//abstract oszatlyt valósít meg ezért kell
 	}
 }

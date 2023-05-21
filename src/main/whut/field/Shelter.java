@@ -18,16 +18,16 @@ public class Shelter extends Field
 	
 	//tölri a tárgyat a shelterről
 	@Override
-	public void removeItem(Item i)
+	public void removeItem(Item item)
 	{
-		items.remove(i);
+		items.remove(item);
 	}
 	
 	//hozzáadja a tárgyat a shelterhez
 	@Override
-	public void addItem(Item i)
+	public void addItem(Item item)
 	{
-		items.add(i);
+		items.add(item);
 	}
 
 	@Override
@@ -36,19 +36,19 @@ public class Shelter extends Field
 	}
 	
 	@Override
-	public Item getItem(String getThis) {
+	public Item getItem(String itemType) {
 		for(Item i : items) {
-			if(i.check(getThis)) {
+			if(i.check(itemType)) {
 				return i;
 			}
 		}
-		MyRunnable.log("There is no "+ getThis + " here!");
+		MyRunnable.log("There is no "+ itemType + " here!");
 		return null;
 	}
 	
 	@Override
 	public String toString() {
-		return "shelter";
+		return "Shelter";
 	}
 }
 

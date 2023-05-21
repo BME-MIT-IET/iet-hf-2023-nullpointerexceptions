@@ -21,7 +21,7 @@ class EvilLabTest {
         @JvmStatic
         fun setup() {
             val game = mock(Game::class.java)
-            doNothing().`when`(game).bearAll()
+            doNothing().`when`(game).applyBearEffectToAll()
 
             myRunnableMock = mockStatic(MyRunnable::class.java)
             `when`(MyRunnable.getGame()).thenReturn(game)
@@ -43,7 +43,7 @@ class EvilLabTest {
     fun touchingEvilLab(){
         val virologist = Virologist()
         evilLab.touching(virologist)
-        assertEquals(1, virologist.agensOnMe.size)
+        assertEquals(1, virologist.appliedAgents.size)
     }
 
     @Test

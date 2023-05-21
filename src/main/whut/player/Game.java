@@ -18,51 +18,51 @@ import java.util.Random;
 
 public class Game extends View implements Serializable {
 	private Map map;
-	ArrayList<Entity> entity;
-	ArrayList<GeneticCode> allGeneticCode;
-	ArrayList<? extends AgentUsable> au;
+	ArrayList<Entity> entities;
+	ArrayList<GeneticCode> allGeneticCodes;
+	ArrayList<? extends AgentUsable> agentUsables;
 	private int players;
-	private boolean megy = true;
-	private Random rand = new Random();
+	private boolean isRunning = true;
+	private Random random = new Random();
 
 	
 	public Entity getEntityAt(int index) {
-		if(index<entity.size()&&index>=0) {
-			return entity.get(index);
+		if(index< entities.size()&&index>=0) {
+			return entities.get(index);
 		}
 		return null;
 	}
 	
-	public Game(int playerNum)
+	public Game(int numberOfPlayers)
 	{
-		players = playerNum;
+		players = numberOfPlayers;
 		initGame();
 	}
 	
 	public void initGame() //játék inicializálás
 	{
 		map = new Map();
-		entity = new ArrayList<>();
-		allGeneticCode = new ArrayList<>();
-		allGeneticCode.add(new ForgetCode());
-		allGeneticCode.add(new StunCode());
-		allGeneticCode.add(new ProtectionCode());
-		allGeneticCode.add(new ChoreaCode());
+		entities = new ArrayList<>();
+		allGeneticCodes = new ArrayList<>();
+		allGeneticCodes.add(new ForgetCode());
+		allGeneticCodes.add(new StunCode());
+		allGeneticCodes.add(new ProtectionCode());
+		allGeneticCodes.add(new ChoreaCode());
 		
 		createGame();
 		MyRunnable.setGame(this);
 		attach(new GameObserver(this));
 	}
 	
-	public void bearAll() {
-		boolean vanJozan = false;
-		for (Entity e : entity) {
-			Virologist v = (Virologist)e;
-			if (!v.isBear()) vanJozan = true;
+	public void applyBearEffectToAll() {
+		boolean hasNotInfected = false;
+		for (Entity entity : entities) {
+			Virologist virologist = (Virologist)entity;
+			if (!virologist.isBear()) hasNotInfected = true;
 		}
 		
-		if(!vanJozan) {
-			megy = false;
+		if(!hasNotInfected) {
+			isRunning = false;
 			((GameObserver)observer.get(0)).drawEnd("Everybody lost!");
 		}
 	}
@@ -71,7 +71,7 @@ public class Game extends View implements Serializable {
 	public void mapThird(){
 		//A megadott virologusszamnak megfeleloen csinal virologuspeldanyokat
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologist());
+			entities.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -88,61 +88,61 @@ public class Game extends View implements Serializable {
 		map.addField(new Lab());
 		map.getField(4).setGeneticCode(new StunCode());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).setNeighbour(map.getField(1));
+		map.getField(0).setNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).setNeighbour(map.getField(3));
+		map.getField(0).setNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).setNeighbour(map.getField(3));
+		map.getField(1).setNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).setNeighbour(map.getField(2));
+		map.getField(1).setNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(2).setNeighbour(map.getField(4));
+		map.getField(2).setNeighbor(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
 		map.getField(5).setGeneticCode(new ProtectionCode());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(5).setNeighbour(map.getField(0));
+		map.getField(5).setNeighbor(map.getField(0));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
 		map.getField(6).setGeneticCode(new ForgetCode());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).setNeighbour(map.getField(5));
+		map.getField(6).setNeighbor(map.getField(5));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).setNeighbour(map.getField(4));
+		map.getField(6).setNeighbor(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
 		map.getField(7).getPacket().addMaterial(new Nucleotide());
 		map.getField(7).getPacket().addMaterial(new AminoAcid());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).setNeighbour(map.getField(5));
+		map.getField(7).setNeighbor(map.getField(5));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).setNeighbour(map.getField(2));
+		map.getField(7).setNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).setNeighbour(map.getField(4));
+		map.getField(7).setNeighbor(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
 		map.getField(8).getPacket().addMaterial(new Nucleotide());
 		map.getField(8).getPacket().addMaterial(new AminoAcid());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(8).setNeighbour(map.getField(4));
+		map.getField(8).setNeighbor(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		map.getField(9).addItem(new Glove());
 		map.getField(9).addItem(new Axe());
 		map.getField(9).addItem(new Axe());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(9).setNeighbour(map.getField(8));
+		map.getField(9).setNeighbor(map.getField(8));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new EvilLab());
 		map.getField(10).setGeneticCode(new StunCode());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(9));
+		map.getField(10).setNeighbor(map.getField(9));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(2));
+		map.getField(10).setNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(1));
+		map.getField(10).setNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(3));
+		map.getField(10).setNeighbor(map.getField(3));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -154,92 +154,98 @@ public class Game extends View implements Serializable {
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).setNeighbour(map.getField(6));
+		map.getField(11).setNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).setNeighbour(map.getField(12));
+		map.getField(11).setNeighbor(map.getField(12));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(12).setNeighbour(map.getField(13));
+		map.getField(12).setNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).setNeighbour(map.getField(14));
+		map.getField(13).setNeighbor(map.getField(14));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(14).setNeighbour(map.getField(15));
+		map.getField(14).setNeighbor(map.getField(15));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(15).setNeighbour(map.getField(3));
+		map.getField(15).setNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(14).setNeighbour(map.getField(3));
+		map.getField(14).setNeighbor(map.getField(3));
 		//A virologusokat felrakja a palyara (elosztva a mezokon)
-		for(int i = 0; i < entity.size(); i++)
-			map.getField(i % map.getSize()).accept(entity.get(i));
+		for(int i = 0; i < entities.size(); i++)
+			map.getField(i % map.getSize()).accept(entities.get(i));
 	}
 
 
 	public void createGame() {
 		MyRunnable.setLeft(2);
-        int kor=rand.nextInt(3);
-        if(kor==0) mapFirst();
-        if (kor==1) mapSecond();
-        if (kor==2) mapThird();
+        int round = random.nextInt(3);
 
+        if(round==0)
+			mapFirst();
+
+        if (round==1)
+			mapSecond();
+
+        if (round==2)
+			mapThird();
 	}
 	
 	public void oneRound() // egy kör, összes entity
 	{
-		for(int i = 0;i<entity.size();++i)
-		{
-			  entity.get(i).step();
+		for (Entity entity : entities) {
+			entity.step();
 		}
 	}
 	
-	public void endGame(List<GeneticCode> all) //játék végét ellenőrzi, genetikai kódókat hasonlít össze
+	public void endGame(List<GeneticCode> allGeneticCodes) //játék végét ellenőrzi, genetikai kódókat hasonlít össze
 	{
-		boolean[] megvannak = {false,false,false,false};
-		for(int i = 0;i<all.size();++i)
+		boolean[] collected = {false,false,false,false};
+		for(int i = 0;i<allGeneticCodes.size();++i)
 		{
-			for(int j = 0; j<allGeneticCode.size(); j++)
-				if(all.get(i).toString().equals(allGeneticCode.get(j).toString()))
-					megvannak[i] = true;
+			for(int j = 0; j< allGeneticCodes.size(); j++)
+				if(allGeneticCodes.get(i).toString().equals(allGeneticCodes.get(j).toString()))
+					collected[i] = true;
 		}
 		
-		boolean nem = true;
-		for (int i = 0; i< megvannak.length; i++)
-			if(!megvannak[i])
-				nem = false;
+		boolean isGameEnded = true;
+		for (boolean b : collected)
+			if (!b) {
+				isGameEnded = false;
+				break;
+			}
 		
-		if(nem) {
+		if(isGameEnded) {
 			MyRunnable.log("You won :)!");
 			((GameObserver)observer.get(0)).drawEnd("You won!");
-			megy = false;
+			isRunning = false;
 			
 		}
 		
 	}
 
 	//Visszaadja, hogy megy-e meg a jatek
-	public boolean getMegy() {
-		return megy;
+	public boolean isRunning() {
+		return isRunning;
 	}
 	
 	//eltavolit egy jatekost
-	public void removePlayer(Virologist v) {
-		entity.remove(v);
+	public void removePlayer(Virologist virologist) {
+		entities.remove(virologist);
 	}
 	//hozzaad egy jatekost
-	public void addPlayer(Virologist v) {
-		entity.add(v);
+	public void addPlayer(Virologist virologist) {
+		entities.add(virologist);
 	}
 	//Visszaadja a mapot
 	public Map getMap() {
 		return map;
 	}
 	//visszaadja az osszes entity-t
-	public List<Entity> getEntity(){
-		return entity;
+	public List<Entity> getEntities(){
+		return entities;
 	}
 	//general egy palyat
 	public void mapFirst() {
 		//a megadott jatekosszamnak megfeleloen general virologuspeldanyokat
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologist());
+			entities.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -281,109 +287,109 @@ public class Game extends View implements Serializable {
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).addNeighbour(map.getField(1));
+		map.getField(0).addNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).addNeighbour(map.getField(19));
+		map.getField(0).addNeighbor(map.getField(19));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).addNeighbour(map.getField(0));
+		map.getField(1).addNeighbor(map.getField(0));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).addNeighbour(map.getField(18));
+		map.getField(1).addNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).addNeighbour(map.getField(2));
+		map.getField(1).addNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(2).addNeighbour(map.getField(1));
+		map.getField(2).addNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(2).addNeighbour(map.getField(3));
+		map.getField(2).addNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(3).addNeighbour(map.getField(2));
+		map.getField(3).addNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(3).addNeighbour(map.getField(15));
+		map.getField(3).addNeighbor(map.getField(15));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(3).addNeighbour(map.getField(4));
+		map.getField(3).addNeighbor(map.getField(4));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(4).addNeighbour(map.getField(3));
+		map.getField(4).addNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(4).addNeighbour(map.getField(11));
+		map.getField(4).addNeighbor(map.getField(11));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(4).addNeighbour(map.getField(5));
+		map.getField(4).addNeighbor(map.getField(5));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(5).addNeighbour(map.getField(4));
+		map.getField(5).addNeighbor(map.getField(4));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(5).addNeighbour(map.getField(6));
+		map.getField(5).addNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).addNeighbour(map.getField(4));
+		map.getField(6).addNeighbor(map.getField(4));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).addNeighbour(map.getField(10));
+		map.getField(6).addNeighbor(map.getField(10));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).addNeighbour(map.getField(7));
+		map.getField(6).addNeighbor(map.getField(7));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).addNeighbour(map.getField(6));
+		map.getField(7).addNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).addNeighbour(map.getField(10));
+		map.getField(7).addNeighbor(map.getField(10));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).addNeighbour(map.getField(8));
+		map.getField(7).addNeighbor(map.getField(8));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(8).addNeighbour(map.getField(7));
+		map.getField(8).addNeighbor(map.getField(7));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(8).addNeighbour(map.getField(9));
+		map.getField(8).addNeighbor(map.getField(9));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(9).addNeighbour(map.getField(8));
+		map.getField(9).addNeighbor(map.getField(8));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(9).addNeighbour(map.getField(10));
+		map.getField(9).addNeighbor(map.getField(10));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).addNeighbour(map.getField(6));
+		map.getField(10).addNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).addNeighbour(map.getField(7));
+		map.getField(10).addNeighbor(map.getField(7));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).addNeighbour(map.getField(9));
+		map.getField(10).addNeighbor(map.getField(9));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).addNeighbour(map.getField(11));
+		map.getField(10).addNeighbor(map.getField(11));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).addNeighbour(map.getField(10));
+		map.getField(11).addNeighbor(map.getField(10));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).addNeighbour(map.getField(4));
+		map.getField(11).addNeighbor(map.getField(4));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).addNeighbour(map.getField(13));
+		map.getField(11).addNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(12).addNeighbour(map.getField(13));
+		map.getField(12).addNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).addNeighbour(map.getField(11));
+		map.getField(13).addNeighbor(map.getField(11));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).addNeighbour(map.getField(12));
+		map.getField(13).addNeighbor(map.getField(12));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).addNeighbour(map.getField(14));
+		map.getField(13).addNeighbor(map.getField(14));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).addNeighbour(map.getField(15));
+		map.getField(13).addNeighbor(map.getField(15));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(14).addNeighbour(map.getField(13));
+		map.getField(14).addNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(14).addNeighbour(map.getField(17));
+		map.getField(14).addNeighbor(map.getField(17));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(15).addNeighbour(map.getField(13));
+		map.getField(15).addNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(15).addNeighbour(map.getField(3));
+		map.getField(15).addNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(16).addNeighbour(map.getField(17));
+		map.getField(16).addNeighbor(map.getField(17));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(16).addNeighbour(map.getField(18));
+		map.getField(16).addNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(17).addNeighbour(map.getField(14));
+		map.getField(17).addNeighbor(map.getField(14));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(17).addNeighbour(map.getField(16));
+		map.getField(17).addNeighbor(map.getField(16));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(17).addNeighbour(map.getField(18));
+		map.getField(17).addNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).addNeighbour(map.getField(16));
+		map.getField(18).addNeighbor(map.getField(16));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).addNeighbour(map.getField(17));
+		map.getField(18).addNeighbor(map.getField(17));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).addNeighbour(map.getField(1));
+		map.getField(18).addNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).addNeighbour(map.getField(19));
+		map.getField(18).addNeighbor(map.getField(19));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(19).addNeighbour(map.getField(18));
+		map.getField(19).addNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(19).addNeighbour(map.getField(0));
+		map.getField(19).addNeighbor(map.getField(0));
 		
 		map.getField(2).setGeneticCode(new StunCode());
 		map.getField(4).setGeneticCode(new ProtectionCode());
@@ -410,15 +416,15 @@ public class Game extends View implements Serializable {
 		map.getField(5).getPacket().addMaterial(new Nucleotide());
 		
 		int field;
-		for(int i = 0; i < entity.size(); i++) {
-			field = rand.nextInt(20);
-			map.getField(field).accept(entity.get(i));
+		for (Entity entity : entities) {
+			field = random.nextInt(20);
+			map.getField(field).accept(entity);
 		}
 	}
 	
 	public void mapSecond() {
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologist());
+			entities.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
 		map.getField(0).setGeneticCode(new ChoreaCode());
@@ -494,90 +500,90 @@ public class Game extends View implements Serializable {
 		map.getField(24).getPacket().addMaterial(new AminoAcid());
 		map.getField(24).getPacket().addMaterial(new Nucleotide());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).setNeighbour(map.getField(1));
+		map.getField(0).setNeighbor(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(0).setNeighbour(map.getField(5));
+		map.getField(0).setNeighbor(map.getField(5));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).setNeighbour(map.getField(2));
+		map.getField(1).setNeighbor(map.getField(2));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(1).setNeighbour(map.getField(6));
+		map.getField(1).setNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(2).setNeighbour(map.getField(3));
+		map.getField(2).setNeighbor(map.getField(3));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(2).setNeighbour(map.getField(7));
+		map.getField(2).setNeighbor(map.getField(7));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(3).setNeighbour(map.getField(4));
+		map.getField(3).setNeighbor(map.getField(4));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(3).setNeighbour(map.getField(8));
+		map.getField(3).setNeighbor(map.getField(8));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(4).setNeighbour(map.getField(9));
+		map.getField(4).setNeighbor(map.getField(9));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(5).setNeighbour(map.getField(6));
+		map.getField(5).setNeighbor(map.getField(6));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(5).setNeighbour(map.getField(10));
+		map.getField(5).setNeighbor(map.getField(10));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).setNeighbour(map.getField(7));
+		map.getField(6).setNeighbor(map.getField(7));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(6).setNeighbour(map.getField(11));
+		map.getField(6).setNeighbor(map.getField(11));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).setNeighbour(map.getField(8));
+		map.getField(7).setNeighbor(map.getField(8));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(7).setNeighbour(map.getField(12));
+		map.getField(7).setNeighbor(map.getField(12));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(8).setNeighbour(map.getField(9));
+		map.getField(8).setNeighbor(map.getField(9));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(8).setNeighbour(map.getField(13));
+		map.getField(8).setNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(9).setNeighbour(map.getField(14));
+		map.getField(9).setNeighbor(map.getField(14));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(11));
+		map.getField(10).setNeighbor(map.getField(11));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(10).setNeighbour(map.getField(15));
+		map.getField(10).setNeighbor(map.getField(15));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).setNeighbour(map.getField(12));
+		map.getField(11).setNeighbor(map.getField(12));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(11).setNeighbour(map.getField(16));
+		map.getField(11).setNeighbor(map.getField(16));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(12).setNeighbour(map.getField(13));
+		map.getField(12).setNeighbor(map.getField(13));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(12).setNeighbour(map.getField(17));
+		map.getField(12).setNeighbor(map.getField(17));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).setNeighbour(map.getField(14));
+		map.getField(13).setNeighbor(map.getField(14));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(13).setNeighbour(map.getField(18));
+		map.getField(13).setNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(14).setNeighbour(map.getField(19));
+		map.getField(14).setNeighbor(map.getField(19));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(15).setNeighbour(map.getField(16));
+		map.getField(15).setNeighbor(map.getField(16));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(15).setNeighbour(map.getField(20));
+		map.getField(15).setNeighbor(map.getField(20));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(16).setNeighbour(map.getField(17));
+		map.getField(16).setNeighbor(map.getField(17));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(16).setNeighbour(map.getField(21));
+		map.getField(16).setNeighbor(map.getField(21));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(17).setNeighbour(map.getField(18));
+		map.getField(17).setNeighbor(map.getField(18));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(17).setNeighbour(map.getField(22));
+		map.getField(17).setNeighbor(map.getField(22));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).setNeighbour(map.getField(19));
+		map.getField(18).setNeighbor(map.getField(19));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(18).setNeighbour(map.getField(23));
+		map.getField(18).setNeighbor(map.getField(23));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(19).setNeighbour(map.getField(24));
+		map.getField(19).setNeighbor(map.getField(24));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(20).setNeighbour(map.getField(21));
+		map.getField(20).setNeighbor(map.getField(21));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(21).setNeighbour(map.getField(22));
+		map.getField(21).setNeighbor(map.getField(22));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(22).setNeighbour(map.getField(23));
+		map.getField(22).setNeighbor(map.getField(23));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
-		map.getField(23).setNeighbour(map.getField(24));
+		map.getField(23).setNeighbor(map.getField(24));
 
 
 		
-		for(int i = 0; i < entity.size(); i++)
-			map.getField(i % map.getSize()).accept(entity.get(i));
+		for(int i = 0; i < entities.size(); i++)
+			map.getField(i % map.getSize()).accept(entities.get(i));
 		
 	}
 	

@@ -12,11 +12,11 @@ public class Cloak extends Item{
 	}
 	
 	@Override
-	public boolean check(String it) {
-		return it.equals("cloak");
+	public boolean check(String itemType) {
+		return itemType.equals(toString());
 	}
 	
 	public String toString() {
-		return "cloak";
+		return "Cloak";
 	}
 }

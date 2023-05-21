@@ -13,10 +13,10 @@ public class Stun extends Agent {
     }
 
     @Override
-    public boolean startTurnEffect(AgentUsable au) {
+    public boolean startTurnEffect(AgentUsable agentUsable) {
         //cs?kkenti a hat?sid?t, ?s ha lej?rt, akkor kit?rli a virol?gust?l
         if(--effectTime < 0) {
-            au.removeAgensOnMe(this);
+            agentUsable.removeAppliedAgent(this);
             //ha lej?rt akkor m?r tud mozogni
             return true;
         }
@@ -32,16 +32,16 @@ public class Stun extends Agent {
     }
 
     @Override
-    public boolean check(String s) {
-        return s.equals("stun");
+    public boolean check(String agentType) {
+        return agentType.equals(toString());
     }
 
     public String toString() {
-        return "stun";
+        return "Stun";
     }
 
     @Override
-    public void destroyEffect(Packet p) {
+    public void destroyEffect(Packet packet) {
         //abstracct oszt?lyt val?s?t meg ez?rt kell
     }
 }

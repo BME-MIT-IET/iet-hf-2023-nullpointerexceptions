@@ -15,68 +15,68 @@ import java.util.List;
 
 public class Field extends View implements Serializable
 {
-	protected ArrayList<AgentUsable> au; // A mezőn található entity-k
-	private ArrayList<Field> neighbor; //szomszédos mezők
+	protected ArrayList<AgentUsable> agentUsableList; // A mezőn található entity-k
+	private ArrayList<Field> neighbors; //szomszédos mezők
 
 	
 	public Field()
 	{
-		au = new ArrayList<>(); //létrehozza a virológust
-		neighbor = new ArrayList<>();
+		agentUsableList = new ArrayList<>(); //létrehozza a virológust
+		neighbors = new ArrayList<>();
 	}
 	
 
 	
 	//visszaadja a virológusok listáját
-	public List<AgentUsable> getVirologusok()
+	public List<AgentUsable> getVirologists()
 	{
-		return au;
+		return agentUsableList;
 	}
 	
 	//törli a virológust a listából
-	public void remove(Entity v)
+	public void remove(Entity entity)
 	{
-		au.remove(v);
+		agentUsableList.remove(entity);
 	}
 	
 	//hozzáadja a virológust a listához
-	public void accept(Entity v)
+	public void accept(Entity entity)
 	{
-		Virologist ag = (Virologist)v;
-		au.add(ag);
-		v.setField(this);
+		Virologist virologist = (Virologist)entity;
+		agentUsableList.add(virologist);
+		entity.setField(this);
 	}
 	
 	//mező érintés esetén hívódik meg
-	public void touching(Virologist v){
+	public void touching(Virologist virologist){
 		//leszarmazott felulirja
 	}
 	
 	//szomszédos mezők beállítása
-	public void setNeighbour(Field f){
-		if(!f.equals(this)) {
-		neighbor.add(f);
-		f.addNeighbour(this);}
+	public void setNeighbor(Field field){
+		if(!field.equals(this)) {
+		neighbors.add(field);
+		field.addNeighbor(this);}
 		//skeletonnál még kézzel
 	}
 	
-	public void addNeighbour(Field f) {
-		neighbor.add(f);
+	public void addNeighbor(Field field) {
+		neighbors.add(field);
 	}
 	
 	//visszaadja a szomszéd mezők listáját
-	public List<Field> getNeighbourhood(){
-		return neighbor;
+	public List<Field> getNeighborhood(){
+		return neighbors;
 	}
 
-	public void removeItem(Item i) {
+	public void removeItem(Item item) {
 		MyRunnable.log("Cant pickup item from here!");
 	}
-	public void addItem(Item i) {
+	public void addItem(Item item) {
 		MyRunnable.log("Cant leave item here!");
 	}
 	
-	public GeneticCode codeHere() {
+	public GeneticCode getGeneticCode() {
 		return null;
 	}
 	
@@ -88,18 +88,18 @@ public class Field extends View implements Serializable
 		return null;
 	}
 
-	public Item getItem(String getThis) {
-		MyRunnable.log("Cant pickup "+getThis+" from here!");
+	public Item getItem(String itemType) {
+		MyRunnable.log("Cant pickup "+itemType+" from here!");
 		return null;
 	}
 	
-	public void setGeneticCode(GeneticCode gc) {
+	public void setGeneticCode(GeneticCode geneticCode) {
 		MyRunnable.log("Ide nem rakhatsz!");
 	}
 	
 	@Override
 	public String toString() {
-		return "whut/field";
+		return "Field";
 	}
 	
 }

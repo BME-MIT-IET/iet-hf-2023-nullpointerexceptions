@@ -17,23 +17,23 @@ public abstract class GeneticCode implements Serializable{
 	protected GeneticCode() 
 	{
 		cost = new ArrayList<>();
-		Material amc=new AminoAcid();
-		amc.setValue(15);
-		cost.add(amc);
+		Material aminoAcid = new AminoAcid();
+		aminoAcid.setAmount(15);
+		cost.add(aminoAcid);
 		
-		Material nuk=new Nucleotide();
-		nuk.setValue(15);
-		cost.add(nuk);	
+		Material nucleotide = new Nucleotide();
+		nucleotide.setAmount(15);
+		cost.add(nucleotide);
 	}
 	
 	//ezen fuggvenyt meg kell valositania a leszarmazottaknak
 	//letrehozza a megfelelo agenst, es hozzaadja a parameterkent kapott agens hasznalonak
 	//AgensUsable au - ezen entity fogja megkapni a letrehozott agenst
-	public abstract void createAgens(AgentUsable au);
+	public abstract void createAgent(AgentUsable agentUsable);
 	
 	public List<Material> getCost(){
 		return cost;
 	}
 	
-	public abstract boolean check(String s);
+	public abstract boolean check(String geneticCodeType);
 }

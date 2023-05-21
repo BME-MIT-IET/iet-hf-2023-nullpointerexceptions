@@ -23,7 +23,7 @@ public class LabObserver implements Observer, Serializable{
 
     @Override
 	public void update(){
-        GeneticCode g = lab.codeHere();
+        GeneticCode g = lab.getGeneticCode();
 
         draw(g.toString());
     }

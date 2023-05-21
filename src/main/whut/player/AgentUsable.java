@@ -10,24 +10,24 @@ import java.util.List;
 
 public class AgentUsable extends Entity{
 	
-	protected ArrayList<Agent> agens = new ArrayList<>();
-	protected ArrayList<Agent> agentOnMe = new ArrayList<>();
-	protected ArrayList<GeneticCode> geneticCode = new ArrayList<>();
+	protected ArrayList<Agent> agents = new ArrayList<>();
+	protected ArrayList<Agent> appliedAgents = new ArrayList<>();
+	protected ArrayList<GeneticCode> geneticCodes = new ArrayList<>();
 	protected Packet materialPacket = new Packet();
 	
 	
 	//list�khoz sim�n hozz�adja �s elveszi
-	public void addAgens(Agent a) {
-		agens.add(a);
+	public void addAgent(Agent agent) {
+		agents.add(agent);
 	}
-	public void addAgensOnMe(Agent ag) {
-		agentOnMe.add(ag);
+	public void applyAgent(Agent agent) {
+		appliedAgents.add(agent);
 	}
-	public void removeAgens(Agent ag) {
-		agens.remove(ag);
+	public void removeAgent(Agent agent) {
+		agents.remove(agent);
 	}
-	public void removeAgensOnMe(Agent ag) {
-		agentOnMe.remove(ag);
+	public void removeAppliedAgent(Agent agent) {
+		appliedAgents.remove(agent);
 	}
 	
 	public Packet getPacket() {
@@ -37,65 +37,65 @@ public class AgentUsable extends Entity{
 
 	
 	//ha egy �gens is leb�n�t�, akkor false-ot add vissza
-	public boolean roundDesc() {
+	public boolean decreaseRound() {
 		//minden startTurneffect lefut, akkor is, ha m�r volt stunnol�
-		for(int i = 0; i < agentOnMe.size(); i++){
-			if(!agentOnMe.get(i).startTurnEffect(this)) {
+		for (Agent appliedAgent : appliedAgents) {
+			if (!appliedAgent.startTurnEffect(this)) {
 				MyRunnable.getGame().myNotify();
-				 return false;
+				return false;
 			}
 		}
 		return true;
 	}
 	
 	//megt�madjuk ezt az agensusable-t
-	public void uRAttacked(Agent ag, Virologist v) {
+	public void gotAttacked(Agent agent, Virologist virologist) {
 		//k�ld�t�lk kit�rli az �genst
-		v.removeAgens(ag);
+		virologist.removeAgent(agent);
 		//ellen�rzi, hogy van-e v�dve valami �ltal
 		boolean isProtected = false;
-		for(Agent a: agentOnMe){
+		for(Agent a: appliedAgents){
 			if(a.defendEffect()) {
 				isProtected=true;
 			}
 		}
 		if(!isProtected) {
-			addAgensOnMe(ag);
+			applyAgent(agent);
 		}
 		
 		
 	}
 	
 	//megtanul egy genetikk�dot
-	public void learnGeneticCode(GeneticCode gc) {
-		for (GeneticCode gc2 : geneticCode){
-			if (gc2.check(gc.toString().substring(0, gc.toString().length()-4)))
+	public void learnGeneticCode(GeneticCode geneticCode) {
+		for (GeneticCode gc : geneticCodes){
+			if (gc.check(geneticCode.toString().substring(0, geneticCode.toString().length()-4)))
 				return;
 		}
-		geneticCode.add(gc);
+		geneticCodes.add(geneticCode);
 	}
 	
 	//megk�rdezi a felhaszn�l�t melyik genetik k�dot szeretn� �genss� alak�tani �s azt megcsin�lja
-	public void createAgens(String mit) {
+	public void createAgent(String agentType) {
 		boolean created = false;
 		int i = 0;
-		while(!created && i < geneticCode.size()) {
-			if(geneticCode.get(i).check(mit)) {
-				geneticCode.get(i).createAgens(this);
+		while(!created && i < geneticCodes.size()) {
+			if(geneticCodes.get(i).check(agentType)) {
+				geneticCodes.get(i).createAgent(this);
 				created = true;
-				geneticCode.remove(i);
-				switch(mit) {
-				case "protection":
-					geneticCode.add(new ProtectionCode());
+				geneticCodes.remove(i);
+				switch(agentType) {
+				case "Protection":
+					geneticCodes.add(new ProtectionCode());
 					break;
-				case "vitusdance":
-					geneticCode.add(new ChoreaCode());
+				case "Chorea":
+					geneticCodes.add(new ChoreaCode());
 					break;
-				case "stun":
-					geneticCode.add(new StunCode());
+				case "Stun":
+					geneticCodes.add(new StunCode());
 					break;
-				case "forget":
-					geneticCode.add(new ForgetCode());
+				case "Forget":
+					geneticCodes.add(new ForgetCode());
 					break;
 				default:
 					break;
@@ -105,51 +105,51 @@ public class AgentUsable extends Entity{
 		}
 		
 		if(!created)
-			MyRunnable.log("Genetic code for " + mit + " not learned yet!");
+			MyRunnable.log("Genetic code for " + agentType + " not learned yet!");
 	}
 	//elfelejt minden genetikk�dot
-	public void forgetAll() {
-		geneticCode.clear();
+	public void forgetAllGeneticCodes() {
+		geneticCodes.clear();
 	}
 	
 	//elvileg ez �sszevonja a kapott packet-et a saj�tj�val?
-	public void increaseMaterial(Packet p, Material m) {
-		p.handleMaterialSeparate(m, this.materialPacket);
+	public void increaseMaterial(Packet packet, Material material) {
+		packet.handleMaterialSeparate(material, this.materialPacket);
 	}
 	
 	//ennek kene egy parameter, hogy melyik agenst hasznalja
-	public void useAgens(Virologist v, Agent ag) {
-		if (!MyRunnable.getGame().getMegy()) return;
-		MyRunnable.getGame().bearAll();
-		agens.remove(ag);
-		v.uRAttacked(ag, (Virologist)this);
-		MyRunnable.getGame().bearAll();
+	public void useAgent(Virologist virologist, Agent agent) {
+		if (!MyRunnable.getGame().isRunning()) return;
+		MyRunnable.getGame().applyBearEffectToAll();
+		agents.remove(agent);
+		virologist.gotAttacked(agent, (Virologist)this);
+		MyRunnable.getGame().applyBearEffectToAll();
 	}
 	
-	public void destroyMaterial(Packet p) {
-		for(Agent a : agentOnMe) {
-			a.destroyEffect(p);
+	public void destroyMaterial(Packet packet) {
+		for(Agent a : appliedAgents) {
+			a.destroyEffect(packet);
 		}
 	}
 
 	
-	public List<GeneticCode> getGeneticCodeHave(){
-		return geneticCode;
+	public List<GeneticCode> getGeneticCodes(){
+		return geneticCodes;
 	}
 
-	public Agent getAgens(String s) {
-		for(Agent ag : agens) {
-			if(ag.check(s))
+	public Agent getAgent(String agentType) {
+		for(Agent ag : agents) {
+			if(ag.check(agentType))
 				return ag;
 		}
 		return null;
 	}
 
-	public List<Agent> getAgensHave(){
-		return agens;
+	public List<Agent> getAgents(){
+		return agents;
 	}
 	
-	public List<Agent> getAgensOnMe(){
-		return agentOnMe;
+	public List<Agent> getAppliedAgents(){
+		return appliedAgents;
 	}
 }

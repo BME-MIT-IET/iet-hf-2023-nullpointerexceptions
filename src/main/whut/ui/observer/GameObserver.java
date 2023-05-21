@@ -51,7 +51,7 @@ public class GameObserver implements Observer, Serializable{
 	}
 	
 	public void drawGame() {
-		if (!game.getMegy()) return;
+		if (!game.isRunning()) return;
 		frame.getContentPane().removeAll();
 		frame.repaint();
 				
@@ -65,7 +65,7 @@ public class GameObserver implements Observer, Serializable{
 			MyRunnable.getSelected().myNotify();
 		
 		ArrayList<String> fields = new ArrayList<>();
-		List<Field> fs = MyRunnable.getCurrentVir().getField().getNeighbourhood();
+		List<Field> fs = MyRunnable.getCurrentVir().getField().getNeighborhood();
 		for (Field f : fs) {
 			fields.add("f"+MyRunnable.getFieldSzam(f));
 		}

@@ -10,60 +10,60 @@ import java.util.List;
 public class Packet implements Serializable
 {
 	private ArrayList<Material> materials = new ArrayList<>();
-	private int maxPerMaterial;
+	private int maxAmountOfEachMaterial;
 	
 	//Konstruktor, alapbol csak a zseb meretet allitja be
 	public Packet()
 	{
-		maxPerMaterial = 50;
+		maxAmountOfEachMaterial = 50;
 	}
 	
 	//Torli a listaban kapott anyagmennyiseget ezen zsebbol
 	// ArrayList<Material> mats - ez az a lista amiket ki kell venni ebbol a zsebbol
 	//visszateresi erteke azt mondja meg, hogy sikerult-e levonni ezen zsebbol a listaban kapott anyagmennyisegeket
-	public boolean decreaseMaterial(List<Material> mats) 
+	public boolean decreaseMaterial(List<Material> materials)
 	{	
-		int nuklevon = 0; //ennyi nukleotidot akarunk levonni
-		int aminolevon = 0; //ennyi aminosavat akarunk levonni
-		for(Material m : mats) {
-			if(m.isSame(new Nucleotide()))
-				nuklevon += m.getValue();
+		int nucleotideNeeded = 0; //ennyi nukleotidot akarunk levonni
+		int aminoAcidNeeded = 0; //ennyi aminosavat akarunk levonni
+		for(Material m : materials) {
+			if(m.sameAs(new Nucleotide()))
+				nucleotideNeeded += m.getAmount();
 			else
-				aminolevon += m.getValue();
+				aminoAcidNeeded += m.getAmount();
 		}
 		
-		int nukSum = 0; //ennyi nukleotidunk van
-		int aminoSum = 0; //ennyi aminosavunk van
+		int nucleotideAmount = 0; //ennyi nukleotidunk van
+		int aminoAcidAmount = 0; //ennyi aminosavunk van
 		for (Material m : this.materials) {
-			if(m.isSame(new Nucleotide()))
-				nukSum += m.getValue();
+			if(m.sameAs(new Nucleotide()))
+				nucleotideAmount += m.getAmount();
 			else
-				aminoSum += m.getValue();
+				aminoAcidAmount += m.getAmount();
 		}
 		
-		if (nukSum < nuklevon || aminoSum < aminolevon){
+		if (nucleotideAmount < nucleotideNeeded || aminoAcidAmount < aminoAcidNeeded){
 			return false;
 		} else {
-			int nukMarad = nukSum-nuklevon; //ennyi nukleotidunk marad a levon�s ut�n
-			int aminoMarad = aminoSum-aminolevon; //ennyi aminosavunk marad a levon�s ut�n
-			materials.clear();
-			AminoAcid a = new AminoAcid();
-			a.setValue(aminoMarad);
-			materials.add(a);
-			Nucleotide n = new Nucleotide();
-			n.setValue(nukMarad);
-			materials.add(n);
+			int nucleotideRemaining = nucleotideAmount-nucleotideNeeded; //ennyi nukleotidunk marad a levon�s ut�n
+			int aminoAcidRemaining = aminoAcidAmount-aminoAcidNeeded; //ennyi aminosavunk marad a levon�s ut�n
+			this.materials.clear();
+			AminoAcid amino = new AminoAcid();
+			amino.setAmount(aminoAcidRemaining);
+			this.materials.add(amino);
+			Nucleotide nucleo = new Nucleotide();
+			nucleo.setAmount(nucleotideRemaining);
+			this.materials.add(nucleo);
 			
-			mats.clear();
+			materials.clear();
 			return true;
 		}
 	}
 	
 	//megvaltoztatjuk a maximum tarolhato anyagmennyiseget anyagonkont
 	//int value - az ertek amivel megvaltoztatjuk a maximum tarolhato anyagmennyiseget
-	public void changeMaxMaterial(int value) 
+	public void changeMaxMaterial(int amountToAdd)
 	{
-		maxPerMaterial += value;
+		maxAmountOfEachMaterial += amountToAdd;
 	}
 	
 	//lekezeli azt az esetet, hogy ha a zseb meretenek csokkentesekor anyagot is kellene kidobnunk a zsebbol
@@ -72,29 +72,29 @@ public class Packet implements Serializable
 	{
 
 		
-		int matsMaterialNDb = 0;  //mennyi nukleotidsavunk van
-		int matsMaterialADb = 0;  //mennyi aminosavunk van
+		int nucleotideAmount = 0;  //mennyi nukleotidsavunk van
+		int aminoAcidAmount = 0;  //mennyi aminosavunk van
 		
 		//vegig megyunk a zseb tartalman es megszamoljuk mibol mennyink van
 		for(Material m : materials) {
-			if(m.isSame(new Nucleotide()))
-				matsMaterialNDb += m.getValue();
+			if(m.sameAs(new Nucleotide()))
+				nucleotideAmount += m.getAmount();
 			else
-				matsMaterialADb += m.getValue();
+				aminoAcidAmount += m.getAmount();
 		}
 		
 		//ha tobb aminosavunk van mint amennyi lehetne a zseb meretenek lecsokkentese utan
-		if(matsMaterialADb > maxPerMaterial-value)
+		if(aminoAcidAmount > maxAmountOfEachMaterial -value)
 		{
-			AminoAcid a = new AminoAcid();
+			AminoAcid amino = new AminoAcid();
 			
 			//az ujonnan letrehozott aminosav erteket beallitjuk arra 
 			//amennyivel kellene csokkenteni a zseb aminosav keszletet
-			a.setValue(matsMaterialADb-maxPerMaterial+value);
+			amino.setAmount(aminoAcidAmount- maxAmountOfEachMaterial +value);
 			
 			//a fuggv�ny parameterezese miatt bele kell rakni egy listaba ezen anyagot
 			ArrayList<Material> m = new ArrayList<>();  
-			m.add(a);
+			m.add(amino);
 			
 			//levonjuk ezen zsebbol a tulcsordulast
 			this.decreaseMaterial(m);
@@ -102,17 +102,17 @@ public class Packet implements Serializable
 		
 		
 		//ha tobb nukleotidunk van mint amennyi lehetne a zseb meretenek lecsokkentese utan
-		if(matsMaterialNDb > maxPerMaterial-value)
+		if(nucleotideAmount > maxAmountOfEachMaterial -value)
 		{
-			Nucleotide a = new Nucleotide();
+			Nucleotide nucleo = new Nucleotide();
 			
 			//az ujonnan letrehozott aminosav erteket beallitjuk arra 
 			//amennyivel kellene csokkenteni a zseb aminosav keszletet
-			a.setValue(matsMaterialNDb-maxPerMaterial+value);
+			nucleo.setAmount(nucleotideAmount- maxAmountOfEachMaterial +value);
 			
 			//a fuggveny parameterezese miatt bele kell rakni egy listaba ezen anyagot
 			ArrayList<Material> m = new ArrayList<>();
-			m.add(a);
+			m.add(nucleo);
 			
 			//levonjuk ezen zsebbol a tulcsordulast
 			this.decreaseMaterial(m);
@@ -124,107 +124,107 @@ public class Packet implements Serializable
 	
 	//Mindig meghivodik amikor felveszunk egy anyagot
 	//abban az esetben ha egy anyagnak a merete nagyobb lenne mint amennyit fel tudnunk venni azt le is kezeli
-	//Material mat - azon anyag amit fel akar venni a jatekos
-	//Packet pac - azon jatekos zsebe aki fel akarja venni az anyagot
-	public void handleMaterialSeparate(Material mat, Packet pac) //pac virologuse sajat
+	//Material materialToPickUp - azon anyag amit fel akar venni a jatekos
+	//Packet packet - azon jatekos zsebe aki fel akarja venni az anyagot
+	public void handleMaterialSeparate(Material materialToPickUp, Packet packet) //pac virologuse sajat
 	{
 		
-		int matsMaterialNDb = 0;  //mennyi nukleotidsavunk van a pac-ban
-		int matsMaterialADb = 0;  //mennyi aminosavunk van a pac-ban
-		int thismatsMaterialNDb = 0;  //mennyi nukleotidsavunk van a this-ben
-		int thismatsMaterialADb = 0;  //mennyi aminosavunk van a this-ben
+		int nucleotideInPacket = 0;  //mennyi nukleotidsavunk van a pac-ban
+		int aminoAcidInPacket = 0;  //mennyi aminosavunk van a pac-ban
+		int currentNucleotideAmount = 0;  //mennyi nukleotidsavunk van a this-ben
+		int currentAminoAcidCount = 0;  //mennyi aminosavunk van a this-ben
 		
 		//vegig megyenk a kapott zseb tartalman es megszamoljuk mibol mennyink van
-		for(Material m : pac.getMaterials()) 
+		for(Material m : packet.getMaterials())
 		{
-			if(m.isSame(new Nucleotide()))
-				matsMaterialNDb += m.getValue();
+			if(m.sameAs(new Nucleotide()))
+				nucleotideInPacket += m.getAmount();
 			else
-				matsMaterialADb += m.getValue();
+				aminoAcidInPacket += m.getAmount();
 		}
 		
 		for(Material m : this.getMaterials()) 
 		{
-			if(m.isSame(new Nucleotide()))
-				thismatsMaterialNDb += m.getValue();
+			if(m.sameAs(new Nucleotide()))
+				currentNucleotideAmount += m.getAmount();
 			else
-				thismatsMaterialADb += m.getValue();
+				currentAminoAcidCount += m.getAmount();
 		}
 		
 		//ebbe az anyagba fog felezodni a kapott anyag ha kell
-		Material m = null;
+		Material material;
 		
 		
 		//ha olyan mennyiseget adna meg amennyi nincs is a zsebben
-		if(mat.isSame(new Nucleotide()) && mat.getValue() > thismatsMaterialNDb)
+		if(materialToPickUp.sameAs(new Nucleotide()) && materialToPickUp.getAmount() > currentNucleotideAmount)
 			return;
 	
-		if(mat.isSame(new AminoAcid()) && mat.getValue() > thismatsMaterialADb)
+		if(materialToPickUp.sameAs(new AminoAcid()) && materialToPickUp.getAmount() > currentAminoAcidCount)
 			return;
 		
 		
 		//amennyiben nukleotidrol van szo
-		if(mat.isSame(new Nucleotide()))
+		if(materialToPickUp.sameAs(new Nucleotide()))
 		{
 			//es nem tudjuk az egesz anyagot felvenni, mert kicsi a zseb merete
-			if(matsMaterialNDb + mat.getValue() > maxPerMaterial) 
+			if(nucleotideInPacket + materialToPickUp.getAmount() > maxAmountOfEachMaterial)
 			{
 				//megfelezzuk az anyagot
-				m = new Nucleotide();
+				material = new Nucleotide();
 				
 				//azon ertekre allitjuk be amit maximalisan fel tud venni
-				m.setValue(maxPerMaterial - matsMaterialNDb);
+				material.setAmount(maxAmountOfEachMaterial - nucleotideInPacket);
 				
 				//ezen anyagot hozzaadjuk a kapott zsebhez
-				pac.addMaterial(m); 
+				packet.addMaterial(material);
 				
 				//az anyag erteket pedig lecsokkentjuk
-				mat.setValue(mat.getValue()-(maxPerMaterial-matsMaterialNDb));
-				this.addMaterial(mat);
+				materialToPickUp.setAmount(materialToPickUp.getAmount()-(maxAmountOfEachMaterial -nucleotideInPacket));
+				this.addMaterial(materialToPickUp);
 				
 			}
 			//ha feltudja venni az egesz anyagot
 			else
 			{
 				//hozzaadjuk a kapott zsebhez az anyagot
-				pac.addMaterial(mat);
+				packet.addMaterial(materialToPickUp);
 			}
 		}
 		//amennyiben aminosavrol van szo
 		else
 		{	
 			//es nem tudjuk az egesz anyagot felvenni, mert kicsi a zseb merete
-			if(matsMaterialADb + mat.getValue() > maxPerMaterial) 
+			if(aminoAcidInPacket + materialToPickUp.getAmount() > maxAmountOfEachMaterial)
 			{
-				m = new AminoAcid();
+				material = new AminoAcid();
 				
 				//azon ertekre allitjuk be amit maximalisan fel tud venni
-				m.setValue(maxPerMaterial-matsMaterialADb);
+				material.setAmount(maxAmountOfEachMaterial -aminoAcidInPacket);
 				
 				//ezen anyagot hozzaadjuk a kapott zsebhez
-				pac.addMaterial(m); 
+				packet.addMaterial(material);
 				
 				//az anyag erteket pedig lecsokkentjuk
-				mat.setValue(mat.getValue()-(maxPerMaterial-matsMaterialADb));
-				this.addMaterial(mat);
+				materialToPickUp.setAmount(materialToPickUp.getAmount()-(maxAmountOfEachMaterial -aminoAcidInPacket));
+				this.addMaterial(materialToPickUp);
 			}
 			//ha feltudja venni az egesz anyagot
 			else
 			{
 				//hozzaadjuk a kapott zsebhez az anyagot
-				pac.addMaterial(mat);
+				packet.addMaterial(materialToPickUp);
 			}
 		}
 			
 	
 		//kelleni fog majd az anyag kiv�tel�hez, a decreasMateral() fuggveny parametere miatt
-		ArrayList<Material> material = new ArrayList<>();
+		ArrayList<Material> materialList = new ArrayList<>();
 		
 		//a megfelezett anyagot hozzaadjuk
-		material.add(mat);
+		materialList.add(materialToPickUp);
 		
 		// a megfelezett anyagot levonjuk ezen zsebbol
-		this.decreaseMaterial(material);	
+		this.decreaseMaterial(materialList);
 	}
 	
 	//vissza adja a zseb anyaglistajat
@@ -233,9 +233,9 @@ public class Packet implements Serializable
 		return materials;
 	}
 	
-	public Material getMaterial(String s) {
+	public Material getMaterial(String materialType) {
 		for(Material m: materials) {
-			if(m.check(s)) {
+			if(m.check(materialType)) {
 				return m;
 			}
 		}
@@ -244,21 +244,21 @@ public class Packet implements Serializable
 	
 	//A parameterkent kapott anyagot hozzaadja a zsebhez
 	//MAterial mat - azon anyag amit a zsebhez adunk
-	public void addMaterial(Material mat)
+	public void addMaterial(Material material)
 	{		
-		if(mat.isSame(new AminoAcid())) {
+		if(material.sameAs(new AminoAcid())) {
 			Material materialAm=new AminoAcid();
-			materialAm.setValue(mat.getValue());
+			materialAm.setAmount(material.getAmount());
 			this.materials.add(materialAm);		
 		}else{
 			Material materialNuk=new Nucleotide();
-			materialNuk.setValue(mat.getValue());
+			materialNuk.setAmount(material.getAmount());
 			this.materials.add(materialNuk);	
 		}
 	}
 	
 	public int getMaxMaterial() {
-		return maxPerMaterial;
+		return maxAmountOfEachMaterial;
 	}
 
 }

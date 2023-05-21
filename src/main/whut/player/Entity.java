@@ -13,16 +13,16 @@ public class Entity extends View implements Serializable{
 		//lesz�rmazott defini�lja
 	}
 	
-	public void move(Field cel) {
-		field.remove(this);
-		cel.accept(this);
+	public void move(Field field) {
+		this.field.remove(this);
+		field.accept(this);
 	}
 	
 	public Field getField() {
 		return field;
 	}
 	
-	public void setField(Field f) {
-		field = f;
+	public void setField(Field field) {
+		this.field = field;
 	}
 }

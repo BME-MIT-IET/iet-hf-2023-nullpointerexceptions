@@ -12,25 +12,25 @@ public class Lab extends Field
 		this.attach(new LabObserver(this));
 	}
 	
-	public Lab(GeneticCode g)
+	public Lab(GeneticCode geneticCode)
 	{
-		geneticCode = g;
+		this.geneticCode = geneticCode;
 		this.attach(new LabObserver(this));
 	}
 	
 	@Override
-	public void setGeneticCode(GeneticCode g) //genetikus kód beállítása
+	public void setGeneticCode(GeneticCode geneticCode) //genetikus kód beállítása
 	{
-		geneticCode = g;
+		this.geneticCode = geneticCode;
 	}
 	@Override
-	public GeneticCode codeHere() {
+	public GeneticCode getGeneticCode() {
 		return geneticCode;
 	}
 	
 	@Override
 	public String toString() {
-		return "lab";
+		return "Lab";
 	}
 }
 

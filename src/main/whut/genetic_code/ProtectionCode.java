@@ -16,21 +16,21 @@ public class ProtectionCode extends GeneticCode
 	//l�trehozza a megfelel� �genst, �s hozz�adja a param�terk�nt kapott �gens haszn�l�nak
 	//AgensUsable au - ezen entity fogja megkapni a l�trehozott �genst
 	@Override
-	public void createAgens(AgentUsable au)
+	public void createAgent(AgentUsable agentUsable)
 	{
-		if(au.getPacket().decreaseMaterial(this.cost))
-			au.addAgens(new Protection());
+		if(agentUsable.getPacket().decreaseMaterial(this.cost))
+			agentUsable.addAgent(new Protection());
 		else
-			MyRunnable.log("Not enough aminosav,nukleotid to create protection");
+			MyRunnable.log("Not enough AminoAcid, Nucleotide to create ProtectionCode");
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("protection");
+	public boolean check(String geneticCodeType) {
+		return geneticCodeType.equals(toString());
 	}
 	
 	@Override
 	public String toString() {
-		return "protectioncode";
+		return "ProtectionCode";
 	}
 }

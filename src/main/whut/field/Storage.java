@@ -20,17 +20,17 @@ public class Storage extends Field
 	
 	
 	@Override
-	public void accept(Entity e) {
-		Virologist ag = (Virologist)e;
-		au.add(ag);
-		ag.setField(this);
+	public void accept(Entity entity) {
+		Virologist virologist = (Virologist) entity;
+		agentUsableList.add(virologist);
+		virologist.setField(this);
 		
-		ag.destroyMaterial(packet);
+		virologist.destroyMaterial(packet);
 		
 	}
 	
-	public void setPacket(Packet p) {
-		packet = p;
+	public void setPacket(Packet packet) {
+		this.packet = packet;
 		MyRunnable.getGame().myNotify();
 	}
 	
@@ -41,7 +41,7 @@ public class Storage extends Field
 	
 	@Override
 	public String toString() {
-		return "storage";
+		return "Storage";
 	}
 }
 

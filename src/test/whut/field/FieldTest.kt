@@ -18,16 +18,16 @@ class FieldTest {
 
     @Test
     fun testConstructor(){
-        assertEquals(0, field.neighbourhood.size)
-        assertEquals(0, field.virologusok.size)
+        assertEquals(0, field.neighborhood.size)
+        assertEquals(0, field.virologists.size)
     }
 
     @Test
     fun setNeighborToField() {
         val neighborField = Field()
-        field.setNeighbour(neighborField)
-        assertEquals(field.neighbourhood.size, 1)
-        assertEquals(neighborField.neighbourhood.size, 1)
+        field.setNeighbor(neighborField)
+        assertEquals(field.neighborhood.size, 1)
+        assertEquals(neighborField.neighborhood.size, 1)
     }
 
     @Test
@@ -49,17 +49,17 @@ class FieldTest {
     @Test
     fun setGeneticCodeToField(){
         field.setGeneticCode(ForgetCode())
-        assertEquals(null, field.codeHere())
+        assertEquals(null, field.getGeneticCode())
     }
 
     @Test
     fun acceptVirologistToField(){
         val virologist = Virologist()
         field.accept(virologist)
-        assertEquals(1, field.au.size)
-        assertEquals(virologist, field.au[0])
+        assertEquals(1, field.agentUsableList.size)
+        assertEquals(virologist, field.agentUsableList[0])
         assertEquals(virologist.field, field)
-        assertEquals(true, field.au.size == field.virologusok.size)
+        assertEquals(true, field.agentUsableList.size == field.virologists.size)
     }
 
     @Test
@@ -72,16 +72,16 @@ class FieldTest {
     fun removeVirologistFromField(){
         val virologist = Virologist()
         field.accept(virologist)
-        assertEquals(1, field.au.size)
+        assertEquals(1, field.agentUsableList.size)
         field.remove(virologist)
-        assertEquals(0, field.au.size)
+        assertEquals(0, field.agentUsableList.size)
     }
 
     @Test
     fun removeEntityFromField(){
-        assertEquals(0, field.au.size)
+        assertEquals(0, field.agentUsableList.size)
         field.remove(Entity())
-        assertEquals(0, field.au.size)
+        assertEquals(0, field.agentUsableList.size)
     }
 
     @Test

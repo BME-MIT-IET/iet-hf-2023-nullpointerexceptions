@@ -12,16 +12,16 @@ public class Nucleotide extends Material
 	@Override
     public String getType()
 	{
-		return "Nukleotid";
+		return toString();
 	}
 	
 	
-	public boolean check(String s) {
-		return s.equals("nukleotid");
+	public boolean check(String materialType) {
+		return materialType.equals(toString());
 	}
 	
 	public String toString() {
-		return "nukleotid";
+		return "Nucleotide";
 	}
 
 }

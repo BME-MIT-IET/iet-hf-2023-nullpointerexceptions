@@ -5,13 +5,13 @@ import java.util.Random;
 //Egy anyagtulajdonsagaiert felel
 //int value - mennyi az anyag mennyisege
 public abstract class Material implements Serializable{
-	private int value;
+	private int amount;
 
 	// Konstruktor, beallitja random az anyag erteket
 	protected Material()
 	{
 		Random rand = new Random();
-		value = rand.nextInt(50) + 1;
+		amount = rand.nextInt(50) + 1;
 	}
 
 	// az anyag tipusut adja vissza, csak a leszarmazottak valositjak meg
@@ -19,22 +19,22 @@ public abstract class Material implements Serializable{
 
 	// megmondja, hogy a parameterkent kapott anyag hasonlo tipusu-e mint ezen amyag
 	// Material mat1 - a kapott anyag, ezt hasonlitja ossze
-	public boolean isSame(Material mat1) {
-		return mat1.getType().equals(this.getType());
+	public boolean sameAs(Material material) {
+		return material.getType().equals(this.getType());
 	}
 
 	// visszadaja az anyag mennyiseget
-	public int getValue() {
-		return value;
+	public int getAmount() {
+		return amount;
 	}
 
 	// beellitja az anyag mennyiseget
 	// int ujValue - erre az ertekre lesz allitva az anyag mennyisege
-	public void setValue(int ujValue) {
-		value = ujValue;
+	public void setAmount(int value) {
+		amount = value;
 	}
 	
 	
 	//a getType a bels�h�z kell ez a kuls� elereshez
-	public abstract boolean check(String s);
+	public abstract boolean check(String materialType);
 }

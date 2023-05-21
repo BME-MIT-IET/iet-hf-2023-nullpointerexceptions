@@ -16,21 +16,21 @@ public class StunCode extends GeneticCode
 	//l�trehozza a megfelel� �genst, �s hozz�adja a param�terk�nt kapott �gens haszn�l�nak
 	//AgensUsable au - ezen entity fogja megkapni a l�trehozott �genst
 	@Override
-	public void createAgens(AgentUsable au)
+	public void createAgent(AgentUsable agentUsable)
 	{
 		//ha ki tudta "fizetni" az �gens haszn�l� az �gens l�trehoz�s d�j�t, akkor kap egyet
-		if(au.getPacket().decreaseMaterial(this.cost))
-			au.addAgens(new Stun());
+		if(agentUsable.getPacket().decreaseMaterial(this.cost))
+			agentUsable.addAgent(new Stun());
 		else
-			MyRunnable.log("Not enough aminosav,nukleotid to create stun");
+			MyRunnable.log("Not enough AminoAcid, Nucleotide to create StunCode");
 		
 	}
 	
-	public boolean check(String s) {
-		return s.equals("stun");
+	public boolean check(String geneticCodeType) {
+		return geneticCodeType.equals(toString());
 	}
 	
 	public String toString() {
-		return "stuncode";
+		return "StunCode";
 	}
 }

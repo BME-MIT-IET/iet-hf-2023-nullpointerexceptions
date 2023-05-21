@@ -29,10 +29,10 @@ public class StorageObserver implements Observer, Serializable {
         int nukNum = 0;
         int aminoNum = 0;
        for(Material m : ms){
-            if(m.isSame(new Nucleotide())){
-                nukNum+= m.getValue();
+            if(m.sameAs(new Nucleotide())){
+                nukNum+= m.getAmount();
             }else{
-                aminoNum+=m.getValue();
+                aminoNum+=m.getAmount();
             }
             ss.add(m.toString());
        }

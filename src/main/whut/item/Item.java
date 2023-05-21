@@ -13,23 +13,23 @@ public class Item implements Serializable{
 		return true;
 	}
 
-	public void pickUpEffect(Virologist v) {
+	public void pickUpEffect(Virologist virologist) {
 		//leszarmazott feluldefinialja ha kell
 	}
 
-	public void lostEffect(Virologist v) {
+	public void lostEffect(Virologist virologist) {
 		//leszarmazott feluldefinialja ha kell
 	}
 
-	public boolean fireBackEffect(Virologist tamado, Virologist hasznalo, Agent a) {
+	public boolean fireBackEffect(Virologist attacker, Virologist defender, Agent agent) {
 		return false;
 	}
 	
-	public boolean killEffect(Virologist v) {
+	public boolean killEffect(Virologist virologist) {
 		return false;
 	}
 	
-	public boolean check(String s) {
+	public boolean check(String itemType) {
 		return false;
 	}
 }

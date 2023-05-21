@@ -21,7 +21,7 @@ class StorageTest{
         @JvmStatic
         fun setup() {
             val game = mock(Game::class.java)
-            Mockito.doNothing().`when`(game).bearAll()
+            Mockito.doNothing().`when`(game).applyBearEffectToAll()
 
             myRunnableMock = Mockito.mockStatic(MyRunnable::class.java)
             Mockito.`when`(MyRunnable.getGame()).thenReturn(game)
@@ -49,8 +49,8 @@ class StorageTest{
     fun acceptVirologistToStorage(){
         val virologist = Virologist()
         storage.accept(virologist)
-        assertEquals(1, storage.virologusok.size)
-        assertEquals(virologist, storage.virologusok[0])
+        assertEquals(1, storage.virologists.size)
+        assertEquals(virologist, storage.virologists[0])
         assertEquals(storage, virologist.field)
     }
 

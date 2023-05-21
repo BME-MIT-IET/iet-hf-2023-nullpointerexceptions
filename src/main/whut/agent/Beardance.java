@@ -11,45 +11,45 @@ public class BearDance extends Agent {
 	//Ezután az új mezõn is megfertõz mindenkit. 
 	//Végül hamissal tér vissza, mivel a birtokos virológus mást nem csinálhat a körében.
 	@Override
-	public boolean startTurnEffect(AgentUsable v) {
-		infectAll(v.getField().getVirologusok(),v);
+	public boolean startTurnEffect(AgentUsable agentUsable) {
+		infectAll(agentUsable.getField().getVirologists(),agentUsable);
 		
-		if (v.getField().getNeighbourhood().size() > 3) {
-			v.move(v.getField().getNeighbourhood().get(2));
+		if (agentUsable.getField().getNeighborhood().size() > 3) {
+			agentUsable.move(agentUsable.getField().getNeighborhood().get(2));
 		} 
 		else{
-			v.move(v.getField().getNeighbourhood().get(0));
+			agentUsable.move(agentUsable.getField().getNeighborhood().get(0));
 		}
-		infectAll(v.getField().getVirologusok(),v);		
+		infectAll(agentUsable.getField().getVirologists(),agentUsable);
 		return false;
 	}
 	
 	//A paraméterül kapott csomagnak lekéri a maximális értékét, majd a maximális értékébõl levonja ezt az értéket, ezzel nullára állítva.
 	@Override
-	public void destroyEffect(Packet p) {
-		p.handlePossibleLostMaterial(p.getMaxMaterial());
+	public void destroyEffect(Packet packet) {
+		packet.handlePossibleLostMaterial(packet.getMaxMaterial());
 	}
 	
 	//A paraméterül kapott virológuslistából mindenkit megfertõz Beardance ágenssel az alábbi módon: 
 	//Csinál egy Beardance ágenst, amit odaad a paraméterül kapott virológusnak. 
 	//Ezután a lista elem virológust a viselõ virológus nevében a csinált ágenssel megtámadja.
-	public void infectAll(List<AgentUsable> vs, AgentUsable a) {
-		for(int i = vs.size()-1; i >= 0; i--) {
-			if(!vs.get(i).equals(a)) {
+	public void infectAll(List<AgentUsable> usableList, AgentUsable attacker) {
+		for(int i = usableList.size()-1; i >= 0; i--) {
+			if(!usableList.get(i).equals(attacker)) {
 				BearDance b = new BearDance();
-				a.addAgens(b);
-				Virologist v = (Virologist)vs.get(i);
-				a.useAgens(v, b);
+				attacker.addAgent(b);
+				Virologist v = (Virologist)usableList.get(i);
+				attacker.useAgent(v, b);
 			}
 		}
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("Beardance");
+	public boolean check(String agentType) {
+		return agentType.equals(toString());
 	}
 	
 	public String toString() {
-		return "beardance";
+		return "BearDance";
 	}
 }

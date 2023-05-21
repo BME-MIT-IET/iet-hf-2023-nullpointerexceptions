@@ -14,35 +14,34 @@ public class Chorea extends Agent {
 	//A k�r elej�n h�v�dik meg, a param�ter�l kapott virol�gust 3-szor egy random szomsz�dos mez�re mozgatja, majd kit�rli mag�t. 
 	//Mindig igazzal t�r vissza, mert a hat�s ut�n m�g mozoghat.
 	@Override
-	public boolean startTurnEffect(AgentUsable au) {
+	public boolean startTurnEffect(AgentUsable agentUsable) {
 		//kor elejen haromszor random lepteti
-		Field all;
-		List<Field> osszesSzomszed;
-		int randomSzomsz;
+		Field currentField;
+		List<Field> allNeighbors;
+		int randomNeighborIndex;
 		for(int i=0;i<3;i++) {
-			all = au.getField();
-			osszesSzomszed = all.getNeighbourhood();
-			randomSzomsz = rand.nextInt(osszesSzomszed.size());
-			au.move(osszesSzomszed.get(randomSzomsz));
+			currentField = agentUsable.getField();
+			allNeighbors = currentField.getNeighborhood();
+			randomNeighborIndex = rand.nextInt(allNeighbors.size());
+			agentUsable.move(allNeighbors.get(randomNeighborIndex));
 		}
 		//kitorli a virologuson levo agensek kozul
-		au.removeAgensOnMe(this);
+		agentUsable.removeAppliedAgent(this);
 		//visszater igazzal, mert meg tud utana lopni
 		return true;
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("vitusdance");
+	public boolean check(String agentType) {
+		return agentType.equals(toString());
 	}
 	
 	public String toString() {
-		return "vitusdance";
+		return "Chorea";
 	}
 
 	@Override
-	public void destroyEffect(Packet p) {
+	public void destroyEffect(Packet packet) {
 		//abstracct oszt�lyt val�s�t meg ez�rt kell
 	}
-	
 }

@@ -43,17 +43,17 @@ public class VirologistObserver implements Observer, Serializable{
     }
 
     public void updateLeft(){
-        List<Item> items = virologist.getItemHave();
+        List<Item> items = virologist.getItems();
         ArrayList<String> is = new ArrayList<>();
         for(Item i : items){
             is.add(i.toString());
         }
-        List<Agent> agents = virologist.getAgensHave();
+        List<Agent> agents = virologist.getAgents();
         ArrayList<String> as = new ArrayList<>();
         for(Agent a : agents){
             as.add(a.toString());
         }
-        List<GeneticCode> genetics = virologist.getGeneticCodeHave();
+        List<GeneticCode> genetics = virologist.getGeneticCodes();
         ArrayList<String> gs = new ArrayList<>();
         for(GeneticCode g : genetics){
             gs.add(g.toString());
@@ -64,15 +64,15 @@ public class VirologistObserver implements Observer, Serializable{
         int nukNum = 0;
         int aminoNum = 0;
         for(Material m : ms){
-            if(m.isSame(new Nucleotide())){
-            	nukNum+= m.getValue();
+            if(m.sameAs(new Nucleotide())){
+            	nukNum+= m.getAmount();
             }else{
-            	aminoNum+=m.getValue();
+            	aminoNum+=m.getAmount();
             }
             ss.add(m.toString());
        	}
         
-        List<Agent> agensesOn = virologist.getAgensOnMe();
+        List<Agent> agensesOn = virologist.getAppliedAgents();
         ArrayList<String> aos = new ArrayList<>();
         for(Agent a : agensesOn){
             aos.add(a.toString());
@@ -153,20 +153,20 @@ public class VirologistObserver implements Observer, Serializable{
         int nukNum = 0;
         int aminoNum = 0;
         for(Material m : ms){
-        	if(m.isSame(new Nucleotide())){
-                aminoNum+= m.getValue();
+        	if(m.sameAs(new Nucleotide())){
+                aminoNum+= m.getAmount();
             }else{
-                nukNum+=m.getValue();
+                nukNum+=m.getAmount();
             }
             ss.add(m.toString());
         }
-        List<Item> items = virologist.getItemHave();
+        List<Item> items = virologist.getItems();
         ArrayList<String> is = new ArrayList<>();
         for(Item i : items){
             is.add(i.toString());
         }
         
-        List<Agent> agensesOn = virologist.getAgensOnMe();
+        List<Agent> agensesOn = virologist.getAppliedAgents();
         ArrayList<String> aos = new ArrayList<>();
         for(Agent a : agensesOn){
             aos.add(a.toString());

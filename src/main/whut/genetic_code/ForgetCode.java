@@ -16,23 +16,23 @@ public class ForgetCode extends GeneticCode
 	//letrehozza a megfelelo agenst, es hozzaadja a parameterkent kapott agens hasznalonak
 	//AgensUsable au - ezen entity fogja megkapni a letrehozott agenst
 	@Override
-	public void createAgens(AgentUsable au)
+	public void createAgent(AgentUsable agentUsable)
 	{
 		//ha ki tudta "fizetni" az agens hasznal�o az agens letrehozas dijat, akkor kap egyet
-		if(au.getPacket().decreaseMaterial(cost))
-			au.addAgens(new Forget());
+		if(agentUsable.getPacket().decreaseMaterial(cost))
+			agentUsable.addAgent(new Forget());
 		else
-			MyRunnable.log("Not enough aminosav,nukleotid to create forget");
+			MyRunnable.log("Not enough AminoAcid, Nucleotide to create ForgetCode");
 	}
 	
 	@Override
-	public boolean check(String s) {
-		return s.equals("forget");
+	public boolean check(String geneticCodeType) {
+		return geneticCodeType.equals(toString());
 	}
 	
 	@Override
 	public String toString() {
-		return "forgetcode";
+		return "ForgetCode";
 	}
 	
 }

@@ -5,29 +5,29 @@ import whut.ui.control.MyRunnable;
 import whut.player.Virologist;
 
 public class Glove extends Item {
-	private int usedTime = 0;
+	private int timesUsed = 0;
 	//r�keni az �gest a param�terk�nt kapott virol�gusra �gy, hogy az m�r ne tudja visszakenni
 	//Virol�gus tamado - akire visszakeni az �genst
 	//Agens a - az �gens, amit visszaken
 	@Override
-	public boolean fireBackEffect(Virologist tamado, Virologist hasznalo, Agent a) {
-		if (tamado != null) {
-			MyRunnable.log("v"+MyRunnable.getVirologusSzam(hasznalo) + " attacked back with " + a.toString());
-			tamado.uRAttacked(a, null);
+	public boolean fireBackEffect(Virologist attacker, Virologist defender, Agent agent) {
+		if (attacker != null) {
+			MyRunnable.log("v"+MyRunnable.getVirologusSzam(defender) + " attacked back with " + agent.toString());
+			attacker.gotAttacked(agent, null);
 		}
-		usedTime++;
-		if (usedTime >= 3) {
-			hasznalo.removeItem(this);
+		timesUsed++;
+		if (timesUsed >= 3) {
+			defender.removeItem(this);
 		}
 		return true;
 	}
 	
 	@Override
-	public boolean check(String it) {
-		return it.equals("glove");
+	public boolean check(String itemType) {
+		return itemType.equals(toString());
 	}
 	
 	public String toString() {
-		return "glove";
+		return "Glove";
 	}
 }

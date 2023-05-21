@@ -10,15 +10,15 @@ public class AminoAcid extends Material {
 	// visszaadja a tipusat az anyagnak
 	@Override
     public String getType() {
-		return "Aminosav";
+		return toString();
 	}
 	
-	public boolean check(String s) {
-		return s.equals("amino");
+	public boolean check(String materialType) {
+		return materialType.equals(toString());
 	}
 	
 	public String toString() {
-		return "amino";
+		return "AminoAcid";
 	}
 
 }

@@ -16,14 +16,14 @@ class NucleotideTest {
     @Test
     fun testIsSame(){
         val nucleotide2 = Nucleotide()
-        assertEquals(true, nucleotide.isSame(nucleotide2))
+        assertEquals(true, nucleotide.sameAs(nucleotide2))
     }
 
     @Test
     fun testValue(){
-        assertTrue(nucleotide.value <= 50)
-        nucleotide.value = 10
-        assertEquals(10, nucleotide.value)
+        assertTrue(nucleotide.amount <= 50)
+        nucleotide.amount = 10
+        assertEquals(10, nucleotide.amount)
     }
 
     @Test

@@ -8,7 +8,6 @@ import whut.genetic_code.ForgetCode
 import whut.item.Item
 import whut.player.Entity
 import whut.player.Virologus
-import java.lang.IndexOutOfBoundsException
 
 class FieldTest {
     private lateinit var field: Field
@@ -58,8 +57,10 @@ class FieldTest {
     fun acceptVirologistToField(){
         val virologist = Virologus()
         field.accept(virologist)
+        assertEquals(1, field.au.size)
         assertEquals(virologist, field.au[0])
         assertEquals(virologist.field, field)
+        assertEquals(true, field.au.size == field.virologusok.size)
     }
 
     @Test
@@ -75,6 +76,7 @@ class FieldTest {
     fun removeVirologistFromField(){
         val virologist = Virologus()
         field.accept(virologist)
+        assertEquals(1, field.au.size)
         field.remove(virologist)
         assertEquals(0, field.au.size)
     }

@@ -1,9 +1,9 @@
 package whut.material;
 //egy konkret anyagtipusert felel
-public class Nukleotid extends Material
+public class Nucleotide extends Material
 {
 	//Konstruktor, amit az osevel egyenlo
-	public Nukleotid() {
+	public Nucleotide() {
 		super();
 	}
 	

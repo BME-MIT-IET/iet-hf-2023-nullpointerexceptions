@@ -1,7 +1,7 @@
 package whut.item;
 
-import whut.agent.Agens;
-import whut.player.Virologus;
+import whut.agent.Agent;
+import whut.player.Virologist;
 
 import java.io.Serializable;
 
@@ -13,19 +13,19 @@ public class Item implements Serializable{
 		return true;
 	}
 
-	public void pickUpEffect(Virologus v) {
+	public void pickUpEffect(Virologist v) {
 		//leszarmazott feluldefinialja ha kell
 	}
 
-	public void lostEffect(Virologus v) {
+	public void lostEffect(Virologist v) {
 		//leszarmazott feluldefinialja ha kell
 	}
 
-	public boolean fireBackEffect(Virologus tamado, Virologus hasznalo, Agens a) {
+	public boolean fireBackEffect(Virologist tamado, Virologist hasznalo, Agent a) {
 		return false;
 	}
 	
-	public boolean killEffect(Virologus v) {
+	public boolean killEffect(Virologist v) {
 		return false;
 	}
 	

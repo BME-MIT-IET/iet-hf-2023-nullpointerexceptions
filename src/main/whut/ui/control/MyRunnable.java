@@ -1,16 +1,16 @@
 package whut.ui.control;
 
-import whut.agent.Agens;
+import whut.agent.Agent;
 import whut.field.*;
 import whut.genetic_code.GeneticCode;
 import whut.item.Item;
-import whut.material.Aminosav;
+import whut.material.AminoAcid;
 import whut.material.Material;
-import whut.material.Nukleotid;
+import whut.material.Nucleotide;
 import whut.material.Packet;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.player.Game;
-import whut.player.Virologus;
+import whut.player.Virologist;
 
 import java.awt.Color;
 import java.io.FileOutputStream;
@@ -32,13 +32,13 @@ public class MyRunnable {
 	private static boolean started = true;
 	private static Game game;
 	private static Scanner scanner;
-	private static Virologus selectedVirologus;
+	private static Virologist selectedVirologist;
 	private static boolean touched = false;
 	private static String badParameter = "Bad parameter!";
 	private static String itemek = "Itemek: ";
 	private static String forget = "forget";
 	private static String protection = "protection";
-	private static Virologus currentVirologus;
+	private static Virologist currentVirologist;
 	private static boolean testfromFile = false;
 
 
@@ -54,12 +54,12 @@ public class MyRunnable {
 	}
 	
 	
-	public static Virologus getSelected() {
-		return selectedVirologus;
+	public static Virologist getSelected() {
+		return selectedVirologist;
 	}
 	
-	public static void setSelected(Virologus v) {
-		selectedVirologus=v;
+	public static void setSelected(Virologist v) {
+		selectedVirologist =v;
 	}
 	
 	public static void setStart(boolean mire) {
@@ -82,8 +82,8 @@ public class MyRunnable {
 		System.out.println(s);
 	}
 	
-	public static void setCurrentVirologus(Virologus v) {
-		currentVirologus=v;
+	public static void setCurrentVirologus(Virologist v) {
+		currentVirologist =v;
 	}
 	
 	public static Game getGame() {return game;}
@@ -115,14 +115,14 @@ public class MyRunnable {
 		try {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='v') {
-				Virologus v = (Virologus)(game.getEntityAt(number-1));
+				Virologist v = (Virologist)(game.getEntityAt(number-1));
 				if(v==null) {
 					log(badParameter);
 					return;
 				}
 				Item it = v.getItem(input[2]);
-				if(it!=null && currentVirologus.getField().getVirologusok().contains(v)) {
-					currentVirologus.stealItem(v, it);
+				if(it!=null && currentVirologist.getField().getVirologusok().contains(v)) {
+					currentVirologist.stealItem(v, it);
 				} else
 					log("This item cant be found at v"+ getVirologusSzam(v));
 			}
@@ -137,14 +137,14 @@ public class MyRunnable {
 		try {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='v') {
-				Virologus v = (Virologus)(game.getEntityAt(number-1));
+				Virologist v = (Virologist)(game.getEntityAt(number-1));
 				if(v==null) {
 					log(badParameter);
 					return;
 				}
 				Material mat = v.getPacket().getMaterial(input[2]);
-				if(mat != null && currentVirologus.getField().getVirologusok().contains(v)) {
-					currentVirologus.stealMaterial(v, mat);
+				if(mat != null && currentVirologist.getField().getVirologusok().contains(v)) {
+					currentVirologist.stealMaterial(v, mat);
 				} else
 					log("This materila cant be found at v"+ getVirologusSzam(v));
 				
@@ -160,10 +160,10 @@ public class MyRunnable {
 		try {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='v') {
-				Virologus v = (Virologus)(game.getEntityAt(number-1));
-				Agens a = currentVirologus.getAgens(input[2]);
-				if(v!=null && a != null && currentVirologus.getField().getVirologusok().contains(v)) {
-					currentVirologus.useAgens(v,a);
+				Virologist v = (Virologist)(game.getEntityAt(number-1));
+				Agent a = currentVirologist.getAgens(input[2]);
+				if(v!=null && a != null && currentVirologist.getField().getVirologusok().contains(v)) {
+					currentVirologist.useAgens(v,a);
 				}
 				
 			}	
@@ -180,12 +180,12 @@ public class MyRunnable {
 			int melyik = Integer.parseInt(ch);
 			Field f = game.getMap().getFields().get(melyik-1);
 			if(hova.charAt(0) == 'f') {
-				List<Field> list = currentVirologus.getField().getNeighbourhood();
+				List<Field> list = currentVirologist.getField().getNeighbourhood();
 				for(Field ff : list)
 					if(ff == f) {
-						currentVirologus.move(f);
+						currentVirologist.move(f);
 						moved = true;
-						log("v"+getVirologusSzam(currentVirologus)+" moved");
+						log("v"+getVirologusSzam(currentVirologist)+" moved");
 					}
 			}
 			if(!moved)
@@ -196,7 +196,7 @@ public class MyRunnable {
 }
 	
 	//Visszaagja a param�terk�nt kapott virol�gus sz�m�t
-	public static int getVirologusSzam(Virologus v) {
+	public static int getVirologusSzam(Virologist v) {
 		for(int i = 0; i < game.getEntity().size(); i++)
 			if(game.getEntityAt(i) == v)
 				return i+1;
@@ -216,9 +216,9 @@ public class MyRunnable {
 		try {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='v') {
-				Virologus v = (Virologus)(game.getEntityAt(number-1));
-				if(v!=null&&currentVirologus.getField().getVirologusok().contains(v)) {
-					currentVirologus.kill(v);
+				Virologist v = (Virologist)(game.getEntityAt(number-1));
+				if(v!=null&& currentVirologist.getField().getVirologusok().contains(v)) {
+					currentVirologist.kill(v);
 				}
 			}
 		}catch(NumberFormatException ex) {
@@ -228,9 +228,9 @@ public class MyRunnable {
 	
 	//A learn bemenetet kezeli le
 	public static void learn() {
-		if(null != currentVirologus.getField().codeHere()) {
-			currentVirologus.learnGeneticCode(currentVirologus.getField().codeHere());
-			log("v"+getVirologusSzam(currentVirologus)+" learned "+currentVirologus.getField().codeHere().toString());
+		if(null != currentVirologist.getField().codeHere()) {
+			currentVirologist.learnGeneticCode(currentVirologist.getField().codeHere());
+			log("v"+getVirologusSzam(currentVirologist)+" learned "+ currentVirologist.getField().codeHere().toString());
 		}
 		else
 			log(badParameter);
@@ -286,7 +286,7 @@ public class MyRunnable {
 		try {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='f') {
-				Virologus v = new Virologus();
+				Virologist v = new Virologist();
 				game.addPlayer(v);
 				game.getMap().getField(number-1).accept(v);
 				log("A Virologus has been added to "+input[1]+"!");
@@ -308,7 +308,7 @@ public class MyRunnable {
 	
 	private static void logItemsOnVirologist() {
 		String kimenet = itemek;
-		for(Item it : currentVirologus.getItemHave()) {
+		for(Item it : currentVirologist.getItemHave()) {
 			if(it.check("axe"))
 				kimenet = kimenet.concat("axe, ");
 			else if(it.check("cloak"))
@@ -323,7 +323,7 @@ public class MyRunnable {
 	
 	private static void logMaterialsOnVirologist() {
 		String kimenet = "Anygok: ";
-		for(Material mat : currentVirologus.getPacket().getMaterials())
+		for(Material mat : currentVirologist.getPacket().getMaterials())
 			kimenet = kimenet.concat(mat.getType()+", ");
 		
 		log(kimenet);
@@ -331,7 +331,7 @@ public class MyRunnable {
 	
 	private static void logGeneticCodesOnVirologist () {
 		String kimenet = "Genetik kodok: ";
-		for(GeneticCode gc : currentVirologus.getGeneticCodeHave()) {
+		for(GeneticCode gc : currentVirologist.getGeneticCodeHave()) {
 			if(gc.check(protection))
 				kimenet = kimenet.concat("protectionCode, ");
 			else if(gc.check(forget))
@@ -346,7 +346,7 @@ public class MyRunnable {
 	
 	private static void logAgensOnVirologist(){
 		String kimenet ="Agensek: ";
-		for(Agens a : currentVirologus.getAgensHave()) {
+		for(Agent a : currentVirologist.getAgensHave()) {
 			if(a.check(protection))
 				kimenet = kimenet.concat("protection, ");
 			else if(a.check(forget))
@@ -363,7 +363,7 @@ public class MyRunnable {
 	
 	private static void logEffectiveAgensOnVirologist() {
 		String kimenet = "Hato agensek: ";
-		for(Agens a : currentVirologus.getAgensOnMe()) {
+		for(Agent a : currentVirologist.getAgensOnMe()) {
 			if(a.check(protection))
 				kimenet = kimenet.concat("protection, ");
 			else if(a.check(forget))
@@ -382,10 +382,10 @@ public class MyRunnable {
 	public static void pickup(String[] input)
 	{
 		String sub = input[1];
-		Item it = currentVirologus.getField().getItem(sub);
+		Item it = currentVirologist.getField().getItem(sub);
 		if(it!=null) {
-			currentVirologus.pickUpItem(it);
-			log(input[1] + " is added to v"+ getVirologusSzam(currentVirologus) +"'s inventory!" );
+			currentVirologist.pickUpItem(it);
+			log(input[1] + " is added to v"+ getVirologusSzam(currentVirologist) +"'s inventory!" );
 		}
 	}
 	
@@ -395,33 +395,33 @@ public class MyRunnable {
 		boolean can = false;
 		Material mm;
 		if(input[1].equals("amino"))
-			mm = new Aminosav();
+			mm = new AminoAcid();
 		else
-			mm = new Nukleotid();
+			mm = new Nucleotide();
 		
-		if(currentVirologus.getField().getPacket() != null) {
-			for(int i = 0; i < currentVirologus.getField().getPacket().getMaterials().size(); i++) {
-				if(currentVirologus.getField().getPacket().getMaterials().get(i).isSame(mm)) {
+		if(currentVirologist.getField().getPacket() != null) {
+			for(int i = 0; i < currentVirologist.getField().getPacket().getMaterials().size(); i++) {
+				if(currentVirologist.getField().getPacket().getMaterials().get(i).isSame(mm)) {
 					can = true;
-					currentVirologus.increaseMaterial(currentVirologus.getField().getPacket(), currentVirologus.getField().getPacket().getMaterials().get(i));
+					currentVirologist.increaseMaterial(currentVirologist.getField().getPacket(), currentVirologist.getField().getPacket().getMaterials().get(i));
 				}
 			}
 		} else
 			log("Cant collect "+input[1]);
 			
 		if(can)
-			log("v" + getVirologusSzam(currentVirologus) + " collected "+ input[1]);
+			log("v" + getVirologusSzam(currentVirologist) + " collected "+ input[1]);
 	}
 	
 	//A leave bemenetet kezeli le
 	public static void leave(String[] input)
 	{
 		String sub = input[1];
-		Item it = currentVirologus.getItem(sub);
+		Item it = currentVirologist.getItem(sub);
 		if(it!= null)
 		{
-			currentVirologus.leaveItem(it);
-			log(input[1] + " has been removed from v"+ getVirologusSzam(currentVirologus) );
+			currentVirologist.leaveItem(it);
+			log(input[1] + " has been removed from v"+ getVirologusSzam(currentVirologist) );
 		}
 		else
 			MyRunnable.log("Bad parameter!");
@@ -429,15 +429,15 @@ public class MyRunnable {
 	
 	//A touch bemenetet kezeli le
 	public static void touch() {
-		Field f = currentVirologus.getField();
+		Field f = currentVirologist.getField();
 		log("Field adatok:");
 		if (f.codeHere() != null)
 			log("genetikai kodok: "+f.codeHere());
 		logItemsOnField(f);
 		logMaterialsOnField(f);
 		
-		for (AgensUsable a : f.getVirologusok()) {
-			Virologus v = (Virologus) a;
+		for (AgentUsable a : f.getVirologusok()) {
+			Virologist v = (Virologist) a;
 			log("v"+ getVirologusSzam(v));
 			String vAnyagok = "Anyagok: ";
 			List<Material> vml = v.getPacket().getMaterials();
@@ -502,7 +502,7 @@ public class MyRunnable {
 			case "touch":
 				touch();
 				incrLeft();
-				currentVirologus.getField().touching(currentVirologus);
+				currentVirologist.getField().touching(currentVirologist);
 				break;
 			case "move":
 				if (readed.length == 2)
@@ -530,37 +530,37 @@ public class MyRunnable {
 	}
 	
 	private static void create(String[] readed) {
-		int elozo = currentVirologus.getAgensHave().size() ;
+		int elozo = currentVirologist.getAgensHave().size() ;
 		if (readed.length == 2)
-			currentVirologus.createAgens(readed[1]);
+			currentVirologist.createAgens(readed[1]);
 		else 
 			log(badParameter);
-		if(currentVirologus.getAgensHave().size() == elozo)
+		if(currentVirologist.getAgensHave().size() == elozo)
 			log("");
 		else
-			log("v"+getVirologusSzam(currentVirologus)+" created a "+readed[1]);
+			log("v"+getVirologusSzam(currentVirologist)+" created a "+readed[1]);
 	}
 	
 	private static void getNextPlayer() {
 		int ii;
-		for(ii = 0; currentVirologus != game.getEntity().get(ii) && ii<game.getEntity().size(); ii++);
+		for(ii = 0; currentVirologist != game.getEntity().get(ii) && ii<game.getEntity().size(); ii++);
 		if(ii < game.getEntity().size()) {
 			if(ii+1 != game.getEntity().size()) {
-				currentVirologus = (Virologus)game.getEntity().get(ii+1);
+				currentVirologist = (Virologist)game.getEntity().get(ii+1);
 			}
 			else {
-				currentVirologus = (Virologus)game.getEntity().get(0);
+				currentVirologist = (Virologist)game.getEntity().get(0);
 			}
 		}
-		if (!currentVirologus.roundDesc()) {
+		if (!currentVirologist.roundDesc()) {
 			setLeft(0);
 		}
 			
-		log("player in row: v" + getVirologusSzam(currentVirologus));
+		log("player in row: v" + getVirologusSzam(currentVirologist));
 	}
 	
 	private static void playerCanMoveTo() {
-		List<Field> n = currentVirologus.getField().getNeighbourhood();
+		List<Field> n = currentVirologist.getField().getNeighbourhood();
 		String kimenet = "Player can move to: ";
 		for(Field f : n)
 			for(int i = 0; i < game.getMap().getSize(); i++)
@@ -579,7 +579,7 @@ public class MyRunnable {
 				} else {
 					out = new ObjectOutputStream(new FileOutputStream(readed[1] + ".txt"));
 					out.writeObject(game);
-					log("v"+getVirologusSzam(currentVirologus)+" saved the game!");
+					log("v"+getVirologusSzam(currentVirologist)+" saved the game!");
 					out.close();
 				}
 			} catch(Exception e) {
@@ -643,7 +643,7 @@ public class MyRunnable {
 				case "learn":
 					if (readed.length == 1) {
 						learn();
-						currentVirologus.step();
+						currentVirologist.step();
 					}
 					else 
 						log(badParameter);
@@ -683,15 +683,15 @@ public class MyRunnable {
 	}
 	
 	private static void initForNextRound() {
-		selectedVirologus = null;
+		selectedVirologist = null;
 		touched = false;
 		game.myNotify();
 	}
 		
 	public static void startInfo() {
-		log("player in row: v" + getVirologusSzam(currentVirologus));
+		log("player in row: v" + getVirologusSzam(currentVirologist));
 		getInfo();
-		List<Field> n = currentVirologus.getField().getNeighbourhood();
+		List<Field> n = currentVirologist.getField().getNeighbourhood();
 		String kimenet = "Player can move to: ";
 		for(Field f : n)
 			for(int i = 0; i < game.getMap().getSize(); i++)
@@ -702,11 +702,11 @@ public class MyRunnable {
 	
 	public static void setGame(Game gg) {
 		game = gg;
-		currentVirologus = (Virologus)game.getEntityAt(0);
+		currentVirologist = (Virologist)game.getEntityAt(0);
 	}
 	
-	public static Virologus getCurrentVir() {
-		return currentVirologus;
+	public static Virologist getCurrentVir() {
+		return currentVirologist;
 	}
 
 

@@ -1,7 +1,7 @@
 package whut.genetic_code;
 
 import whut.agent.Forget;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.ui.control.MyRunnable;
 
 //egy konkret genetikuskodert felel
@@ -16,7 +16,7 @@ public class ForgetCode extends GeneticCode
 	//letrehozza a megfelelo agenst, es hozzaadja a parameterkent kapott agens hasznalonak
 	//AgensUsable au - ezen entity fogja megkapni a letrehozott agenst
 	@Override
-	public void createAgens(AgensUsable au)
+	public void createAgens(AgentUsable au)
 	{
 		//ha ki tudta "fizetni" az agens hasznal�o az agens letrehozas dijat, akkor kap egyet
 		if(au.getPacket().decreaseMaterial(cost))

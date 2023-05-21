@@ -1,7 +1,7 @@
 package whut.item;
 
 import whut.material.Packet;
-import whut.player.Virologus;
+import whut.player.Virologist;
 
 public class Sack extends Item{
 	private int increase = 200;
@@ -9,7 +9,7 @@ public class Sack extends Item{
 	//megn�veli a virol�gus anyag t�rol�kapacit�s�t
 	//Virologus v - a virol�gus, akin kifejti hat�s�t
 	@Override
-	public void pickUpEffect(Virologus v) {
+	public void pickUpEffect(Virologist v) {
 		Packet p = v.getPacket();
 		p.changeMaxMaterial(increase);
 	}
@@ -17,7 +17,7 @@ public class Sack extends Item{
 	//cs�kkenti a virol�gus anyag t�rol�kapacit�s�t
 	//Virologus v - a virol�gus, akin kifejti hat�s�t
 	@Override
-	public void lostEffect(Virologus v) {
+	public void lostEffect(Virologist v) {
 		Packet p = v.getPacket();
 		p.handlePossibleLostMaterial(increase);
 	}

@@ -1,8 +1,8 @@
 package whut.ui.container;
 
 import whut.ui.control.MyRunnable;
-import whut.player.AgensUsable;
-import whut.player.Virologus;
+import whut.player.AgentUsable;
+import whut.player.Virologist;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -46,7 +46,7 @@ public class TouchContainer extends JPanel {
 			if(MyRunnable.getTouched()) {
 				String valami=cb.getSelectedItem().toString();
 				String sub = valami.substring(1);
-				MyRunnable.setSelected((Virologus)MyRunnable.getGame().getEntityAt(Integer.parseInt(sub)-1)); //szep.
+				MyRunnable.setSelected((Virologist)MyRunnable.getGame().getEntityAt(Integer.parseInt(sub)-1)); //szep.
 				MyRunnable.getGame().myNotify();
 			}
 		}
@@ -59,14 +59,14 @@ public class TouchContainer extends JPanel {
 			if (ae.getActionCommand().equals(touch) && !MyRunnable.getTouched()) {
 				cb.removeAllItems();
 				ArrayList<String> players = new ArrayList<>();
-				List<AgensUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologusok();
-				for (AgensUsable a : vs) {
-					Virologus v = (Virologus)a;
+				List<AgentUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologusok();
+				for (AgentUsable a : vs) {
+					Virologist v = (Virologist)a;
 					players.add("v"+MyRunnable.getVirologusSzam(v));
 				}
 				for (String player : players)
 					cb.addItem(player);
-				MyRunnable.setSelected((Virologus)vs.get(0));
+				MyRunnable.setSelected((Virologist)vs.get(0));
 				String[] command = new String[1];
 				command[0] = touch;
 				MyRunnable.setTouched(true);

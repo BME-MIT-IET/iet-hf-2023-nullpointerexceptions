@@ -6,16 +6,16 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class NucleotideTest {
-    private lateinit var nucleotide: Nukleotid
+    private lateinit var nucleotide: Nucleotide
 
     @BeforeEach
     fun init(){
-        nucleotide = Nukleotid()
+        nucleotide = Nucleotide()
     }
 
     @Test
     fun testIsSame(){
-        val nucleotide2 = Nukleotid()
+        val nucleotide2 = Nucleotide()
         assertEquals(true, nucleotide.isSame(nucleotide2))
     }
 

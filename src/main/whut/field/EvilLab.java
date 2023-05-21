@@ -1,8 +1,8 @@
 package whut.field;
 
 
-import whut.agent.Beardance;
-import whut.player.Virologus;
+import whut.agent.BearDance;
+import whut.player.Virologist;
 import whut.genetic_code.StunCode;
 
 //A fert�z� laborat�rium mez� nyilv�ntart�s��rt felel.
@@ -16,9 +16,9 @@ public class EvilLab extends Lab
  
 	//L�trehoz egy medvet�nc �genst, �s megt�madja vele a virol�gust, ezzel �megfert�zve� �t.
 	@Override
-	public void touching(Virologus v) //mező érintésekor
+	public void touching(Virologist v) //mező érintésekor
 	{
-		Beardance br = new Beardance();
+		BearDance br = new BearDance();
 		v.uRAttacked(br,null); //megtámadjad egy medvetáncal		
 	}
 	

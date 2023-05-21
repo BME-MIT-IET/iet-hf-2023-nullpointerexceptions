@@ -1,17 +1,17 @@
 package whut.agent;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.material.Packet;
-import whut.player.Virologus;
+import whut.player.Virologist;
 
 import java.util.List;
 
-public class Beardance extends Agens{
+public class BearDance extends Agent {
 	
 	//A mezõn amin áll a paraméterül kapott virológus megfertõz minden virológust, majd a paraméterül kapott virológust egy random szomszédos mezõre mozgatja. 
 	//Ezután az új mezõn is megfertõz mindenkit. 
 	//Végül hamissal tér vissza, mivel a birtokos virológus mást nem csinálhat a körében.
 	@Override
-	public boolean startTurnEffect(AgensUsable v) {
+	public boolean startTurnEffect(AgentUsable v) {
 		infectAll(v.getField().getVirologusok(),v);
 		
 		if (v.getField().getNeighbourhood().size() > 3) {
@@ -33,12 +33,12 @@ public class Beardance extends Agens{
 	//A paraméterül kapott virológuslistából mindenkit megfertõz Beardance ágenssel az alábbi módon: 
 	//Csinál egy Beardance ágenst, amit odaad a paraméterül kapott virológusnak. 
 	//Ezután a lista elem virológust a viselõ virológus nevében a csinált ágenssel megtámadja.
-	public void infectAll(List<AgensUsable> vs, AgensUsable a) {
+	public void infectAll(List<AgentUsable> vs, AgentUsable a) {
 		for(int i = vs.size()-1; i >= 0; i--) {
 			if(!vs.get(i).equals(a)) {
-				Beardance b = new Beardance();
+				BearDance b = new BearDance();
 				a.addAgens(b);
-				Virologus v = (Virologus)vs.get(i);
+				Virologist v = (Virologist)vs.get(i);
 				a.useAgens(v, b);
 			}
 		}

@@ -2,9 +2,9 @@ package whut.field;
 import whut.genetic_code.GeneticCode;
 import whut.item.Item;
 import whut.material.Packet;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.player.Entity;
-import whut.player.Virologus;
+import whut.player.Virologist;
 import whut.ui.control.MyRunnable;
 import whut.ui.control.View;
 
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Field extends View implements Serializable
 {
-	protected ArrayList<AgensUsable> au; // A mezőn található entity-k
+	protected ArrayList<AgentUsable> au; // A mezőn található entity-k
 	private ArrayList<Field> neighbor; //szomszédos mezők
 
 	
@@ -28,7 +28,7 @@ public class Field extends View implements Serializable
 
 	
 	//visszaadja a virológusok listáját
-	public List<AgensUsable> getVirologusok()
+	public List<AgentUsable> getVirologusok()
 	{
 		return au;
 	}
@@ -42,13 +42,13 @@ public class Field extends View implements Serializable
 	//hozzáadja a virológust a listához
 	public void accept(Entity v)
 	{
-		Virologus ag = (Virologus)v;
+		Virologist ag = (Virologist)v;
 		au.add(ag);
 		v.setField(this);
 	}
 	
 	//mező érintés esetén hívódik meg
-	public void touching(Virologus v){
+	public void touching(Virologist v){
 		//leszarmazott felulirja
 	}
 	

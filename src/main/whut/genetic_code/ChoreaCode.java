@@ -1,14 +1,14 @@
 package whut.genetic_code;
 
-import whut.agent.Vitusdance;
-import whut.player.AgensUsable;
+import whut.agent.Chorea;
+import whut.player.AgentUsable;
 import whut.ui.control.MyRunnable;
 
 //egy konkr�t genetikusk�d�rt felel
-public class VitusdanceCode extends GeneticCode
+public class ChoreaCode extends GeneticCode
 {
 	//megh�vja az �s konstruktor�t
-	public VitusdanceCode() 
+	public ChoreaCode()
 	{
 		super();
 	}
@@ -16,11 +16,11 @@ public class VitusdanceCode extends GeneticCode
 	//l�trehozza a megfelel� �genst, �s hozz�adja a param�terk�nt kapott �gens haszn�l�nak
 	//AgensUsable au - ezen entity fogja megkapni a l�trehozott �genst
 	@Override
-	public void createAgens(AgensUsable au)
+	public void createAgens(AgentUsable au)
 	{
 		//ha ki tudta "fizetni" az �gens haszn�l� az �gens l�trehoz�s d�j�t, akkor kap egyet
 		if(au.getPacket().decreaseMaterial(this.cost))
-			au.addAgens(new Vitusdance());
+			au.addAgens(new Chorea());
 		else
 			MyRunnable.log("Not enough aminosav,nukleotid to create vitusdance");
 	}

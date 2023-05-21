@@ -1,5 +1,5 @@
 package whut.agent;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.field.Field;
 import whut.material.Packet;
 
@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Vitusdance extends Agens{
+public class Chorea extends Agent {
 	
 	private Random rand = new SecureRandom();  
 	//A k�r elej�n h�v�dik meg, a param�ter�l kapott virol�gust 3-szor egy random szomsz�dos mez�re mozgatja, majd kit�rli mag�t. 
 	//Mindig igazzal t�r vissza, mert a hat�s ut�n m�g mozoghat.
 	@Override
-	public boolean startTurnEffect(AgensUsable au) {
+	public boolean startTurnEffect(AgentUsable au) {
 		//kor elejen haromszor random lepteti
 		Field all;
 		List<Field> osszesSzomszed;

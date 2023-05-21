@@ -26,7 +26,7 @@ public class Packet implements Serializable
 		int nuklevon = 0; //ennyi nukleotidot akarunk levonni
 		int aminolevon = 0; //ennyi aminosavat akarunk levonni
 		for(Material m : mats) {
-			if(m.isSame(new Nukleotid()))
+			if(m.isSame(new Nucleotide()))
 				nuklevon += m.getValue();
 			else
 				aminolevon += m.getValue();
@@ -35,7 +35,7 @@ public class Packet implements Serializable
 		int nukSum = 0; //ennyi nukleotidunk van
 		int aminoSum = 0; //ennyi aminosavunk van
 		for (Material m : this.materials) {
-			if(m.isSame(new Nukleotid()))
+			if(m.isSame(new Nucleotide()))
 				nukSum += m.getValue();
 			else
 				aminoSum += m.getValue();
@@ -47,10 +47,10 @@ public class Packet implements Serializable
 			int nukMarad = nukSum-nuklevon; //ennyi nukleotidunk marad a levon�s ut�n
 			int aminoMarad = aminoSum-aminolevon; //ennyi aminosavunk marad a levon�s ut�n
 			materials.clear();
-			Aminosav a = new Aminosav();
+			AminoAcid a = new AminoAcid();
 			a.setValue(aminoMarad);
 			materials.add(a);
-			Nukleotid n = new Nukleotid();
+			Nucleotide n = new Nucleotide();
 			n.setValue(nukMarad);
 			materials.add(n);
 			
@@ -77,7 +77,7 @@ public class Packet implements Serializable
 		
 		//vegig megyunk a zseb tartalman es megszamoljuk mibol mennyink van
 		for(Material m : materials) {
-			if(m.isSame(new Nukleotid()))
+			if(m.isSame(new Nucleotide()))
 				matsMaterialNDb += m.getValue();
 			else
 				matsMaterialADb += m.getValue();
@@ -86,7 +86,7 @@ public class Packet implements Serializable
 		//ha tobb aminosavunk van mint amennyi lehetne a zseb meretenek lecsokkentese utan
 		if(matsMaterialADb > maxPerMaterial-value)
 		{
-			Aminosav a = new Aminosav();
+			AminoAcid a = new AminoAcid();
 			
 			//az ujonnan letrehozott aminosav erteket beallitjuk arra 
 			//amennyivel kellene csokkenteni a zseb aminosav keszletet
@@ -104,7 +104,7 @@ public class Packet implements Serializable
 		//ha tobb nukleotidunk van mint amennyi lehetne a zseb meretenek lecsokkentese utan
 		if(matsMaterialNDb > maxPerMaterial-value)
 		{
-			Nukleotid a = new Nukleotid();
+			Nucleotide a = new Nucleotide();
 			
 			//az ujonnan letrehozott aminosav erteket beallitjuk arra 
 			//amennyivel kellene csokkenteni a zseb aminosav keszletet
@@ -137,7 +137,7 @@ public class Packet implements Serializable
 		//vegig megyenk a kapott zseb tartalman es megszamoljuk mibol mennyink van
 		for(Material m : pac.getMaterials()) 
 		{
-			if(m.isSame(new Nukleotid()))
+			if(m.isSame(new Nucleotide()))
 				matsMaterialNDb += m.getValue();
 			else
 				matsMaterialADb += m.getValue();
@@ -145,7 +145,7 @@ public class Packet implements Serializable
 		
 		for(Material m : this.getMaterials()) 
 		{
-			if(m.isSame(new Nukleotid()))
+			if(m.isSame(new Nucleotide()))
 				thismatsMaterialNDb += m.getValue();
 			else
 				thismatsMaterialADb += m.getValue();
@@ -156,21 +156,21 @@ public class Packet implements Serializable
 		
 		
 		//ha olyan mennyiseget adna meg amennyi nincs is a zsebben
-		if(mat.isSame(new Nukleotid()) && mat.getValue() > thismatsMaterialNDb)
+		if(mat.isSame(new Nucleotide()) && mat.getValue() > thismatsMaterialNDb)
 			return;
 	
-		if(mat.isSame(new Aminosav()) && mat.getValue() > thismatsMaterialADb)
+		if(mat.isSame(new AminoAcid()) && mat.getValue() > thismatsMaterialADb)
 			return;
 		
 		
 		//amennyiben nukleotidrol van szo
-		if(mat.isSame(new Nukleotid())) 
+		if(mat.isSame(new Nucleotide()))
 		{
 			//es nem tudjuk az egesz anyagot felvenni, mert kicsi a zseb merete
 			if(matsMaterialNDb + mat.getValue() > maxPerMaterial) 
 			{
 				//megfelezzuk az anyagot
-				m = new Nukleotid();
+				m = new Nucleotide();
 				
 				//azon ertekre allitjuk be amit maximalisan fel tud venni
 				m.setValue(maxPerMaterial - matsMaterialNDb);
@@ -196,7 +196,7 @@ public class Packet implements Serializable
 			//es nem tudjuk az egesz anyagot felvenni, mert kicsi a zseb merete
 			if(matsMaterialADb + mat.getValue() > maxPerMaterial) 
 			{
-				m = new Aminosav();
+				m = new AminoAcid();
 				
 				//azon ertekre allitjuk be amit maximalisan fel tud venni
 				m.setValue(maxPerMaterial-matsMaterialADb);
@@ -246,12 +246,12 @@ public class Packet implements Serializable
 	//MAterial mat - azon anyag amit a zsebhez adunk
 	public void addMaterial(Material mat)
 	{		
-		if(mat.isSame(new Aminosav())) {
-			Material materialAm=new Aminosav();
+		if(mat.isSame(new AminoAcid())) {
+			Material materialAm=new AminoAcid();
 			materialAm.setValue(mat.getValue());
 			this.materials.add(materialAm);		
 		}else{
-			Material materialNuk=new Nukleotid();
+			Material materialNuk=new Nucleotide();
 			materialNuk.setValue(mat.getValue());
 			this.materials.add(materialNuk);	
 		}

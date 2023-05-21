@@ -3,11 +3,10 @@ package whut.field
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import whut.genetic_code.ForgetCode
 import whut.item.Item
 import whut.player.Entity
-import whut.player.Virologus
+import whut.player.Virologist
 
 class FieldTest {
     private lateinit var field: Field
@@ -55,7 +54,7 @@ class FieldTest {
 
     @Test
     fun acceptVirologistToField(){
-        val virologist = Virologus()
+        val virologist = Virologist()
         field.accept(virologist)
         assertEquals(1, field.au.size)
         assertEquals(virologist, field.au[0])
@@ -71,7 +70,7 @@ class FieldTest {
 
     @Test
     fun removeVirologistFromField(){
-        val virologist = Virologus()
+        val virologist = Virologist()
         field.accept(virologist)
         assertEquals(1, field.au.size)
         field.remove(virologist)

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.MockedStatic
 import org.mockito.Mockito.*
 import whut.player.Game
-import whut.player.Virologus
+import whut.player.Virologist
 import whut.ui.control.MyRunnable
 
 class EvilLabTest {
@@ -41,7 +41,7 @@ class EvilLabTest {
 
     @Test
     fun touchingEvilLab(){
-        val virologist = Virologus()
+        val virologist = Virologist()
         evilLab.touching(virologist)
         assertEquals(1, virologist.agensOnMe.size)
     }

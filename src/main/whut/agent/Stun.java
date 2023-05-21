@@ -1,9 +1,9 @@
 package whut.agent;
 
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.material.Packet;
 
-public class Stun extends Agens{
+public class Stun extends Agent {
 
     private int effectTime;
 
@@ -13,7 +13,7 @@ public class Stun extends Agens{
     }
 
     @Override
-    public boolean startTurnEffect(AgensUsable au) {
+    public boolean startTurnEffect(AgentUsable au) {
         //cs?kkenti a hat?sid?t, ?s ha lej?rt, akkor kit?rli a virol?gust?l
         if(--effectTime < 0) {
             au.removeAgensOnMe(this);

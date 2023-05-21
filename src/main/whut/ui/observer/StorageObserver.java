@@ -4,7 +4,7 @@ import whut.ui.control.Icon;
 import whut.ui.control.MyRunnable;
 import whut.field.Storage;
 import whut.material.Material;
-import whut.material.Nukleotid;
+import whut.material.Nucleotide;
 import whut.ui.container.Container;
 import whut.ui.container.ContainerSuper;
 
@@ -29,7 +29,7 @@ public class StorageObserver implements Observer, Serializable {
         int nukNum = 0;
         int aminoNum = 0;
        for(Material m : ms){
-            if(m.isSame(new Nukleotid())){
+            if(m.isSame(new Nucleotide())){
                 nukNum+= m.getValue();
             }else{
                 aminoNum+=m.getValue();

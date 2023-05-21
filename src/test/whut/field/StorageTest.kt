@@ -8,7 +8,7 @@ import org.mockito.Mockito.mock
 import whut.material.Packet
 import whut.player.Entity
 import whut.player.Game
-import whut.player.Virologus
+import whut.player.Virologist
 import whut.ui.control.MyRunnable
 
 class StorageTest{
@@ -47,7 +47,7 @@ class StorageTest{
 
     @Test
     fun acceptVirologistToStorage(){
-        val virologist = Virologus()
+        val virologist = Virologist()
         storage.accept(virologist)
         assertEquals(1, storage.virologusok.size)
         assertEquals(virologist, storage.virologusok[0])

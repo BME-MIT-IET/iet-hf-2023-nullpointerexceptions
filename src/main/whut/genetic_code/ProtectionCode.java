@@ -1,7 +1,7 @@
 package whut.genetic_code;
 
 import whut.agent.Protection;
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.ui.control.MyRunnable;
 
 //egy konkr�t genetikusk�d�rt felel
@@ -16,7 +16,7 @@ public class ProtectionCode extends GeneticCode
 	//l�trehozza a megfelel� �genst, �s hozz�adja a param�terk�nt kapott �gens haszn�l�nak
 	//AgensUsable au - ezen entity fogja megkapni a l�trehozott �genst
 	@Override
-	public void createAgens(AgensUsable au)
+	public void createAgens(AgentUsable au)
 	{
 		if(au.getPacket().decreaseMaterial(this.cost))
 			au.addAgens(new Protection());

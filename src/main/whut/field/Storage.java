@@ -3,7 +3,7 @@ package whut.field;
 
 import whut.material.Packet;
 import whut.player.Entity;
-import whut.player.Virologus;
+import whut.player.Virologist;
 import whut.ui.control.MyRunnable;
 import whut.ui.observer.StorageObserver;
 
@@ -21,7 +21,7 @@ public class Storage extends Field
 	
 	@Override
 	public void accept(Entity e) {
-		Virologus ag = (Virologus)e;
+		Virologist ag = (Virologist)e;
 		au.add(ag);
 		ag.setField(this);
 		

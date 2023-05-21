@@ -1,8 +1,8 @@
 package whut.material;
 //egy konkret anyagtipusert felel
-public class Aminosav extends Material {
+public class AminoAcid extends Material {
 	// Konstruktor, amit az osevel egyenlo
-	public Aminosav() {
+	public AminoAcid() {
 		super();
 	}
 

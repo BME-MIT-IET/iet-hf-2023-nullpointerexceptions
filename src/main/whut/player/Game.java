@@ -5,8 +5,8 @@ import whut.item.Axe;
 import whut.item.Cloak;
 import whut.item.Glove;
 import whut.item.Sack;
-import whut.material.Aminosav;
-import whut.material.Nukleotid;
+import whut.material.AminoAcid;
+import whut.material.Nucleotide;
 import whut.ui.control.MyRunnable;
 import whut.ui.control.View;
 import whut.ui.observer.GameObserver;
@@ -20,7 +20,7 @@ public class Game extends View implements Serializable {
 	private Map map;
 	ArrayList<Entity> entity;
 	ArrayList<GeneticCode> allGeneticCode;
-	ArrayList<? extends AgensUsable> au;
+	ArrayList<? extends AgentUsable> au;
 	private int players;
 	private boolean megy = true;
 	private Random rand = new Random();
@@ -47,7 +47,7 @@ public class Game extends View implements Serializable {
 		allGeneticCode.add(new ForgetCode());
 		allGeneticCode.add(new StunCode());
 		allGeneticCode.add(new ProtectionCode());
-		allGeneticCode.add(new VitusdanceCode());
+		allGeneticCode.add(new ChoreaCode());
 		
 		createGame();
 		MyRunnable.setGame(this);
@@ -57,7 +57,7 @@ public class Game extends View implements Serializable {
 	public void bearAll() {
 		boolean vanJozan = false;
 		for (Entity e : entity) {
-			Virologus v = (Virologus)e;
+			Virologist v = (Virologist)e;
 			if (!v.isBear()) vanJozan = true;
 		}
 		
@@ -71,12 +71,12 @@ public class Game extends View implements Serializable {
 	public void mapThird(){
 		//A megadott virologusszamnak megfeleloen csinal virologuspeldanyokat
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologus());
+			entity.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
-		map.getField(1).setGeneticCode(new VitusdanceCode());
+		map.getField(1).setGeneticCode(new ChoreaCode());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		map.getField(2).addItem(new Cloak());
@@ -111,8 +111,8 @@ public class Game extends View implements Serializable {
 		map.getField(6).setNeighbour(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(7).getPacket().addMaterial(new Nukleotid());
-		map.getField(7).getPacket().addMaterial(new Aminosav());
+		map.getField(7).getPacket().addMaterial(new Nucleotide());
+		map.getField(7).getPacket().addMaterial(new AminoAcid());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
 		map.getField(7).setNeighbour(map.getField(5));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
@@ -121,8 +121,8 @@ public class Game extends View implements Serializable {
 		map.getField(7).setNeighbour(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(8).getPacket().addMaterial(new Nukleotid());
-		map.getField(8).getPacket().addMaterial(new Aminosav());
+		map.getField(8).getPacket().addMaterial(new Nucleotide());
+		map.getField(8).getPacket().addMaterial(new AminoAcid());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
 		map.getField(8).setNeighbour(map.getField(4));
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -220,11 +220,11 @@ public class Game extends View implements Serializable {
 	}
 	
 	//eltavolit egy jatekost
-	public void removePlayer(Virologus v) {
+	public void removePlayer(Virologist v) {
 		entity.remove(v);
 	}
 	//hozzaad egy jatekost
-	public void addPlayer(Virologus v) {
+	public void addPlayer(Virologist v) {
 		entity.add(v);
 	}
 	//Visszaadja a mapot
@@ -239,7 +239,7 @@ public class Game extends View implements Serializable {
 	public void mapFirst() {
 		//a megadott jatekosszamnak megfeleloen general virologuspeldanyokat
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologus());
+			entity.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -387,10 +387,10 @@ public class Game extends View implements Serializable {
 		
 		map.getField(2).setGeneticCode(new StunCode());
 		map.getField(4).setGeneticCode(new ProtectionCode());
-		map.getField(17).setGeneticCode(new VitusdanceCode());
+		map.getField(17).setGeneticCode(new ChoreaCode());
 		map.getField(14).setGeneticCode(new StunCode());
 		map.getField(10).setGeneticCode(new ForgetCode());
-		map.getField(8).setGeneticCode(new VitusdanceCode());
+		map.getField(8).setGeneticCode(new ChoreaCode());
 		
 		map.getField(19).addItem(new Sack());
 		map.getField(19).addItem(new Sack());
@@ -402,12 +402,12 @@ public class Game extends View implements Serializable {
 		map.getField(15).addItem(new Cloak());
 		map.getField(15).addItem(new Sack());
 		
-		map.getField(18).getPacket().addMaterial(new Aminosav());
-		map.getField(18).getPacket().addMaterial(new Nukleotid());
-		map.getField(13).getPacket().addMaterial(new Aminosav());
-		map.getField(13).getPacket().addMaterial(new Nukleotid());
-		map.getField(5).getPacket().addMaterial(new Aminosav());
-		map.getField(5).getPacket().addMaterial(new Nukleotid());
+		map.getField(18).getPacket().addMaterial(new AminoAcid());
+		map.getField(18).getPacket().addMaterial(new Nucleotide());
+		map.getField(13).getPacket().addMaterial(new AminoAcid());
+		map.getField(13).getPacket().addMaterial(new Nucleotide());
+		map.getField(5).getPacket().addMaterial(new AminoAcid());
+		map.getField(5).getPacket().addMaterial(new Nucleotide());
 		
 		int field;
 		for(int i = 0; i < entity.size(); i++) {
@@ -418,25 +418,25 @@ public class Game extends View implements Serializable {
 	
 	public void mapSecond() {
 		for(int i = 0; i < players; i++)
-			entity.add(new Virologus());
+			entity.add(new Virologist());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
-		map.getField(0).setGeneticCode(new VitusdanceCode());
+		map.getField(0).setGeneticCode(new ChoreaCode());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		map.getField(2).addItem(new Sack());
 		map.addField(new Storage());
-		map.getField(3).getPacket().addMaterial(new Aminosav());
-		map.getField(3).getPacket().addMaterial(new Nukleotid());
+		map.getField(3).getPacket().addMaterial(new AminoAcid());
+		map.getField(3).getPacket().addMaterial(new Nucleotide());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		map.getField(4).addItem(new Axe());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(5).getPacket().addMaterial(new Aminosav());
-		map.getField(5).getPacket().addMaterial(new Nukleotid());
+		map.getField(5).getPacket().addMaterial(new AminoAcid());
+		map.getField(5).getPacket().addMaterial(new Nucleotide());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Lab());
 		//E
@@ -457,8 +457,8 @@ public class Game extends View implements Serializable {
 		map.addField(new EvilLab());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(13).getPacket().addMaterial(new Aminosav());
-		map.getField(13).getPacket().addMaterial(new Nukleotid());
+		map.getField(13).getPacket().addMaterial(new AminoAcid());
+		map.getField(13).getPacket().addMaterial(new Nucleotide());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Shelter());
 		map.getField(14).addItem(new Glove());
@@ -467,8 +467,8 @@ public class Game extends View implements Serializable {
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(16).getPacket().addMaterial(new Aminosav());
-		map.getField(16).getPacket().addMaterial(new Nukleotid());
+		map.getField(16).getPacket().addMaterial(new AminoAcid());
+		map.getField(16).getPacket().addMaterial(new Nucleotide());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
@@ -485,14 +485,14 @@ public class Game extends View implements Serializable {
 		map.getField(21).setGeneticCode(new ForgetCode());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(22).getPacket().addMaterial(new Aminosav());
-		map.getField(22).getPacket().addMaterial(new Nukleotid());
+		map.getField(22).getPacket().addMaterial(new AminoAcid());
+		map.getField(22).getPacket().addMaterial(new Nucleotide());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Field());
 		//Elkeszit egy mezot es hozzaadja a map(terkep)-hez..
 		map.addField(new Storage());
-		map.getField(24).getPacket().addMaterial(new Aminosav());
-		map.getField(24).getPacket().addMaterial(new Nukleotid());
+		map.getField(24).getPacket().addMaterial(new AminoAcid());
+		map.getField(24).getPacket().addMaterial(new Nucleotide());
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...
 		map.getField(0).setNeighbour(map.getField(1));
 		//ket mezo kozott beallit egy szomszedsagot. Ezt eleg egyiranyba megtenni, mivel az addNeighbour() fuggveny lekezeli az oda-vissza kapcsolast...

@@ -2,12 +2,12 @@ package whut.ui.observer;
 
 import whut.ui.control.Icon;
 import whut.ui.control.MyRunnable;
-import whut.agent.Agens;
+import whut.agent.Agent;
 import whut.genetic_code.GeneticCode;
 import whut.item.Item;
 import whut.material.Material;
-import whut.material.Nukleotid;
-import whut.player.Virologus;
+import whut.material.Nucleotide;
+import whut.player.Virologist;
 import whut.ui.container.Container;
 import whut.ui.container.ContainerSuper;
 
@@ -19,51 +19,52 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class VirologusObserver implements Observer, Serializable{
+public class VirologistObserver implements Observer, Serializable{
     private ContainerSuper csLeft;
    
-    Virologus virologus;
+    Virologist virologist;
     
-    public VirologusObserver(Virologus v) {
-    	virologus = v;
+    public VirologistObserver(Virologist v) {
+    	virologist = v;
     }
     
-    public void setVirologus(Virologus vir){virologus=vir;}
+    public void setVirologus(Virologist vir){
+        virologist =vir;}
     
     @Override
 	public void update() {
-    	if(virologus.equals(MyRunnable.getCurrentVir())) {
+    	if(virologist.equals(MyRunnable.getCurrentVir())) {
     		updateLeft();
     	}
-    	if(virologus.equals(MyRunnable.getSelected())) {
+    	if(virologist.equals(MyRunnable.getSelected())) {
     		updateRight();
     		
     	}
     }
 
     public void updateLeft(){
-        List<Item> items = virologus.getItemHave();
+        List<Item> items = virologist.getItemHave();
         ArrayList<String> is = new ArrayList<>();
         for(Item i : items){
             is.add(i.toString());
         }
-        List<Agens> agenses = virologus.getAgensHave();
+        List<Agent> agents = virologist.getAgensHave();
         ArrayList<String> as = new ArrayList<>();
-        for(Agens a : agenses){
+        for(Agent a : agents){
             as.add(a.toString());
         }
-        List<GeneticCode> genetics = virologus.getGeneticCodeHave();
+        List<GeneticCode> genetics = virologist.getGeneticCodeHave();
         ArrayList<String> gs = new ArrayList<>();
         for(GeneticCode g : genetics){
             gs.add(g.toString());
         }
         
-        List<Material> ms =  virologus.getPacket().getMaterials();
+        List<Material> ms =  virologist.getPacket().getMaterials();
         ArrayList<String> ss = new ArrayList<>();
         int nukNum = 0;
         int aminoNum = 0;
         for(Material m : ms){
-            if(m.isSame(new Nukleotid())){
+            if(m.isSame(new Nucleotide())){
             	nukNum+= m.getValue();
             }else{
             	aminoNum+=m.getValue();
@@ -71,9 +72,9 @@ public class VirologusObserver implements Observer, Serializable{
             ss.add(m.toString());
        	}
         
-        List<Agens> agensesOn = virologus.getAgensOnMe();
+        List<Agent> agensesOn = virologist.getAgensOnMe();
         ArrayList<String> aos = new ArrayList<>();
-        for(Agens a : agensesOn){
+        for(Agent a : agensesOn){
             aos.add(a.toString());
         }
         drawLeft(is, as, gs, aos, nukNum, aminoNum);
@@ -147,27 +148,27 @@ public class VirologusObserver implements Observer, Serializable{
 
 
     public void updateRight() {
-        List<Material> ms =  virologus.getPacket().getMaterials();
+        List<Material> ms =  virologist.getPacket().getMaterials();
         ArrayList<String> ss = new ArrayList<>();
         int nukNum = 0;
         int aminoNum = 0;
         for(Material m : ms){
-        	if(m.isSame(new Nukleotid())){
+        	if(m.isSame(new Nucleotide())){
                 aminoNum+= m.getValue();
             }else{
                 nukNum+=m.getValue();
             }
             ss.add(m.toString());
         }
-        List<Item> items = virologus.getItemHave();
+        List<Item> items = virologist.getItemHave();
         ArrayList<String> is = new ArrayList<>();
         for(Item i : items){
             is.add(i.toString());
         }
         
-        List<Agens> agensesOn = virologus.getAgensOnMe();
+        List<Agent> agensesOn = virologist.getAgensOnMe();
         ArrayList<String> aos = new ArrayList<>();
-        for(Agens a : agensesOn){
+        for(Agent a : agensesOn){
             aos.add(a.toString());
         }
         
@@ -175,13 +176,13 @@ public class VirologusObserver implements Observer, Serializable{
     }
     
     public void drawRight(List<String> is, List<String> aos, int nukNum, int aminoNum){    	
-    	ContainerSuper csRight = new ContainerSuper("V"+ MyRunnable.getVirologusSzam(virologus) +"player's stats:");
+    	ContainerSuper csRight = new ContainerSuper("V"+ MyRunnable.getVirologusSzam(virologist) +"player's stats:");
         
         Container c1 = new Container("Items:");
         for(String s : is){
             String[] command = new String[3];
             command[0] = "stealitem";
-            command[1] = "v"+MyRunnable.getVirologusSzam(virologus);
+            command[1] = "v"+MyRunnable.getVirologusSzam(virologist);
             command[2] = s;
             c1.addIcon(new Icon(command,s));
         }
@@ -191,7 +192,7 @@ public class VirologusObserver implements Observer, Serializable{
         String[] tmp1 = new String[3];
         String[] tmp2 = new String[3];
         tmp1[0]= tmp2[0]="stealmaterial";
-        tmp1[1] = tmp2[1] = "v"+ MyRunnable.getVirologusSzam(virologus);
+        tmp1[1] = tmp2[1] = "v"+ MyRunnable.getVirologusSzam(virologist);
         tmp1[2] = "amino";
         tmp2[2]= "nukleotid";
         c2.addIcon(new Icon(tmp2,"nukleotid"));

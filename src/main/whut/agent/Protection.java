@@ -1,9 +1,9 @@
 package whut.agent;
 
-import whut.player.AgensUsable;
+import whut.player.AgentUsable;
 import whut.material.Packet;
 
-public class Protection extends Agens{
+public class Protection extends Agent {
 	
 	private int effectTime;
 	
@@ -14,7 +14,7 @@ public class Protection extends Agens{
 	
 	//Elõször is az élettartalmát csökkenti, ha pedig ez az érték eléri a 0-t akkor a paraméterül kapott virológustól kitörli. 
 	//Mindenképp igazzal tér vissza, jelezve hogy még az adott körben mozoghat.
-	public boolean startTurnEffect(AgensUsable au) {
+	public boolean startTurnEffect(AgentUsable au) {
 		//csï¿½kkenti a hatï¿½sidï¿½t, ï¿½s ha lejï¿½rt, akkor kitï¿½rli a virolï¿½gustï¿½l
 		if(effectTime < 0) {
 			au.removeAgensOnMe(this);

@@ -1,8 +1,8 @@
 package whut.item;
 
-import whut.agent.Agens;
+import whut.agent.Agent;
 import whut.ui.control.MyRunnable;
-import whut.player.Virologus;
+import whut.player.Virologist;
 
 public class Glove extends Item {
 	private int usedTime = 0;
@@ -10,7 +10,7 @@ public class Glove extends Item {
 	//Virol�gus tamado - akire visszakeni az �genst
 	//Agens a - az �gens, amit visszaken
 	@Override
-	public boolean fireBackEffect(Virologus tamado, Virologus hasznalo, Agens a) {
+	public boolean fireBackEffect(Virologist tamado, Virologist hasznalo, Agent a) {
 		if (tamado != null) {
 			MyRunnable.log("v"+MyRunnable.getVirologusSzam(hasznalo) + " attacked back with " + a.toString());
 			tamado.uRAttacked(a, null);

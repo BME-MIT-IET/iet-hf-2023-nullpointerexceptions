@@ -3,19 +3,19 @@ import whut.item.Item;
 import whut.material.Material;
 import whut.material.Packet;
 import whut.ui.control.MyRunnable;
-import whut.ui.observer.VirologusObserver;
-import whut.agent.Agens;
+import whut.ui.observer.VirologistObserver;
+import whut.agent.Agent;
 import whut.field.Field;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Virologus extends AgensUsable {
+public class Virologist extends AgentUsable {
 	private ArrayList<Item> itemHave = new ArrayList<>();
 	private String bearDance = "Beardance";
 
-	public Virologus() {
-		VirologusObserver virologusObs=new VirologusObserver(this);
+	public Virologist() {
+		VirologistObserver virologusObs=new VirologistObserver(this);
 		this.attach(virologusObs);
 	}
 	
@@ -26,14 +26,14 @@ public class Virologus extends AgensUsable {
 	
 	//megkerdezi a felhasznalot, hogy melyik virol�gust�l szeretne t�rgyat lopni, �s megpr�b�l lopni
 	//ArrayList<Virologus> vs - a virol�gusok list�ja, amelyb�l v�laszthat a felhaszn�l�
-	public void stealItem(Virologus v,Item item) {
+	public void stealItem(Virologist v, Item item) {
 		v.stealItemAttempt(this,item);
 		
 	}
 	
 	//megk�rdezi a felhaszn�l�t, hogy melyik virol�gust�l szeretne t�rgyat lopni, �s megpr�b�l lopni
 	//ArrayList<Virologus> vs - a virol�gusok list�ja, amelyb�l v�laszthat a felhaszn�l�
-	public void stealMaterial(Virologus v, Material mit) {
+	public void stealMaterial(Virologist v, Material mit) {
 		v.stealMaterialAttempt(this,mit);
 		
 	}
@@ -51,9 +51,9 @@ public class Virologus extends AgensUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le t�rgyat lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealItemAttempt(Virologus v,Item mit) {
+	public void stealItemAttempt(Virologist v, Item mit) {
 		boolean canSteal = false;
-		for(Agens a : agensOnMe) {
+		for(Agent a : agentOnMe) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
@@ -71,9 +71,9 @@ public class Virologus extends AgensUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le anyagot lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealMaterialAttempt(Virologus v,Material mit) {
+	public void stealMaterialAttempt(Virologist v, Material mit) {
 		boolean canSteal = false;
-		for(Agens a : agensOnMe) {
+		for(Agent a : agentOnMe) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
@@ -133,7 +133,7 @@ public class Virologus extends AgensUsable {
 	
 	//megt�madj�k az adott virol�gust
 	@Override
-	public void uRAttacked(Agens ag, Virologus v) {
+	public void uRAttacked(Agent ag, Virologist v) {
 		if (v == this) {
 			addAgensOnMe(ag);
 		} else {
@@ -141,9 +141,9 @@ public class Virologus extends AgensUsable {
 		}
 	}
 	
-	private void canAddAgensToMe(Agens ag, Virologus v) {
+	private void canAddAgensToMe(Agent ag, Virologist v) {
 		//ellenorzi, hogy van-e vedve valami altal
-		for(Agens a : agensOnMe)
+		for(Agent a : agentOnMe)
 			if(a.defendEffect())
 				return;
 		
@@ -161,9 +161,9 @@ public class Virologus extends AgensUsable {
 		addAgensToMe(ag);
 	}
 		
-	private void addAgensToMe(Agens ag) {
+	private void addAgensToMe(Agent ag) {
 		boolean medve = false;
-		for (Agens ag2 : agensOnMe) {
+		for (Agent ag2 : agentOnMe) {
 			if(ag2.check(bearDance))
 				medve = true;
 		}
@@ -180,7 +180,7 @@ public class Virologus extends AgensUsable {
 		}
 	}
 	
-	public void kill(Virologus v) {
+	public void kill(Virologist v) {
 		if (v.equals(this)) return;
 		boolean killed = false;
 		for (Item i : itemHave) {
@@ -197,7 +197,7 @@ public class Virologus extends AgensUsable {
 	
 	public boolean isBear() {
 		boolean medve = false;
-		for (Agens ag2 : agensOnMe) {
+		for (Agent ag2 : agentOnMe) {
 			if(ag2.check("Beardance"))
 				medve = true;
 		}

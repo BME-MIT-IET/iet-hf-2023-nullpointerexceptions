@@ -5,11 +5,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class AminoAcidTest {
-    private lateinit var aminoAcid: Aminosav
+    private lateinit var aminoAcid: AminoAcid
 
     @BeforeEach
     fun init(){
-        aminoAcid = Aminosav()
+        aminoAcid = AminoAcid()
     }
 
     @Test

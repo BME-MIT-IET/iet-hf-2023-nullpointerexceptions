@@ -31,7 +31,7 @@ public class Storage extends Field
 	
 	public void setPacket(Packet packet) {
 		this.packet = packet;
-		MyRunnable.getGame().myNotify();
+		MyRunnable.getGame().notifyObservers();
 	}
 	
 	@Override

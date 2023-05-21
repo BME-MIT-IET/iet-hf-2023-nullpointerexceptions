@@ -87,7 +87,7 @@ public class VirologistObserver implements Observer, Serializable{
     	if (csLeft != null) {
     		frame.remove(csLeft);
     	}
-        csLeft = new ContainerSuper("V"+MyRunnable.getVirologusSzam(MyRunnable.getCurrentVir())+"player in row");
+        csLeft = new ContainerSuper("V"+MyRunnable.getNumberOfVirologist(MyRunnable.getCurrentVir())+"player in row");
         Container c1 = new Container("Items:");
         for(String s : is){
             String[] command = new String[2];
@@ -98,7 +98,7 @@ public class VirologistObserver implements Observer, Serializable{
             if(s.equals("axe")){
                 String[] commando = new String[2];
                 commando[0]="kill";
-                commando[1]= "v"+ MyRunnable.getVirologusSzam(MyRunnable.getSelected());
+                commando[1]= "v"+ MyRunnable.getNumberOfVirologist(MyRunnable.getSelected());
                 c1.addIcon(new Icon(commando,"kill"));
             }
         }
@@ -107,7 +107,7 @@ public class VirologistObserver implements Observer, Serializable{
         for(String s : as){
             String[] command = new String[3];
             command[0] = "useagens";
-            command[1] = "v"+MyRunnable.getVirologusSzam(MyRunnable.getSelected());
+            command[1] = "v"+MyRunnable.getNumberOfVirologist(MyRunnable.getSelected());
             command[2] = s;
             c2.addIcon(new Icon(command,s));
         }
@@ -176,13 +176,13 @@ public class VirologistObserver implements Observer, Serializable{
     }
     
     public void drawRight(List<String> is, List<String> aos, int nukNum, int aminoNum){    	
-    	ContainerSuper csRight = new ContainerSuper("V"+ MyRunnable.getVirologusSzam(virologist) +"player's stats:");
+    	ContainerSuper csRight = new ContainerSuper("V"+ MyRunnable.getNumberOfVirologist(virologist) +"player's stats:");
         
         Container c1 = new Container("Items:");
         for(String s : is){
             String[] command = new String[3];
             command[0] = "stealitem";
-            command[1] = "v"+MyRunnable.getVirologusSzam(virologist);
+            command[1] = "v"+MyRunnable.getNumberOfVirologist(virologist);
             command[2] = s;
             c1.addIcon(new Icon(command,s));
         }
@@ -192,7 +192,7 @@ public class VirologistObserver implements Observer, Serializable{
         String[] tmp1 = new String[3];
         String[] tmp2 = new String[3];
         tmp1[0]= tmp2[0]="stealmaterial";
-        tmp1[1] = tmp2[1] = "v"+ MyRunnable.getVirologusSzam(virologist);
+        tmp1[1] = tmp2[1] = "v"+ MyRunnable.getNumberOfVirologist(virologist);
         tmp1[2] = "amino";
         tmp2[2]= "nukleotid";
         c2.addIcon(new Icon(tmp2,"nukleotid"));

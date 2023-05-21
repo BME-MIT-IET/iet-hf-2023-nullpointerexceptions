@@ -63,7 +63,7 @@ public class Game extends View implements Serializable {
 		
 		if(!hasNotInfected) {
 			isRunning = false;
-			((GameObserver)observer.get(0)).drawEnd("Everybody lost!");
+			((GameObserver) observers.get(0)).drawEnd("Everybody lost!");
 		}
 	}
 
@@ -213,7 +213,7 @@ public class Game extends View implements Serializable {
 		
 		if(isGameEnded) {
 			MyRunnable.log("You won :)!");
-			((GameObserver)observer.get(0)).drawEnd("You won!");
+			((GameObserver) observers.get(0)).drawEnd("You won!");
 			isRunning = false;
 			
 		}

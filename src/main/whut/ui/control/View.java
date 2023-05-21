@@ -6,18 +6,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class View implements Serializable{
-	protected ArrayList<Observer> observer = new ArrayList<>();
+	protected ArrayList<Observer> observers = new ArrayList<>();
 	
-	public void myNotify() {
-		for(Observer os : observer)
+	public void notifyObservers() {
+		for(Observer os : observers)
 			os.update();
 	}
 	
-	public void attach(Observer os) {
-		observer.add(os);
+	public void attach(Observer observer) {
+		observers.add(observer);
 	}
 	
-	public void detach(Observer os) {
-		observer.remove(os);
+	public void detach(Observer observer) {
+		observers.remove(observer);
 	}
 }

@@ -20,28 +20,28 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Menu extends JPanel implements Serializable{
 	private static int players = 1;
-	private static JFrame f;
-	private static Game gg;
+	private static JFrame frame;
+	private static Game game;
 	public static void main(String[] args) {
 		drawMenu();
 	}
 	
 	public static void setFrame(JFrame frame) {
-		f = frame;
+		Menu.frame = frame;
 	}
 	
 	public static JFrame getFrame() {
-		return f;
+		return frame;
 	}
 	
 	public static void createGame(){
-		gg = new Game(players);
+		game = new Game(players);
 	}
 	
 	public static void drawMenu() {
 		JTextField t;
-		f = new JFrame("");
-		f.setPreferredSize( new Dimension(300, 300));
+		frame = new JFrame("");
+		frame.setPreferredSize( new Dimension(300, 300));
 		
 		JPanel top = new JPanel(new FlowLayout());
 		top.setBackground(Color.YELLOW);
@@ -53,26 +53,26 @@ public class Menu extends JPanel implements Serializable{
 		t.setEnabled(false);
 		
 		JButton start = new JButton("Start game");
-		start.addActionListener(ae -> {createGame(); f.dispose();});
+		start.addActionListener(ae -> {createGame(); frame.dispose();});
 		
-		JButton minus = new JButton("-");
-		minus.addActionListener(ae -> { 
+		JButton minusButton = new JButton("-");
+		minusButton.addActionListener(ae -> {
 				  if(players > 1) {
 						players--;
 				  }
 				  t.setText(Integer.toString(players));
-					f.pack();
+					frame.pack();
 				  });
 		
-		JButton plus = new JButton("+");
-		plus.addActionListener(ae -> { 
+		JButton plusButton = new JButton("+");
+		plusButton.addActionListener(ae -> {
 				  players++;
 				  t.setText(Integer.toString(players));
-					f.pack();
+					frame.pack();
 				  });
 		
-		JButton load = new JButton("Load game");
-		load.addActionListener(ae -> {
+		JButton loadButton = new JButton("Load game");
+		loadButton.addActionListener(ae -> {
 			int userSelection;
 			JFileChooser chooser = new JFileChooser();
 			JFrame parentFrame = new JFrame();
@@ -87,31 +87,31 @@ public class Menu extends JPanel implements Serializable{
 			    
 			    try {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileToSave.getPath()));
-			        gg = (Game)ois.readObject();
+			        game = (Game)ois.readObject();
 			        ois.close();
 				} 
 				catch(Exception ex) {
 				        ex.printStackTrace();
 				}
-			    MyRunnable.setGame(gg);
-				gg.myNotify();
-			    f.dispose();
+			    MyRunnable.setGame(game);
+				game.notifyObservers();
+			    frame.dispose();
 			}
 			
 		});
 		
 		top.add(start);
-		mid.add(minus);
+		mid.add(minusButton);
 		mid.add(t);
-		mid.add(plus);
-		bot.add(load);
+		mid.add(plusButton);
+		bot.add(loadButton);
 		
-		f.add(top, BorderLayout.NORTH);
-		f.add(mid, BorderLayout.CENTER);
-		f.add(bot, BorderLayout.SOUTH);
-		f.pack();
-		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		frame.add(top, BorderLayout.NORTH);
+		frame.add(mid, BorderLayout.CENTER);
+		frame.add(bot, BorderLayout.SOUTH);
+		frame.pack();
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 
 	}
 }

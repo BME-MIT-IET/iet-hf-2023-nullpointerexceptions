@@ -172,7 +172,7 @@ public class Virologist extends AgentUsable {
 		}
 		if (agent.check(bearDance)) {
 			MyRunnable.setSelected(null);
-			MyRunnable.setTouched(false);
+			MyRunnable.setIsTouched(false);
 			String[] command = new String[1];
 			command[0] = "finishturn";
 			MyRunnable.getGame().applyBearEffectToAll();

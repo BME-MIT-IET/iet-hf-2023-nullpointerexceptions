@@ -43,11 +43,11 @@ public class TouchContainer extends JPanel {
 	class ItemActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(MyRunnable.getTouched()) {
+			if(MyRunnable.getIsTouched()) {
 				String valami=cb.getSelectedItem().toString();
 				String sub = valami.substring(1);
 				MyRunnable.setSelected((Virologist)MyRunnable.getGame().getEntityAt(Integer.parseInt(sub)-1)); //szep.
-				MyRunnable.getGame().myNotify();
+				MyRunnable.getGame().notifyObservers();
 			}
 		}
 	}
@@ -56,22 +56,22 @@ public class TouchContainer extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 
-			if (ae.getActionCommand().equals(touch) && !MyRunnable.getTouched()) {
+			if (ae.getActionCommand().equals(touch) && !MyRunnable.getIsTouched()) {
 				cb.removeAllItems();
 				ArrayList<String> players = new ArrayList<>();
 				List<AgentUsable> vs =  MyRunnable.getCurrentVir().getField().getVirologists();
 				for (AgentUsable a : vs) {
 					Virologist v = (Virologist)a;
-					players.add("v"+MyRunnable.getVirologusSzam(v));
+					players.add("v"+MyRunnable.getNumberOfVirologist(v));
 				}
 				for (String player : players)
 					cb.addItem(player);
 				MyRunnable.setSelected((Virologist)vs.get(0));
 				String[] command = new String[1];
 				command[0] = touch;
-				MyRunnable.setTouched(true);
+				MyRunnable.setIsTouched(true);
 				MyRunnable.getInputFirstAct(command);
-				MyRunnable.getGame().myNotify();
+				MyRunnable.getGame().notifyObservers();
 			}
 			
 		}

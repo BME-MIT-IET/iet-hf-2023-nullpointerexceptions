@@ -12,7 +12,7 @@ public class Glove extends Item {
 	@Override
 	public boolean fireBackEffect(Virologist attacker, Virologist defender, Agent agent) {
 		if (attacker != null) {
-			MyRunnable.log("v"+MyRunnable.getVirologusSzam(defender) + " attacked back with " + agent.toString());
+			MyRunnable.log("v"+MyRunnable.getNumberOfVirologist(defender) + " attacked back with " + agent.toString());
 			attacker.gotAttacked(agent, null);
 		}
 		timesUsed++;

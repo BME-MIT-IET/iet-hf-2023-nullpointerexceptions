@@ -41,7 +41,7 @@ public class AgentUsable extends Entity{
 		//minden startTurneffect lefut, akkor is, ha m�r volt stunnol�
 		for (Agent appliedAgent : appliedAgents) {
 			if (!appliedAgent.startTurnEffect(this)) {
-				MyRunnable.getGame().myNotify();
+				MyRunnable.getGame().notifyObservers();
 				return false;
 			}
 		}

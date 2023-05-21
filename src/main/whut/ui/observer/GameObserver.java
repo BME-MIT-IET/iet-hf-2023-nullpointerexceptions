@@ -60,14 +60,14 @@ public class GameObserver implements Observer, Serializable{
 		blc.addButton("New Game");
 		blc.addButton("Finishturn");
 		blc.draw();
-		MyRunnable.getCurrentVir().myNotify();
+		MyRunnable.getCurrentVir().notifyObservers();
 		if(MyRunnable.getSelected() != null)
-			MyRunnable.getSelected().myNotify();
+			MyRunnable.getSelected().notifyObservers();
 		
 		ArrayList<String> fields = new ArrayList<>();
 		List<Field> fs = MyRunnable.getCurrentVir().getField().getNeighborhood();
 		for (Field f : fs) {
-			fields.add("f"+MyRunnable.getFieldSzam(f));
+			fields.add("f"+MyRunnable.getNumberOfField(f));
 		}
 
 		JPanel p = new JPanel(new FlowLayout());
@@ -76,15 +76,15 @@ public class GameObserver implements Observer, Serializable{
 		MoveContainer mc = new MoveContainer();
 		mc = new MoveContainer(fields);
 		
-		if(!MyRunnable.getTouched())
+		if(!MyRunnable.getIsTouched())
 			tc = new TouchContainer();
 		else {
-			MyRunnable.getCurrentVir().getField().myNotify();
+			MyRunnable.getCurrentVir().getField().notifyObservers();
 		}
 		
 		mc.setBackground(Color.PINK);
 		tc.setBackground(Color.PINK);
-		p.add(new JLabel("Remaining steps: "+Integer.toString(MyRunnable.getLeft())+"            "+"You are on: f"+MyRunnable.getFieldSzam(MyRunnable.getCurrentVir().getField())));
+		p.add(new JLabel("Remaining steps: "+Integer.toString(MyRunnable.getLeft())+"            "+"You are on: f"+MyRunnable.getNumberOfField(MyRunnable.getCurrentVir().getField())));
 		p.add(mc);
 		p.add(tc);
 		frame.add(blc, BorderLayout.SOUTH);
@@ -97,7 +97,7 @@ public class GameObserver implements Observer, Serializable{
 		frame = new JFrame();
 
 		JButton b = new JButton("Back to menu");
-		b.addActionListener(ae -> {MyRunnable.setSelected(null); MyRunnable.setTouched(false);frame.dispose(); Menu.drawMenu();});
+		b.addActionListener(ae -> {MyRunnable.setSelected(null); MyRunnable.setIsTouched(false);frame.dispose(); Menu.drawMenu();});
 		
 		frame.add(new JLabel("                      "+msg), BorderLayout.CENTER);
 		frame.add(b, BorderLayout.SOUTH);

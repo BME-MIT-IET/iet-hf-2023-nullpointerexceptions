@@ -8,9 +8,11 @@ public class Icon extends JButton{
 
     String[] command;
 
+    String path = System.getProperty("user.dir")+"/src/main/resources/";
+
     public Icon(String[] c,String p){
         command = c;
-        this.setIcon(new ImageIcon(p+".png"));
+        this.setIcon(new ImageIcon(path+p+".png"));
         this.addActionListener(new AfterTouchActionListener());
     }
 

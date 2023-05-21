@@ -7,7 +7,7 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
-sourceSets.main.java.srcDirs = ['src/whut']
+sourceSets.main.java.srcDirs = ['src/main']
 
 repositories {
     mavenCentral()

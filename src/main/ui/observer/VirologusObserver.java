@@ -21,7 +21,6 @@ import javax.swing.JLabel;
 
 public class VirologusObserver implements Observer, Serializable{
     private ContainerSuper csLeft;
-    private String resources = "resources/";
    
     Virologus virologus;
     
@@ -93,13 +92,13 @@ public class VirologusObserver implements Observer, Serializable{
             String[] command = new String[2];
             command[0] = "leave";
             command[1] = s;
-            c1.addIcon(new Icon(command,resources+s));
+            c1.addIcon(new Icon(command,s));
 
             if(s.equals("axe")){
                 String[] commando = new String[2];
                 commando[0]="kill";
                 commando[1]= "v"+ MyRunnable.getVirologusSzam(MyRunnable.getSelected());
-                c1.addIcon(new Icon(commando,"resources/kill"));
+                c1.addIcon(new Icon(commando,"kill"));
             }
         }
         csLeft.addContainer(c1);
@@ -109,7 +108,7 @@ public class VirologusObserver implements Observer, Serializable{
             command[0] = "useagens";
             command[1] = "v"+MyRunnable.getVirologusSzam(MyRunnable.getSelected());
             command[2] = s;
-            c2.addIcon(new Icon(command,resources+s));
+            c2.addIcon(new Icon(command,s));
         }
         csLeft.addContainer(c2);
 
@@ -118,7 +117,7 @@ public class VirologusObserver implements Observer, Serializable{
             String[] command = new String[2];
             command[0] = "create";
             command[1] = s.substring(0, s.length()-4);
-            c3.addIcon(new Icon(command,resources+s));
+            c3.addIcon(new Icon(command,s));
         }
         csLeft.addContainer(c3);
 
@@ -128,15 +127,15 @@ public class VirologusObserver implements Observer, Serializable{
         tmp1[0]=tmp2[0]="idle"; //kell idle parancs ami nem csinál semmit, vagy disableelni kell ezt a buttont
         c4.addLabel(new JLabel(Integer.toString(nukNum)));
         c4.addLabel(new JLabel(Integer.toString(aminoNum)));
-        c4.addIcon(new Icon(tmp2,"resources/nukleotid"));
-        c4.addIcon(new Icon(tmp1,"resources/amino"));
+        c4.addIcon(new Icon(tmp2,"nukleotid"));
+        c4.addIcon(new Icon(tmp1,"amino"));
         csLeft.addContainer(c4);
         
         Container c5 = new Container("UnderEffect:");
         for(String s : aos){
             String[] command = new String[1];
             command[0] = "idle";
-            c5.addIcon(new Icon(command,resources+s));
+            c5.addIcon(new Icon(command,s));
         }
         csLeft.addContainer(c5);
         
@@ -184,7 +183,7 @@ public class VirologusObserver implements Observer, Serializable{
             command[0] = "stealitem";
             command[1] = "v"+MyRunnable.getVirologusSzam(virologus);
             command[2] = s;
-            c1.addIcon(new Icon(command,resources+s));
+            c1.addIcon(new Icon(command,s));
         }
         csRight.addContainer(c1);
 
@@ -195,8 +194,8 @@ public class VirologusObserver implements Observer, Serializable{
         tmp1[1] = tmp2[1] = "v"+ MyRunnable.getVirologusSzam(virologus);
         tmp1[2] = "amino";
         tmp2[2]= "nukleotid";
-        c2.addIcon(new Icon(tmp2,"resources/nukleotid"));
-        c2.addIcon(new Icon(tmp1,"resources/amino"));
+        c2.addIcon(new Icon(tmp2,"nukleotid"));
+        c2.addIcon(new Icon(tmp1,"amino"));
         c2.addLabel(new JLabel(Integer.toString(aminoNum)));
         c2.addLabel(new JLabel(Integer.toString(nukNum)));
         csRight.addContainer(c2);
@@ -205,7 +204,7 @@ public class VirologusObserver implements Observer, Serializable{
         for(String s : aos){
             String[] command = new String[1];
             command[0] = "idle";
-            c3.addIcon(new Icon(command,resources+s));
+            c3.addIcon(new Icon(command,s));
         }
         csRight.addContainer(c3);
         

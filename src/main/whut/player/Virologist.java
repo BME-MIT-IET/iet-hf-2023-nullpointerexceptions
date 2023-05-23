@@ -48,18 +48,18 @@ public class Virologist extends AgentUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le t�rgyat lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealItemAttempt(Virologist virologist, Item itemToSteal) {
+	public void stealItemAttempt(Virologist attacker, Item itemToSteal) {
 		boolean canSteal = false;
 		for(Agent a : appliedAgents) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
 		if (canSteal) {
-			if (virologist.getItemCount() == 3)
+			if (attacker.getItemCount() == 3)
 				removeItem(itemToSteal);
 			else {
 				removeItem(itemToSteal);
-				virologist.addItem(itemToSteal);
+				attacker.addItem(itemToSteal);
 				MyRunnable.log(itemToSteal.toString()+" was stolen");
 			}
 		} else
@@ -68,14 +68,14 @@ public class Virologist extends AgentUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le anyagot lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealMaterialAttempt(Virologist virologist, Material materialToSteal) {
+	public void stealMaterialAttempt(Virologist attacker, Material materialToSteal) {
 		boolean canSteal = false;
 		for(Agent a : appliedAgents) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
 		if (canSteal) {
-			Packet p = virologist.getPacket();
+			Packet p = attacker.getPacket();
 			materialPacket.handleMaterialSeparate(materialToSteal, p);
 			ArrayList<Material> temp = new ArrayList<>();
 			temp.add(materialToSteal);
@@ -177,11 +177,11 @@ public class Virologist extends AgentUsable {
 		}
 	}
 	
-	public void kill(Virologist virologist) {
-		if (virologist.equals(this)) return;
+	public boolean kill(Virologist target) {
+		if (target.equals(this)) return false;
 		boolean isKilled = false;
 		for (Item item : items) {
-			isKilled = item.killEffect(virologist);
+			isKilled = item.killEffect(target);
 			if (isKilled) {
 				MyRunnable.log("An enemy has been slain!");
 				break;
@@ -190,6 +190,7 @@ public class Virologist extends AgentUsable {
 		if (!isKilled) {
 			MyRunnable.log("You need an axe");
 		}
+		return isKilled;
 	}
 	
 	public boolean isBear() {

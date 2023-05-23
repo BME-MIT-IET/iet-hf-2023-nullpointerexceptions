@@ -15,7 +15,7 @@ class LabTest {
     }
 
     @Test
-    fun setGeneticCodeToLab(){
+    fun testSetGeneticCodeToLab(){
         val geneticCode = mock(GeneticCode::class.java)
         lab.setGeneticCode(geneticCode)
         assertEquals(geneticCode, lab.getGeneticCode())
@@ -23,6 +23,6 @@ class LabTest {
 
     @Test
     fun testToString(){
-        assertEquals("lab", lab.toString())
+        assertEquals("Lab", lab.toString())
     }
 }

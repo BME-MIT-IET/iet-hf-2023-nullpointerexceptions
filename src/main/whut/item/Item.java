@@ -1,6 +1,7 @@
 package whut.item;
 
 import whut.agent.Agent;
+import whut.player.AgentUsable;
 import whut.player.Virologist;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public class Item implements Serializable{
 		//leszarmazott feluldefinialja ha kell
 	}
 
-	public boolean fireBackEffect(Virologist attacker, Virologist defender, Agent agent) {
+	public boolean fireBackEffect(AgentUsable attacker, Virologist defender, Agent agent) {
 		return false;
 	}
 	

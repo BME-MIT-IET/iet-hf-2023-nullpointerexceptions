@@ -21,12 +21,8 @@ public class Storage extends Field
 	
 	@Override
 	public void accept(Entity entity) {
-		Virologist virologist = (Virologist) entity;
-		agentUsableList.add(virologist);
-		virologist.setField(this);
-		
-		virologist.destroyMaterial(packet);
-		
+		entity.setField(this);
+		entity.destroyMaterial(packet);
 	}
 	
 	public void setPacket(Packet packet) {

@@ -49,9 +49,9 @@ public class AgentUsable extends Entity{
 	}
 	
 	//megt�madjuk ezt az agensusable-t
-	public void gotAttacked(Agent agent, Virologist virologist) {
+	public void gotAttacked(Agent agent, AgentUsable agentUsable) {
 		//k�ld�t�lk kit�rli az �genst
-		virologist.removeAgent(agent);
+		agentUsable.removeAgent(agent);
 		//ellen�rzi, hogy van-e v�dve valami �ltal
 		boolean isProtected = false;
 		for(Agent a: appliedAgents){
@@ -76,25 +76,25 @@ public class AgentUsable extends Entity{
 	}
 	
 	//megk�rdezi a felhaszn�l�t melyik genetik k�dot szeretn� �genss� alak�tani �s azt megcsin�lja
-	public void createAgent(String agentType) {
+	public void createAgent(String geneticCodeType) {
 		boolean created = false;
 		int i = 0;
 		while(!created && i < geneticCodes.size()) {
-			if(geneticCodes.get(i).check(agentType)) {
+			if(geneticCodes.get(i).check(geneticCodeType)) {
 				geneticCodes.get(i).createAgent(this);
 				created = true;
 				geneticCodes.remove(i);
-				switch(agentType) {
-				case "Protection":
+				switch(geneticCodeType) {
+				case "ProtectionCode":
 					geneticCodes.add(new ProtectionCode());
 					break;
-				case "Chorea":
+				case "ChoreaCode":
 					geneticCodes.add(new ChoreaCode());
 					break;
-				case "Stun":
+				case "StunCode":
 					geneticCodes.add(new StunCode());
 					break;
-				case "Forget":
+				case "ForgetCode":
 					geneticCodes.add(new ForgetCode());
 					break;
 				default:
@@ -105,7 +105,7 @@ public class AgentUsable extends Entity{
 		}
 		
 		if(!created)
-			MyRunnable.log("Genetic code for " + agentType + " not learned yet!");
+			MyRunnable.log("Genetic code for " + geneticCodeType + " not learned yet!");
 	}
 	//elfelejt minden genetikk�dot
 	public void forgetAllGeneticCodes() {
@@ -118,14 +118,15 @@ public class AgentUsable extends Entity{
 	}
 	
 	//ennek kene egy parameter, hogy melyik agenst hasznalja
-	public void useAgent(Virologist virologist, Agent agent) {
+	public void useAgent(Virologist target, Agent agent) {
 		if (!MyRunnable.getGame().isRunning()) return;
 		MyRunnable.getGame().applyBearEffectToAll();
 		agents.remove(agent);
-		virologist.gotAttacked(agent, (Virologist)this);
+		target.gotAttacked(agent, this);
 		MyRunnable.getGame().applyBearEffectToAll();
 	}
-	
+
+	@Override
 	public void destroyMaterial(Packet packet) {
 		for(Agent a : appliedAgents) {
 			a.destroyEffect(packet);

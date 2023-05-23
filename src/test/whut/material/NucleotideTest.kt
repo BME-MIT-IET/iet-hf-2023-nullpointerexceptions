@@ -1,7 +1,6 @@
 package whut.material
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -16,7 +15,7 @@ class NucleotideTest {
     @Test
     fun testIsSame(){
         val nucleotide2 = Nucleotide()
-        assertEquals(true, nucleotide.sameAs(nucleotide2))
+        assertTrue(nucleotide.sameAs(nucleotide2))
     }
 
     @Test
@@ -28,16 +27,19 @@ class NucleotideTest {
 
     @Test
     fun testCheck(){
-        assertEquals(true, nucleotide.check("nukleotid"))
+        assertTrue(nucleotide.check("Nucleotide"))
+        assertFalse(nucleotide.check("AminoAcid"))
     }
 
     @Test
     fun testToString(){
-        assertEquals("nukleotid", nucleotide.toString())
+        assertEquals("Nucleotide", nucleotide.toString())
+        assertNotEquals("AminoAcid", nucleotide.toString())
     }
 
     @Test
     fun testGetType(){
-        assertEquals("Nukleotid", nucleotide.type)
+        assertEquals("Nucleotide", nucleotide.type)
+        assertNotEquals("AminoAcid", nucleotide.type)
     }
 }

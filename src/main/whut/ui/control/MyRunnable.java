@@ -121,7 +121,7 @@ public class MyRunnable {
 					return;
 				}
 				Item it = v.getItem(input[2]);
-				if(it!=null && currentVirologist.getField().getVirologists().contains(v)) {
+				if(it!=null && currentVirologist.getField().getAgentUsableList().contains(v)) {
 					currentVirologist.stealItem(v, it);
 				} else
 					log("This item cant be found at v"+ getNumberOfVirologist(v));
@@ -143,7 +143,7 @@ public class MyRunnable {
 					return;
 				}
 				Material mat = virologist.getPacket().getMaterial(input[2]);
-				if(mat != null && currentVirologist.getField().getVirologists().contains(virologist)) {
+				if(mat != null && currentVirologist.getField().getAgentUsableList().contains(virologist)) {
 					currentVirologist.stealMaterial(virologist, mat);
 				} else
 					log("This materila cant be found at v"+ getNumberOfVirologist(virologist));
@@ -162,7 +162,7 @@ public class MyRunnable {
 			if(input[1].charAt(0)=='v') {
 				Virologist virologist = (Virologist)(game.getEntityAt(number-1));
 				Agent a = currentVirologist.getAgent(input[2]);
-				if(virologist!=null && a != null && currentVirologist.getField().getVirologists().contains(virologist)) {
+				if(virologist!=null && a != null && currentVirologist.getField().getAgentUsableList().contains(virologist)) {
 					currentVirologist.useAgent(virologist,a);
 				}
 				
@@ -217,7 +217,7 @@ public class MyRunnable {
 			int number = Integer.parseInt(sub);
 			if(input[1].charAt(0)=='v') {
 				Virologist v = (Virologist)(game.getEntityAt(number-1));
-				if(v!=null&& currentVirologist.getField().getVirologists().contains(v)) {
+				if(v!=null&& currentVirologist.getField().getAgentUsableList().contains(v)) {
 					currentVirologist.kill(v);
 				}
 			}
@@ -436,7 +436,7 @@ public class MyRunnable {
 		logItemsOnField(f);
 		logMaterialsOnField(f);
 		
-		for (AgentUsable a : f.getVirologists()) {
+		for (AgentUsable a : f.getAgentUsableList()) {
 			Virologist v = (Virologist) a;
 			log("v"+ getNumberOfVirologist(v));
 			String vAnyagok = "Anyagok: ";

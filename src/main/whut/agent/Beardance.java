@@ -12,7 +12,7 @@ public class BearDance extends Agent {
 	//Végül hamissal tér vissza, mivel a birtokos virológus mást nem csinálhat a körében.
 	@Override
 	public boolean startTurnEffect(AgentUsable agentUsable) {
-		infectAll(agentUsable.getField().getVirologists(),agentUsable);
+		infectAll(agentUsable.getField().getAgentUsableList(),agentUsable);
 		
 		if (agentUsable.getField().getNeighborhood().size() > 3) {
 			agentUsable.move(agentUsable.getField().getNeighborhood().get(2));
@@ -20,7 +20,7 @@ public class BearDance extends Agent {
 		else{
 			agentUsable.move(agentUsable.getField().getNeighborhood().get(0));
 		}
-		infectAll(agentUsable.getField().getVirologists(),agentUsable);
+		infectAll(agentUsable.getField().getAgentUsableList(),agentUsable);
 		return false;
 	}
 	

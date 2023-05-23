@@ -17,13 +17,13 @@ class ShelterTest {
     }
 
     @Test
-    fun addItemToShelter(){
+    fun testAddItemToShelter(){
         shelter.addItem(Item())
         assertEquals(1, shelter.items.size)
     }
 
     @Test
-    fun removeItemFromShelter(){
+    fun testRemoveItemFromShelter(){
         val item = Item()
         shelter.addItem(item)
         assertEquals(item, shelter.items[0])
@@ -32,14 +32,14 @@ class ShelterTest {
     }
 
     @Test
-    fun getContainedItemFromShelter(){
+    fun testGetContainedItemFromShelter(){
         val axe = Axe()
         shelter.addItem(axe)
-        assertEquals(axe, shelter.getItem("axe"))
+        assertEquals(axe, shelter.getItem("Axe"))
     }
 
     @Test
-    fun getNotContainedItemFromShelter(){
+    fun testGetNotContainedItemFromShelter(){
         val cloak = Cloak()
         shelter.addItem(Axe())
         assertNotEquals(cloak, shelter.getItem("cloak"))
@@ -48,6 +48,6 @@ class ShelterTest {
 
     @Test
     fun testToString(){
-        assertEquals("shelter", shelter.toString())
+        assertEquals("Shelter", shelter.toString())
     }
 }

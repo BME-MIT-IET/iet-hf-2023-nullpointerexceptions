@@ -40,22 +40,22 @@ class StorageTest{
     }
 
     @Test
-    fun acceptEntityToStorage(){
+    fun testAcceptEntityToStorage(){
         val entity = Entity()
         assertEquals(Unit, storage.accept(entity))
     }
 
     @Test
-    fun acceptVirologistToStorage(){
+    fun testAcceptVirologistToStorage(){
         val virologist = Virologist()
         storage.accept(virologist)
-        assertEquals(1, storage.virologists.size)
-        assertEquals(virologist, storage.virologists[0])
+        assertEquals(1, storage.agentUsableList.size)
+        assertEquals(virologist, storage.agentUsableList[0])
         assertEquals(storage, virologist.field)
     }
 
     @Test
-    fun setPacketToStorage(){
+    fun testSetPacketToStorage(){
         val packet = mock(Packet::class.java)
         storage.packet = packet
         assertEquals(packet, storage.packet)
@@ -63,6 +63,6 @@ class StorageTest{
 
     @Test
     fun testToString(){
-        assertEquals("storage", storage.toString())
+        assertEquals("Storage", storage.toString())
     }
 }

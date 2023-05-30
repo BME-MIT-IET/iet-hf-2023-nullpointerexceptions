@@ -31,6 +31,6 @@ public class ProtectionCode extends GeneticCode
 	
 	@Override
 	public String toString() {
-		return "ProtectionCode";
+		return "Protection";
 	}
 }

@@ -31,6 +31,6 @@ public class StunCode extends GeneticCode
 	}
 	
 	public String toString() {
-		return "StunCode";
+		return "Stun";
 	}
 }

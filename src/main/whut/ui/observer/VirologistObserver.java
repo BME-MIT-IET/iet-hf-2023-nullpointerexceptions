@@ -117,7 +117,7 @@ public class VirologistObserver implements Observer, Serializable{
         for(String s : gs){
             String[] command = new String[2];
             command[0] = "create";
-            command[1] = s.substring(0, s.length()-4);
+            command[1] = s.substring(0, s.length());
             c3.addIcon(new Icon(command,s));
         }
         csLeft.addContainer(c3);

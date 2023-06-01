@@ -17,11 +17,11 @@ public abstract class Agent implements Serializable{
 		return false;
 	}
 	
-	//Ez akkor h�v�dik meg, ha egy var�zsl�nak az agensOnMe list�j�ban van az adott �gens a k�re kezdet�n.
-	//A lesz�rmazottak azokkal a hat�sokkal defini�lj�k f�l�l, melyek a k�r elej�n hatnak. 
-	//A param�ter a birtokos virol�gus. 
-	//Igazzal t�r vissza, ha az adott �gens miatt m�g tud mozogni az adott k�rben. 
-	//Jelen helyen teh�t mindig igazzal, de ezt fel�l lehet defini�lni.
+	//Ez akkor hivodik meg, ha egy varazslonak az agensOnMe listajaban van az adott agens a kore kezdeten.
+	//A leszarmazottak azokkal a hatasokkal definialjak felul, melyek a kor elejen hatnak.
+	//A paramater a birtokos virologus.
+	//Igazzal ter vissza, ha az adott agens miatt meg tud mozogni az adott korben.
+	//Jelen helyen tehet mindig igazzal, de ezt felul lehet definialni.
 	public abstract boolean startTurnEffect(AgentUsable agentUsable);
 	
 	//Akkor h�v�dik meg, ha a birtokos virol�gust �genssel megt�madj�k. 

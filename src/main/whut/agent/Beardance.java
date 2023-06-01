@@ -52,4 +52,5 @@ public class BearDance extends Agent {
 	public String toString() {
 		return "BearDance";
 	}
+	
 }

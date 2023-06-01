@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockedStatic
 import org.mockito.Mockito.*
-import whut.agent.BearDance
+import whut.agent.Beardance
 import whut.agent.Protection
 import whut.agent.Stun
 import whut.field.Field
@@ -219,7 +219,7 @@ class VirologistTest {
     @Test
     fun testIsBear(){
         assertFalse(virologist.isBear)
-        virologist.applyAgent(BearDance())
+        virologist.applyAgent(Beardance())
         assertTrue(virologist.isBear)
     }
 }

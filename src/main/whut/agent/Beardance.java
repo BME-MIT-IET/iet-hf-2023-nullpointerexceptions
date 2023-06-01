@@ -5,7 +5,7 @@ import whut.player.Virologist;
 
 import java.util.List;
 
-public class BearDance extends Agent {
+public class Beardance extends Agent {
 	
 	//A mezõn amin áll a paraméterül kapott virológus megfertõz minden virológust, majd a paraméterül kapott virológust egy random szomszédos mezõre mozgatja. 
 	//Ezután az új mezõn is megfertõz mindenkit. 
@@ -36,7 +36,7 @@ public class BearDance extends Agent {
 	public void infectAll(List<AgentUsable> usableList, AgentUsable attacker) {
 		for(int i = usableList.size()-1; i >= 0; i--) {
 			if(!usableList.get(i).equals(attacker)) {
-				BearDance b = new BearDance();
+				Beardance b = new Beardance();
 				attacker.addAgent(b);
 				Virologist v = (Virologist)usableList.get(i);
 				attacker.useAgent(v, b);
@@ -52,5 +52,5 @@ public class BearDance extends Agent {
 	public String toString() {
 		return "BearDance";
 	}
-	
+
 }

@@ -1,7 +1,7 @@
 package whut.field;
 
 
-import whut.agent.BearDance;
+import whut.agent.Beardance;
 import whut.player.Virologist;
 import whut.genetic_code.StunCode;
 
@@ -18,7 +18,7 @@ public class EvilLab extends Lab
 	@Override
 	public void touching(Virologist virologist) //mező érintésekor
 	{
-		BearDance br = new BearDance();
+		Beardance br = new Beardance();
 		virologist.gotAttacked(br,null); //megtámadjad egy medvetáncal
 	}
 	

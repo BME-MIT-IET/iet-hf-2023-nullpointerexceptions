@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Virologist extends AgentUsable {
-	private ArrayList<Item> items = new ArrayList<>();
-	private String bearDance = "BearDance";
+	private final ArrayList<Item> items = new ArrayList<>();
 
 	public Virologist() {
 		VirologistObserver observer = new VirologistObserver(this);
@@ -28,14 +27,12 @@ public class Virologist extends AgentUsable {
 	//ArrayList<Virologus> vs - a virol�gusok list�ja, amelyb�l v�laszthat a felhaszn�l�
 	public void stealItem(Virologist virologist, Item itemToSteal) {
 		virologist.stealItemAttempt(this,itemToSteal);
-		
 	}
 	
 	//megk�rdezi a felhaszn�l�t, hogy melyik virol�gust�l szeretne t�rgyat lopni, �s megpr�b�l lopni
 	//ArrayList<Virologus> vs - a virol�gusok list�ja, amelyb�l v�laszthat a felhaszn�l�
 	public void stealMaterial(Virologist virologist, Material materialToSteal) {
 		virologist.stealMaterialAttempt(this,materialToSteal);
-		
 	}
 	
 	//megk�rdezi a felhaszn�l�t�l, hogy melyik t�rgyat akarja cse�lni, �s azt adja vissza
@@ -51,18 +48,18 @@ public class Virologist extends AgentUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le t�rgyat lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealItemAttempt(Virologist virologist, Item itemToSteal) {
+	public void stealItemAttempt(Virologist attacker, Item itemToSteal) {
 		boolean canSteal = false;
 		for(Agent a : appliedAgents) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
 		if (canSteal) {
-			if (virologist.getItemCount() == 3)
+			if (attacker.getItemCount() == 3)
 				removeItem(itemToSteal);
 			else {
 				removeItem(itemToSteal);
-				virologist.addItem(itemToSteal);
+				attacker.addItem(itemToSteal);
 				MyRunnable.log(itemToSteal.toString()+" was stolen");
 			}
 		} else
@@ -71,14 +68,14 @@ public class Virologist extends AgentUsable {
 	
 	//ellen�rzi, hogy lehet-e t�le anyagot lopni, �s ha igen, akkor v�grehajtja a lop�st
 	//Virologus v - a virol�gus, aki lopni pr�b�l t�le
-	public void stealMaterialAttempt(Virologist virologist, Material materialToSteal) {
+	public void stealMaterialAttempt(Virologist attacker, Material materialToSteal) {
 		boolean canSteal = false;
 		for(Agent a : appliedAgents) {
 			if (a.canStealEffect())
 				canSteal = true;
 		}
 		if (canSteal) {
-			Packet p = virologist.getPacket();
+			Packet p = attacker.getPacket();
 			materialPacket.handleMaterialSeparate(materialToSteal, p);
 			ArrayList<Material> temp = new ArrayList<>();
 			temp.add(materialToSteal);
@@ -94,7 +91,6 @@ public class Virologist extends AgentUsable {
 	public void changeItem(Item itemToRemove, Item itemToCollect) {
 		this.removeItem(itemToRemove);
 		this.addItem(itemToCollect);
-		
 	}
 	
 	//elt�vol�t egy t�rgyat a n�la l�v� t�rgyak k�z�l
@@ -133,15 +129,15 @@ public class Virologist extends AgentUsable {
 	
 	//megt�madj�k az adott virol�gust
 	@Override
-	public void gotAttacked(Agent agent, Virologist virologist) {
-		if (virologist == this) {
+	public void gotAttacked(Agent agent, AgentUsable agentUsable) {
+		if (agentUsable == this) {
 			applyAgent(agent);
 		} else {
-			canAddAgensToMe(agent, virologist);
+			canBeAttackedByAgent(agent, agentUsable);
 		}
 	}
 	
-	private void canAddAgensToMe(Agent agent, Virologist virologist) {
+	private void canBeAttackedByAgent(Agent agent, AgentUsable agentUsable) {
 		//ellenorzi, hogy van-e vedve valami altal
 		for(Agent a : appliedAgents)
 			if(a.defendEffect())
@@ -154,15 +150,16 @@ public class Virologist extends AgentUsable {
 		
 		//mivel virologus, ezert vegigmegy az itemein, hogy valamelyik visszakeni-e
 		for(int i = items.size()-1; i>=0; i--)
-			if(items.get(i).fireBackEffect(virologist, this, agent))
+			if(items.get(i).fireBackEffect(agentUsable, this, agent))
 				 return;
 			
 		//ha vissza sem keni, akkor hozzaadja a rajt levo agensekhez
-		addAgensToMe(agent);
+		attackByAgent(agent);
 	}
 		
-	private void addAgensToMe(Agent agent) {
+	private void attackByAgent(Agent agent) {
 		boolean isBear = false;
+		String bearDance = "BearDance";
 		for (Agent ag : appliedAgents) {
 			if(ag.check(bearDance))
 				isBear = true;
@@ -180,11 +177,11 @@ public class Virologist extends AgentUsable {
 		}
 	}
 	
-	public void kill(Virologist virologist) {
-		if (virologist.equals(this)) return;
+	public boolean kill(Virologist target) {
+		if (target.equals(this)) return false;
 		boolean isKilled = false;
 		for (Item item : items) {
-			isKilled = item.killEffect(virologist);
+			isKilled = item.killEffect(target);
 			if (isKilled) {
 				MyRunnable.log("An enemy has been slain!");
 				break;
@@ -193,6 +190,7 @@ public class Virologist extends AgentUsable {
 		if (!isKilled) {
 			MyRunnable.log("You need an axe");
 		}
+		return isKilled;
 	}
 	
 	public boolean isBear() {
@@ -216,6 +214,7 @@ public class Virologist extends AgentUsable {
 	@Override
 	public void setField(Field field) {
 		this.field = field;
+		field.addVirologist(this);
 	}
 	
 	public void setItem(Item item) {

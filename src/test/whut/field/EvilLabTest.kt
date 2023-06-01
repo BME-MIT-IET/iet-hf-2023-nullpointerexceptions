@@ -40,7 +40,7 @@ class EvilLabTest {
     }
 
     @Test
-    fun touchingEvilLab(){
+    fun testTouchingEvilLab(){
         val virologist = Virologist()
         evilLab.touching(virologist)
         assertEquals(1, virologist.appliedAgents.size)
@@ -48,6 +48,6 @@ class EvilLabTest {
 
     @Test
     fun testToString(){
-        assertEquals("evillab", evilLab.toString())
+        assertEquals("EvilLab", evilLab.toString())
     }
 }

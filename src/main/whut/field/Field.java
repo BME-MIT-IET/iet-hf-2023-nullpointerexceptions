@@ -16,7 +16,7 @@ import java.util.List;
 public class Field extends View implements Serializable
 {
 	protected ArrayList<AgentUsable> agentUsableList; // A mezőn található entity-k
-	private ArrayList<Field> neighbors; //szomszédos mezők
+	private final ArrayList<Field> neighbors; //szomszédos mezők
 
 	
 	public Field()
@@ -28,7 +28,7 @@ public class Field extends View implements Serializable
 
 	
 	//visszaadja a virológusok listáját
-	public List<AgentUsable> getVirologists()
+	public List<AgentUsable> getAgentUsableList()
 	{
 		return agentUsableList;
 	}
@@ -42,8 +42,6 @@ public class Field extends View implements Serializable
 	//hozzáadja a virológust a listához
 	public void accept(Entity entity)
 	{
-		Virologist virologist = (Virologist)entity;
-		agentUsableList.add(virologist);
 		entity.setField(this);
 	}
 	
@@ -91,6 +89,10 @@ public class Field extends View implements Serializable
 	public Item getItem(String itemType) {
 		MyRunnable.log("Cant pickup "+itemType+" from here!");
 		return null;
+	}
+
+	public void addVirologist(Virologist virologist){
+		agentUsableList.add(virologist);
 	}
 	
 	public void setGeneticCode(GeneticCode geneticCode) {

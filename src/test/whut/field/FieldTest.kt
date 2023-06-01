@@ -19,11 +19,11 @@ class FieldTest {
     @Test
     fun testConstructor(){
         assertEquals(0, field.neighborhood.size)
-        assertEquals(0, field.virologists.size)
+        assertEquals(0, field.agentUsableList.size)
     }
 
     @Test
-    fun setNeighborToField() {
+    fun testSetNeighborToField() {
         val neighborField = Field()
         field.setNeighbor(neighborField)
         assertEquals(field.neighborhood.size, 1)
@@ -31,14 +31,14 @@ class FieldTest {
     }
 
     @Test
-    fun addItemToField(){
+    fun testAddItemToField(){
         field.addItem(Item())
         assertEquals(0, field.items.size)
         assertEquals(null, field.getItem(""))
     }
 
     @Test
-    fun removeItemFromField(){
+    fun testRemoveItemFromField(){
         val item = Item()
         field.addItem(item)
         field.removeItem(item)
@@ -47,29 +47,29 @@ class FieldTest {
     }
 
     @Test
-    fun setGeneticCodeToField(){
+    fun testSetGeneticCodeToField(){
         field.setGeneticCode(ForgetCode())
         assertEquals(null, field.getGeneticCode())
     }
 
     @Test
-    fun acceptVirologistToField(){
+    fun testAcceptVirologistToField(){
         val virologist = Virologist()
         field.accept(virologist)
         assertEquals(1, field.agentUsableList.size)
         assertEquals(virologist, field.agentUsableList[0])
         assertEquals(virologist.field, field)
-        assertEquals(true, field.agentUsableList.size == field.virologists.size)
+        assertEquals(true, field.agentUsableList.size == field.agentUsableList.size)
     }
 
     @Test
-    fun acceptEntityToField(){
+    fun testAcceptEntityToField(){
         val entity = Entity()
         assertEquals(Unit, field.accept(entity))
     }
 
     @Test
-    fun removeVirologistFromField(){
+    fun testTemoveVirologistFromField(){
         val virologist = Virologist()
         field.accept(virologist)
         assertEquals(1, field.agentUsableList.size)
@@ -78,19 +78,19 @@ class FieldTest {
     }
 
     @Test
-    fun removeEntityFromField(){
+    fun testRemoveEntityFromField(){
         assertEquals(0, field.agentUsableList.size)
         field.remove(Entity())
         assertEquals(0, field.agentUsableList.size)
     }
 
     @Test
-    fun getPacketFromField(){
+    fun testGetPacketFromField(){
         assertEquals(null, field.packet)
     }
 
     @Test
     fun testToString(){
-        assertEquals("whut/field", field.toString())
+        assertEquals("Field", field.toString())
     }
 }

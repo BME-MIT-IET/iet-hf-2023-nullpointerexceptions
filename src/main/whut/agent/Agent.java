@@ -7,12 +7,12 @@ import java.io.Serializable;
 
 public abstract class Agent implements Serializable{
 	
-	//ezeket a f�ggv�nyeket overridolj�k(opcion�lisan) az �gensek. Alap�rtelmezetten olyan a visszat�r�si �rt�k, hogy ne legyen hat�sa(pl.: nem lehet csak �gy lopni, ez�rt a canStealEffect false)
+	//ezeket a fuggvenyeket overridoljuk(opcionalisan) az agensek. Alapertelmezetten olyan a visszateresi ertek, hogy ne legyen hatasa(pl.: nem lehet csak ugy lopni, ezert a canStealEffect false)
 	
 	
-	//Akkor h�v�dik meg, ha a birtokos virol�gust�l valamit lopni akarnak. 
-	//Igazzal t�r vissza, ha lehet t�le lopni, hamissal ha nem. 
-	//Itt teh�t igazzal, ezt defini�lhatj�k fel�l a lesz�rmazottak.
+	//Akkor hivodik meg, ha a birtokos virologustol valamit lopni akarnak.
+	//Igazzal ter vissza, ha lehet tole lopni, hamissal ha nem.
+	//Itt tehet igazzal, ezt definialhatjak felul a leszarmazottak.
 	public boolean canStealEffect() {
 		return false;
 	}

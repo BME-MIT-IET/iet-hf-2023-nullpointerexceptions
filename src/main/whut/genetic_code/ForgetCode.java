@@ -32,7 +32,7 @@ public class ForgetCode extends GeneticCode
 	
 	@Override
 	public String toString() {
-		return "ForgetCode";
+		return "Forget";
 	}
 	
 }

@@ -30,6 +30,6 @@ public class ChoreaCode extends GeneticCode
 	}
 	
 	public String toString() {
-		return "ChoreaCode";
+		return "Chorea";
 	}
 }
